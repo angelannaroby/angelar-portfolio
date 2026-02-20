@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
+import { Section } from "../shared/ui/Section"
+import { H2, P } from "../shared/ui/Typography"
 
 export const Route = createFileRoute("/experience")({
   component: ExperiencePage,
@@ -6,9 +8,11 @@ export const Route = createFileRoute("/experience")({
 
 function ExperiencePage() {
   return (
-    <section className="space-y-2">
-      <h1 className="text-2xl font-semibold">Experience & Education</h1>
-      <p className="text-neutral-700">We’ll structure this like a product resume.</p>
-    </section>
+    <Section>
+      <div className="space-y-2">
+        <H2>Experience & Education</H2>
+        <P>We’ll structure this like a product resume.</P>
+      </div>
+    </Section>
   )
 }

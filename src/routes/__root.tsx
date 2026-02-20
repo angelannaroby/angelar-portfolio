@@ -1,4 +1,5 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router"
+import { Container } from "../shared/ui/Container"
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -8,7 +9,7 @@ function RootLayout() {
   return (
     <div className="min-h-dvh bg-white text-neutral-900">
       <header className="border-b">
-        <nav className="mx-auto flex max-w-5xl items-center gap-6 px-4 py-4">
+        <Container as="nav" className="flex items-center gap-6 py-4">
           <Link to="/" className="font-semibold">
             angelannaroby
           </Link>
@@ -24,17 +25,17 @@ function RootLayout() {
           <Link to="/contact" className="text-sm hover:underline">
             Contact
           </Link>
-        </nav>
+        </Container>
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 py-10">
+      <main>
         <Outlet />
       </main>
 
       <footer className="border-t">
-        <div className="mx-auto max-w-5xl px-4 py-6 text-sm text-neutral-600">
+        <Container className="py-6 text-sm text-neutral-600">
           © {new Date().getFullYear()} angelannaroby
-        </div>
+        </Container>
       </footer>
     </div>
   )
