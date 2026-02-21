@@ -1,16 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { experience } from "../features/experience/data/experience"
 import { ExperienceCard } from "../features/experience/components/ExperienceCard"
-import type { Locale } from "../shared/i18n"
 import { PageHeader } from "../shared/ui/PageHeader"
 import { Section } from "../shared/ui/Section"
+import { useLocale } from "../app/providers/LocalProvider"
 
 export const Route = createFileRoute("/experience")({
   component: ExperiencePage,
 })
 
 function ExperiencePage() {
-  const locale: Locale = "en"
+  const { locale } = useLocale()
 
   const work = experience.filter((e) => e.kind === "work")
   const education = experience.filter((e) => e.kind === "education")

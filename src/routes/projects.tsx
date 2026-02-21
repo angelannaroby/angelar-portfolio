@@ -4,17 +4,17 @@ import { projects } from "../features/projects/data/projects";
 import { ProjectCard } from "../features/projects/components/ProjectCard";
 import { pickText, type Locale } from "../shared/i18n";
 import { Section } from "../shared/ui/Section";
-import { H2, P } from "../shared/ui/Typography";
 import { TextInput } from "../shared/ui/TextInput";
 import { Badge } from "../shared/ui/Badge";
 import { PageHeader } from "../shared/ui/PageHeader";
+import { useLocale } from "../app/providers/LocalProvider"
 
 export const Route = createFileRoute("/projects")({
   component: ProjectsPage,
 });
 
 function ProjectsPage() {
-  const locale: Locale = "en";
+  const { locale } = useLocale()
   const [query, setQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

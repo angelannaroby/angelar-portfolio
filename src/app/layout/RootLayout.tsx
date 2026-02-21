@@ -1,7 +1,10 @@
-import { Link, Outlet } from "@tanstack/react-router"
-import { Container } from "../../shared/ui/Container"
+import { Link, Outlet } from "@tanstack/react-router";
+import { Container } from "../../shared/ui/Container";
+import { useLocale } from "../providers/LocalProvider";
+import { Button } from "../../shared/ui/Button";
 
 export function RootLayout() {
+  const { locale, toggleLocale } = useLocale();
   return (
     <div className="min-h-dvh bg-white text-neutral-900">
       <header className="border-b">
@@ -21,6 +24,16 @@ export function RootLayout() {
           <Link to="/contact" className="text-sm hover:underline">
             Contact
           </Link>
+          <div className="ml-auto">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleLocale}
+              aria-label="Toggle language"
+            >
+              {locale === "en" ? "DE" : "EN"}
+            </Button>
+          </div>
         </Container>
       </header>
 
@@ -34,5 +47,5 @@ export function RootLayout() {
         </Container>
       </footer>
     </div>
-  )
+  );
 }
