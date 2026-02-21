@@ -7,6 +7,7 @@ import { Section } from "../shared/ui/Section";
 import { H2, P } from "../shared/ui/Typography";
 import { TextInput } from "../shared/ui/TextInput";
 import { Badge } from "../shared/ui/Badge";
+import { PageHeader } from "../shared/ui/PageHeader";
 
 export const Route = createFileRoute("/projects")({
   component: ProjectsPage,
@@ -55,51 +56,49 @@ function ProjectsPage() {
   }, [query, locale, selectedTags]);
 
   return (
-    <Section>
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <H2>Projects</H2>
-          <P>Selected work and case studies.</P>
-        </div>
+    <>
+      <PageHeader title="Projects" subtitle="Selected work and case studies." />
+      <Section className="pt-6">
+        <div className="space-y-6">
+          <TextInput
+            label="Search"
+            placeholder="Search by title, tech, or tags…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
 
-        <TextInput
-          label="Search"
-          placeholder="Search by title, tech, or tags…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-
-        <div className="flex flex-wrap gap-2">
-          {allTags.map((tag) => {
-            const active = selectedTags.includes(tag);
-            return (
-              <button
-                key={tag}
-                type="button"
-                onClick={() => toggleTag(tag)}
-                className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 rounded-full"
-                aria-pressed={active}
-              >
-                <Badge variant={active ? "accent" : "neutral"}>{tag}</Badge>
-              </button>
-            );
-          })}
-        </div>
-        <p className="text-sm text-neutral-600">
-          Showing {filtered.length} of {projects.length}
-        </p>
-        <div className="grid gap-4">
-          {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} locale={locale} />
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
+          <div className="flex flex-wrap gap-2">
+            {allTags.map((tag) => {
+              const active = selectedTags.includes(tag);
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => toggleTag(tag)}
+                  className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 rounded-full"
+                  aria-pressed={active}
+                >
+                  <Badge variant={active ? "accent" : "neutral"}>{tag}</Badge>
+                </button>
+              );
+            })}
+          </div>
           <p className="text-sm text-neutral-600">
-            No projects match your search.
+            Showing {filtered.length} of {projects.length}
           </p>
-        )}
-      </div>
-    </Section>
+          <div className="grid gap-4">
+            {filtered.map((project) => (
+              <ProjectCard key={project.id} project={project} locale={locale} />
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <p className="text-sm text-neutral-600">
+              No projects match your search.
+            </p>
+          )}
+        </div>
+      </Section>
+    </>
   );
 }
