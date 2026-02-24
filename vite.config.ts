@@ -4,6 +4,7 @@ import path from "node:path"
 import { defineConfig } from "vite"
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES ? "/angelannaroby/" : "/",
   plugins: [TanStackRouterVite(), react()],
   resolve: {
     alias: {

@@ -33,7 +33,7 @@ export function RootLayout() {
           </Link>
 
           <a
-            href="/cv/AngelAnnaRoby_CV.pdf"
+            href="cv/AngelAnnaRoby_CV.pdf"
             className="text-sm hover:underline"
             target="_blank"
             rel="noreferrer"
