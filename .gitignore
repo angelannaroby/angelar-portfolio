@@ -7,16 +7,41 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Build output
 dist
 dist-ssr
+
+# Vite / tooling caches
+.vite
+.turbo
+.cache
+
+# TanStack Router (generated + cache)
+.tanstack
+
+# TypeScript build info
+*.tsbuildinfo
+node_modules/.tmp
+
+# Env files
 *.local
+.env
+.env.*.local
+
+# Coverage / test artifacts
+coverage
+playwright-report
+test-results
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
