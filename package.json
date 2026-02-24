@@ -3,24 +3,26 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "format": "prettier . --write",
+    "prepare": "husky",
+    "lint:staged": "lint-staged"
+  },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "eslint --fix"
+      "eslint --fix",
+      "prettier --write"
     ],
     "*.{json,md,yml,yaml,css}": [
       "prettier --write"
     ]
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:run": "vitest run",
-    "lint:fix": "eslint . --fix",
-    "prepare": "husky",
-    "lint:staged": "lint-staged"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
