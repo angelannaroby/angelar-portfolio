@@ -1,28 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
-import "./styles/globals.css";
-import { LocaleProvider } from "./app/providers/LocalProvider";
+import React from "react"
 
-const rawBase = import.meta.env.BASE_URL;
-const basepath = rawBase === "/" ? "/" : rawBase.replace(/\/$/, "");
+import { RouterProvider } from "@tanstack/react-router"
+import ReactDOM from "react-dom/client"
 
-const router = createRouter({
-  routeTree,
-  basepath,
-});
+import { AppProviders } from "@/app/providers/AppProviders"
+import { router } from "@/app/router"
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
+import "@/styles/globals.css"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <LocaleProvider>
+    <AppProviders>
       <RouterProvider router={router} />
-    </LocaleProvider>
+    </AppProviders>
   </React.StrictMode>,
-);
+)

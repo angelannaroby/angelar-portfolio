@@ -1,14 +1,15 @@
-import { Link } from "@tanstack/react-router";
-import { Badge } from "../../../shared/ui/Badge";
-import { Button } from "../../../shared/ui/Button";
-import { Card, CardContent, CardHeader } from "../../../shared/ui/Card";
-import { pickText, type Locale } from "../../../shared/i18n";
-import type { Project } from "../types/project";
+import { Link } from "@tanstack/react-router"
+
+import { type Locale, pickText } from "@/shared/i18n"
+import { Badge } from "@/shared/ui/Badge"
+import { Card, CardContent, CardHeader } from "@/shared/ui/Card"
+
+import type { Project } from "../types"
 
 type ProjectCardProps = {
-  project: Project;
-  locale: Locale;
-};
+  project: Project
+  locale: Locale
+}
 
 export function ProjectCard({ project, locale }: ProjectCardProps) {
   return (
@@ -23,7 +24,8 @@ export function ProjectCard({ project, locale }: ProjectCardProps) {
           </div>
 
           <Link
-            to="/projects"
+            to="/projects/$projectId"
+            params={{ projectId: project.id }}
             className="inline-flex h-9 items-center justify-center rounded-md bg-neutral-100 px-3 text-sm font-medium text-neutral-900 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
           >
             View
@@ -47,5 +49,5 @@ export function ProjectCard({ project, locale }: ProjectCardProps) {
         ))}
       </div>
     </Card>
-  );
+  )
 }

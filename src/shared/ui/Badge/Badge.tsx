@@ -12,7 +12,12 @@ const variants: Record<BadgeVariant, string> = {
   accent: "bg-neutral-900 text-white",
 }
 
-export function Badge({ children, variant = "neutral", className, ...rest }: BadgeProps) {
+export function Badge({
+  children,
+  variant = "neutral",
+  className,
+  ...rest
+}: BadgeProps) {
   return (
     <span
       className={[

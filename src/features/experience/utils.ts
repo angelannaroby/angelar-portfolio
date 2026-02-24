@@ -1,12 +1,22 @@
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
+import type { Locale } from "@/shared/i18n"
 
-export function formatYearMonth(ym: string): string {
-  const [y, m] = ym.split("-")
-  const monthIdx = Number(m) - 1
-  const month = MONTHS[monthIdx] ?? m
-  return `${month} ${y}`
-}
+export function formatPeriod(
+  start: string,
+  end?: string,
+  locale: Locale = "en",
+) {
+  const format = (ym: string) => {
+    const [y, m] = ym.split("-")
+    const date = new Date(Number(y), Number(m) - 1, 1)
 
-export function formatPeriod(start: string, end?: string): string {
-  return `${formatYearMonth(start)} — ${end ? formatYearMonth(end) : "Present"}`
+    return new Intl.DateTimeFormat(locale === "de" ? "de-DE" : "en-GB", {
+      month: "short",
+      year: "numeric",
+    }).format(date)
+  }
+
+  const startText = format(start)
+  const endText = end ? format(end) : locale === "de" ? "Heute" : "Present"
+
+  return `${startText} – ${endText}`
 }

@@ -15,10 +15,12 @@ const base =
   "inline-flex items-center justify-center gap-2 rounded-md font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none"
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-neutral-900 text-white hover:bg-neutral-800 focus-visible:outline-neutral-900",
+  primary:
+    "bg-neutral-900 text-white hover:bg-neutral-800 focus-visible:outline-neutral-900",
   secondary:
     "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus-visible:outline-neutral-900",
-  ghost: "bg-transparent text-neutral-900 hover:bg-neutral-100 focus-visible:outline-neutral-900",
+  ghost:
+    "bg-transparent text-neutral-900 hover:bg-neutral-100 focus-visible:outline-neutral-900",
 }
 
 const sizes: Record<ButtonSize, string> = {
@@ -44,7 +46,9 @@ export function Button({
     <button
       type={type}
       disabled={isDisabled}
-      className={[base, variants[variant], sizes[size], className].filter(Boolean).join(" ")}
+      className={[base, variants[variant], sizes[size], className]
+        .filter(Boolean)
+        .join(" ")}
       {...rest}
     >
       {leftIcon}

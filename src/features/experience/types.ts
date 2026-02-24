@@ -1,4 +1,4 @@
-import type { LocalizedText } from "../../../shared/i18n"
+import type { LocalizedText } from "../../shared/i18n"
 
 export type ExperienceKind = "work" | "education"
 
@@ -8,8 +8,8 @@ export type ExperienceEntry = {
   role: LocalizedText
   org: string
   location: string
-  start: string 
-  end?: string 
+  start: string
+  end?: string
   highlights: LocalizedText[]
   stack?: string[]
   links?: { label: LocalizedText; href: string }[]

@@ -1,8 +1,13 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite"
+import react from "@vitejs/plugin-react-swc"
+import path from "node:path"
+import { defineConfig } from "vite"
 
 export default defineConfig({
-  plugins: [react(), TanStackRouterVite()],
-  base: "/angelar-portfolio/",
-});
+  plugins: [TanStackRouterVite(), react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+})

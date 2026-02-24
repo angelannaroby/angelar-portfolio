@@ -1,4 +1,4 @@
-import type { ExperienceEntry } from "../types/experience"
+import type { ExperienceEntry } from "./types"
 
 export const experience: ExperienceEntry[] = [
   {
@@ -37,7 +37,17 @@ export const experience: ExperienceEntry[] = [
         de: "Agile/Scrum Zusammenarbeit inkl. Code Reviews, Anforderungsabstimmung, UI-Optimierungen und CI/CD Delivery.",
       },
     ],
-    stack: ["React", "TypeScript", "pnpm", "Turborepo", "Vitest", "Playwright", "RTL", "MobX", "Zustand"],
+    stack: [
+      "React",
+      "TypeScript",
+      "pnpm",
+      "Turborepo",
+      "Vitest",
+      "Playwright",
+      "RTL",
+      "MobX",
+      "Zustand",
+    ],
   },
   {
     id: "kimball-software-engineer",
@@ -107,7 +117,10 @@ export const experience: ExperienceEntry[] = [
   {
     id: "btech-it",
     kind: "education",
-    role: { en: "B.Tech Information Technology", de: "B.Tech Information Technology" },
+    role: {
+      en: "B.Tech Information Technology",
+      de: "B.Tech Information Technology",
+    },
     org: "APJ Abdul Kalam Technological University",
     location: "Kerala, India",
     start: "2015-07",

@@ -1,44 +1,52 @@
-import { Badge } from "../../../shared/ui/Badge";
-import { Card, CardContent, CardHeader } from "../../../shared/ui/Card";
-import { pickText, type Locale } from "../../../shared/i18n";
-import type { ExperienceEntry } from "../types/experience";
-import { formatPeriod } from "../utils";
+import { type Locale, pickText } from "@/shared/i18n"
+import { Badge } from "@/shared/ui/Badge"
+import { Card, CardContent, CardHeader } from "@/shared/ui/Card"
+import { H3, P } from "@/shared/ui/Typography"
 
-type ExperienceCardProps = {
-  entry: ExperienceEntry;
-  locale: Locale;
-};
+import type { ExperienceEntry } from "../types"
+import { formatPeriod } from "../utils"
 
-export function ExperienceCard({ entry, locale }: ExperienceCardProps) {
+type Props = {
+  entry: ExperienceEntry
+  locale: Locale
+}
+
+export function ExperienceCard({ entry, locale }: Props) {
+  const title = pickText(entry.role, locale)
+  const period = formatPeriod(entry.start, entry.end, locale)
+
   return (
     <Card>
       <CardHeader>
-        <div className="space-y-1">
-          <p className="font-semibold">{pickText(entry.role, locale)}</p>
-          <p className="text-sm text-neutral-600">
-            {entry.org} · {entry.location} ·{" "}
-            {formatPeriod(entry.start, entry.end)}
-          </p>
+        <div className="flex flex-col gap-1">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <H3>{title}</H3>
+            <span className="text-sm text-neutral-600">{period}</span>
+          </div>
+          <P className="text-sm text-neutral-700">
+            <span className="font-medium">{entry.org}</span>
+            <span className="text-neutral-500"> · {entry.location}</span>
+          </P>
         </div>
       </CardHeader>
 
       <CardContent>
-        <div className="space-y-4">
-          <ul className="list-disc space-y-2 pl-5 text-sm text-neutral-800">
-            {entry.highlights.map((h, idx) => (
-              <li key={idx}>{pickText(h, locale)}</li>
-            ))}
-          </ul>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-neutral-700">
+          {entry.highlights.map((h, idx) => (
+            <li key={`${entry.id}-h-${idx}`}>{pickText(h, locale)}</li>
+          ))}
+        </ul>
 
-          {entry.stack && entry.stack.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {entry.stack.map((s) => (
-                <Badge key={s}>{s}</Badge>
-              ))}
-            </div>
-          )}
-        </div>
+        {!!entry.stack?.length && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {entry.stack.map((s) => (
+              <Badge key={`${entry.id}-s-${s}`} variant="neutral">
+                {s}
+              </Badge>
+            ))}
+          </div>
+        )}
       </CardContent>
     </Card>
-  );
+  )
 }

@@ -1,18 +1,31 @@
 import type { InputHTMLAttributes, ReactNode } from "react"
 
-export type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
+export type TextInputProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "size"
+> & {
   label?: string
   hint?: ReactNode
   error?: string
 }
 
-export function TextInput({ label, hint, error, className, id, ...rest }: TextInputProps) {
+export function TextInput({
+  label,
+  hint,
+  error,
+  className,
+  id,
+  ...rest
+}: TextInputProps) {
   const inputId = id ?? rest.name
 
   return (
     <div className="space-y-1">
       {label && (
-        <label htmlFor={inputId} className="block text-sm font-medium text-neutral-900">
+        <label
+          htmlFor={inputId}
+          className="block text-sm font-medium text-neutral-900"
+        >
           {label}
         </label>
       )}
@@ -34,7 +47,13 @@ export function TextInput({ label, hint, error, className, id, ...rest }: TextIn
       />
 
       {(hint || error) && (
-        <p id={`${inputId}-help`} className={["text-sm", error ? "text-red-600" : "text-neutral-600"].join(" ")}>
+        <p
+          id={`${inputId}-help`}
+          className={[
+            "text-sm",
+            error ? "text-red-600" : "text-neutral-600",
+          ].join(" ")}
+        >
           {error ?? hint}
         </p>
       )}

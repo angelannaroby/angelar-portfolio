@@ -1,17 +1,24 @@
-import { Link, Outlet } from "@tanstack/react-router";
-import { Container } from "../../shared/ui/Container";
-import { useLocale } from "../providers/LocalProvider";
-import { Button } from "../../shared/ui/Button";
+import { Link, Outlet } from "@tanstack/react-router"
+
+import { useLocale } from "@/app/providers"
+import { Button } from "@/shared/ui/Button"
+import { Container } from "@/shared/ui/Container"
+
+import { SkipToContent } from "./SkipToContent"
 
 export function RootLayout() {
-  const { locale, toggleLocale } = useLocale();
+  const { locale, toggleLocale } = useLocale()
+
   return (
     <div className="min-h-dvh bg-white text-neutral-900">
+      <SkipToContent />
+
       <header className="border-b">
         <Container as="nav" className="flex items-center gap-6 py-4">
           <Link to="/" className="font-semibold">
             angelannaroby
           </Link>
+
           <Link to="/projects" className="text-sm hover:underline">
             Projects
           </Link>
@@ -24,6 +31,16 @@ export function RootLayout() {
           <Link to="/contact" className="text-sm hover:underline">
             Contact
           </Link>
+
+          <a
+            href="/cv/AngelAnnaRoby_CV.pdf"
+            className="text-sm hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            CV
+          </a>
+
           <div className="ml-auto">
             <Button
               variant="ghost"
@@ -37,7 +54,7 @@ export function RootLayout() {
         </Container>
       </header>
 
-      <main>
+      <main id="main">
         <Outlet />
       </main>
 
@@ -47,5 +64,5 @@ export function RootLayout() {
         </Container>
       </footer>
     </div>
-  );
+  )
 }

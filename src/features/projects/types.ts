@@ -1,8 +1,14 @@
-import type { LocalizedText } from "../../../shared/i18n"
+import type { LocalizedText } from "../../shared/i18n"
 
 export type ProjectLink = {
   label: LocalizedText
   href: string
+}
+
+export type ProjectCaseStudy = {
+  problem: LocalizedText
+  solution: LocalizedText
+  impact: LocalizedText
 }
 
 export type Project = {
@@ -14,4 +20,5 @@ export type Project = {
   links: ProjectLink[]
   period?: LocalizedText
   featured?: boolean
+  caseStudy?: ProjectCaseStudy
 }

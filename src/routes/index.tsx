@@ -1,11 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Section } from "../shared/ui/Section";
-import { H1, P } from "../shared/ui/Typography";
-import { Button } from "../shared/ui/Button";
+import { createFileRoute, Link } from "@tanstack/react-router"
+
+import { Button } from "@/shared/ui/Button"
+import { Section } from "@/shared/ui/Section"
+import { H1, P } from "@/shared/ui/Typography"
 
 export const Route = createFileRoute("/")({
   component: HomePage,
-});
+})
 
 function HomePage() {
   return (
@@ -16,15 +17,13 @@ function HomePage() {
           I build production-grade web applications with React, TypeScript, and
           strong engineering practices.
         </P>
+
         <div className="pt-2">
-          <Button
-            variant="primary"
-            onClick={() => window.location.assign("#contact")}
-          >
-            Contact me
-          </Button>
+          <Link to="/contact">
+            <Button variant="primary">Contact me</Button>
+          </Link>
         </div>
       </div>
     </Section>
-  );
+  )
 }

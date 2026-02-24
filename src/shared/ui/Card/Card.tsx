@@ -11,10 +11,7 @@ type CardSectionProps = HTMLAttributes<HTMLDivElement> & {
 export function Card({ children, className, ...rest }: CardProps) {
   return (
     <div
-      className={[
-        "rounded-xl border bg-white shadow-sm",
-        className,
-      ]
+      className={["rounded-xl border bg-white shadow-sm", className]
         .filter(Boolean)
         .join(" ")}
       {...rest}
@@ -26,15 +23,25 @@ export function Card({ children, className, ...rest }: CardProps) {
 
 export function CardHeader({ children, className, ...rest }: CardSectionProps) {
   return (
-    <div className={["border-b px-4 py-3", className].filter(Boolean).join(" ")} {...rest}>
+    <div
+      className={["border-b px-4 py-3", className].filter(Boolean).join(" ")}
+      {...rest}
+    >
       {children}
     </div>
   )
 }
 
-export function CardContent({ children, className, ...rest }: CardSectionProps) {
+export function CardContent({
+  children,
+  className,
+  ...rest
+}: CardSectionProps) {
   return (
-    <div className={["px-4 py-4", className].filter(Boolean).join(" ")} {...rest}>
+    <div
+      className={["px-4 py-4", className].filter(Boolean).join(" ")}
+      {...rest}
+    >
       {children}
     </div>
   )

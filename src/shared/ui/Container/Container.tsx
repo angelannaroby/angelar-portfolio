@@ -1,21 +1,26 @@
-import type { ReactNode } from "react"
+import type { ElementType, ComponentPropsWithoutRef, ReactNode } from "react"
 
-type ContainerProps = {
-  children: ReactNode
+type Props<T extends ElementType> = {
+  as?: T
   className?: string
-  as?: keyof JSX.IntrinsicElements
-}
+  children: ReactNode
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "className" | "children">
 
-/**
- * Constrains content width and applies consistent horizontal padding.
- */
-export function Container({
-  children,
+export function Container<T extends ElementType = "div">({
+  as,
   className,
-  as: Component = "div",
-}: ContainerProps) {
+  children,
+  ...rest
+}: Props<T>) {
+  const Component = (as ?? "div") as ElementType
+
   return (
-    <Component className={["mx-auto w-full max-w-5xl px-4", className].filter(Boolean).join(" ")}>
+    <Component
+      className={["mx-auto w-full max-w-5xl px-4", className]
+        .filter(Boolean)
+        .join(" ")}
+      {...rest}
+    >
       {children}
     </Component>
   )
