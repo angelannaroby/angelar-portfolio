@@ -1,11 +1,12 @@
-import type { ReactNode } from "react"
+import { LocaleProvider, ThemeProvider } from "./index"
 
-import { LocaleProvider } from "@/app/providers/LocaleProvider"
-
-type AppProvidersProps = {
-  children: ReactNode
+export function AppProviders({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider>
+      <LocaleProvider>{children}</LocaleProvider>
+    </ThemeProvider>
+  )
 }
 
-export function AppProviders({ children }: AppProvidersProps) {
-  return <LocaleProvider>{children}</LocaleProvider>
-}
+export { useLocale } from "./hooks/useLocale"
+export { useTheme } from "./theme/ThemeProvider"
