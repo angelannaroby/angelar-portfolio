@@ -2,8 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* visible keyboard focus */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 :focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 2px;
+}
+
+@media (min-width: 1024px) {
+  html.home-no-scroll,
+  body.home-no-scroll {
+    overflow: hidden;
+    height: 100%;
+  }
 }

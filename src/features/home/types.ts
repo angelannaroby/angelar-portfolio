@@ -32,4 +32,8 @@ export type HomeContent = {
     linkedinLabel: LocalizedText
     githubLabel: LocalizedText
   }
+  links: {
+    linkedin: string
+    github: string
+  }
 }

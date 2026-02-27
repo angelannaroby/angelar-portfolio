@@ -52,7 +52,7 @@ export function ContactForm({ locale }: Props) {
   })
 
   const onSubmit = (values: ContactFormValues) => {
-    const to = "angel.anna.roby@gmail.com" // change if needed
+    const to = "angel.anna.roby@gmail.com"
     const subject = encodeURIComponent(values.subject)
     const body = encodeURIComponent(
       `Name: ${values.name}\nEmail: ${values.email}\n\n${values.message}`,
@@ -60,7 +60,6 @@ export function ContactForm({ locale }: Props) {
 
     const href = `mailto:${to}?subject=${subject}&body=${body}`
 
-    // Avoid mutating window.location (eslint react-hooks/immutability)
     const a = document.createElement("a")
     a.href = href
     a.rel = "noreferrer"

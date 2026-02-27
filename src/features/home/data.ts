@@ -18,11 +18,6 @@ export const homeContent: HomeContent = {
       title: { en: "Skills", de: "Skills" },
       hint: { en: "Tech stack & strengths", de: "Tech-Stack & Stärken" },
     },
-    // {
-    //   to: "/contact",
-    //   title: { en: "Contact Me", de: "Kontakt" },
-    //   hint: { en: "Send a message", de: "Nachricht senden" },
-    // },
   ],
 
   hello: { en: "Hello! I’m", de: "Hallo! Ich bin" },
@@ -66,5 +61,9 @@ export const homeContent: HomeContent = {
   socials: {
     linkedinLabel: { en: "LinkedIn", de: "LinkedIn" },
     githubLabel: { en: "GitHub", de: "GitHub" },
+  },
+  links: {
+    linkedin: "https://www.linkedin.com/in/angel-roby/",
+    github: "https://github.com/angelar-portfolio",
   },
 }
