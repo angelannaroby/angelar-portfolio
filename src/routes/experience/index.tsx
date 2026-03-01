@@ -3,8 +3,12 @@ import { useMemo } from "react"
 import { createFileRoute } from "@tanstack/react-router"
 
 import { useLocale } from "@/app/providers"
-import { experience } from "@/features/experience"
-import { ExperienceCard } from "@/features/experience/components/ExperienceCard"
+import {
+  experience,
+  ExperienceCard,
+  experienceContent,
+} from "@/features/experience"
+import { pickText } from "@/shared/i18n"
 import { PageHeader } from "@/shared/ui/PageHeader"
 import { Section } from "@/shared/ui/Section"
 
@@ -29,22 +33,20 @@ function ExperiencePage() {
     return { work: workEntries, education: educationEntries }
   }, [])
 
+  const title = pickText(experienceContent.page.title, locale)
+  const subtitle = pickText(experienceContent.page.subtitle, locale)
+  const workTitle = pickText(experienceContent.sections.work, locale)
+  const educationTitle = pickText(experienceContent.sections.education, locale)
+
   return (
     <>
-      <PageHeader
-        title={locale === "en" ? "Experience" : "Erfahrung"}
-        subtitle={
-          locale === "en"
-            ? "Work experience and education."
-            : "Berufserfahrung und Ausbildung."
-        }
-      />
+      <PageHeader title={title} subtitle={subtitle} />
 
       <Section className="pt-6">
         <div className="space-y-12">
           <section className="space-y-4">
-            <h2 className="text-lg font-semibold">
-              {locale === "en" ? "Work Experience" : "Berufserfahrung"}
+            <h2 className="text-lg font-semibold text-foreground">
+              {workTitle}
             </h2>
             <div className="grid gap-4">
               {work.map((entry) => (
@@ -54,8 +56,8 @@ function ExperiencePage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-lg font-semibold">
-              {locale === "en" ? "Education" : "Ausbildung"}
+            <h2 className="text-lg font-semibold text-foreground">
+              {educationTitle}
             </h2>
             <div className="grid gap-4">
               {education.map((entry) => (

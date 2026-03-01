@@ -17,15 +17,16 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-const STORAGE_KEY = "theme"
+const THEME_STORAGE_KEY = "theme"
 
 function applyThemeToDom(theme: Theme) {
-  const root = document.documentElement
-  root.classList.toggle("dark", theme === "dark")
+  document.documentElement.classList.toggle("dark", theme === "dark")
+  // fixed palette for now
+  document.documentElement.dataset.palette = "mono"
 }
 
 function getInitialTheme(): Theme {
-  const stored = window.localStorage.getItem(STORAGE_KEY)
+  const stored = window.localStorage.getItem(THEME_STORAGE_KEY)
   if (stored === "light" || stored === "dark") return stored
 
   const prefersDark = window.matchMedia?.(
@@ -39,7 +40,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = useCallback((next: Theme) => {
     setThemeState(next)
-    window.localStorage.setItem(STORAGE_KEY, next)
+    window.localStorage.setItem(THEME_STORAGE_KEY, next)
     applyThemeToDom(next)
   }, [])
 

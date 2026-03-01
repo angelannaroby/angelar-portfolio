@@ -1,9 +1,14 @@
 import type { Locale } from "@/shared/i18n"
 
+type FormatPeriodOptions = {
+  presentLabel: string
+}
+
 export function formatPeriod(
   start: string,
-  end?: string,
-  locale: Locale = "en",
+  end: string | undefined,
+  locale: Locale,
+  options: FormatPeriodOptions,
 ) {
   const format = (ym: string) => {
     const [y, m] = ym.split("-")
@@ -16,7 +21,7 @@ export function formatPeriod(
   }
 
   const startText = format(start)
-  const endText = end ? format(end) : locale === "de" ? "Heute" : "Present"
+  const endText = end ? format(end) : options.presentLabel
 
   return `${startText} – ${endText}`
 }

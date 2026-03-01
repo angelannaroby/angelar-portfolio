@@ -1,5 +1,7 @@
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react"
 
+import { cn } from "@/shared/lib/cn"
+
 type ContainerSize = "default" | "wide"
 
 type Props<T extends ElementType> = {
@@ -22,11 +24,10 @@ export function Container<T extends ElementType = "div">({
   ...rest
 }: Props<T>) {
   const Component = (as ?? "div") as ElementType
+
   return (
     <Component
-      className={["mx-auto w-full px-4 sm:px-6", sizes[size], className]
-        .filter(Boolean)
-        .join(" ")}
+      className={cn("mx-auto w-full px-4 sm:px-6", sizes[size], className)}
       {...rest}
     >
       {children}

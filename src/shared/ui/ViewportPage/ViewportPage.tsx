@@ -13,8 +13,7 @@ type Props = {
  * - Mobile/tablet: natural document flow
  * - Desktop (lg+): strict viewport layout (no page scroll)
  *
- * Additionally:
- * - Measures header/strip/footer heights and exposes remaining space via CSS var:
+ * Measures header/strip/footer heights and exposes remaining space via CSS var:
  *   --vp-content-h (px)
  */
 export function ViewportPage({
@@ -39,7 +38,6 @@ export function ViewportPage({
       const footerH = footerRef.current?.offsetHeight ?? 0
 
       const remaining = window.innerHeight - headerH - stripH - footerH
-
       root.style.setProperty("--vp-content-h", `${Math.max(0, remaining)}px`)
     }
 
@@ -51,7 +49,6 @@ export function ViewportPage({
     if (footerRef.current) ro.observe(footerRef.current)
 
     window.addEventListener("resize", compute)
-
     return () => {
       ro.disconnect()
       window.removeEventListener("resize", compute)
@@ -70,9 +67,9 @@ export function ViewportPage({
           {header}
         </div>
 
-        <div className="lg:h-[var(--vp-content-h)] lg:min-h-0 lg:overflow-hidden">
+        <main className="lg:h-[var(--vp-content-h)] lg:min-h-0 lg:overflow-hidden">
           {children}
-        </div>
+        </main>
 
         {strip ? (
           <div ref={stripRef} className="shrink-0">

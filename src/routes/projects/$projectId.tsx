@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router"
 
 import { useLocale } from "@/app/providers"
 import { projects } from "@/features/projects"
+import { projectsContent } from "@/features/projects/content"
 import { pickText } from "@/shared/i18n"
 import { Badge } from "@/shared/ui/Badge"
 import { PageHeader } from "@/shared/ui/PageHeader"
@@ -18,6 +19,18 @@ function ProjectDetailPage() {
   const project = projects.find((p) => p.id === projectId)
   if (!project) throw notFound()
 
+  const featuredLabel = pickText(projectsContent.detail.featured, locale)
+  const problemTitle = pickText(
+    projectsContent.detail.caseStudy.problem,
+    locale,
+  )
+  const solutionTitle = pickText(
+    projectsContent.detail.caseStudy.solution,
+    locale,
+  )
+  const impactTitle = pickText(projectsContent.detail.caseStudy.impact, locale)
+  const linksTitle = pickText(projectsContent.detail.linksTitle, locale)
+
   return (
     <>
       <PageHeader
@@ -29,39 +42,43 @@ function ProjectDetailPage() {
         <div className="space-y-10">
           <div className="flex flex-wrap gap-2">
             {project.stack.map((s) => (
-              <Badge key={s}>{s}</Badge>
+              <Badge key={`${project.id}-stack-${s}`}>{s}</Badge>
             ))}
-            {project.featured && <Badge variant="accent">Featured</Badge>}
+            {project.featured ? (
+              <Badge variant="accent">{featuredLabel}</Badge>
+            ) : null}
           </div>
 
-          {project.caseStudy && (
+          {project.caseStudy ? (
             <div className="space-y-6">
               <CaseStudyBlock
-                title="Problem"
+                title={problemTitle}
                 body={pickText(project.caseStudy.problem, locale)}
               />
               <CaseStudyBlock
-                title="Solution"
+                title={solutionTitle}
                 body={pickText(project.caseStudy.solution, locale)}
               />
               <CaseStudyBlock
-                title="Impact"
+                title={impactTitle}
                 body={pickText(project.caseStudy.impact, locale)}
               />
             </div>
-          )}
+          ) : null}
 
-          {!!project.links.length && (
+          {project.links.length ? (
             <div className="space-y-2">
-              <h2 className="text-lg font-semibold">Links</h2>
-              <ul className="list-disc pl-5 text-sm">
+              <h2 className="text-lg font-semibold text-foreground">
+                {linksTitle}
+              </h2>
+              <ul className="list-disc pl-5 text-sm text-foreground">
                 {project.links.map((l) => (
                   <li key={l.href}>
                     <a
-                      className="underline"
+                      className="underline underline-offset-4 hover:opacity-80"
                       href={l.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noreferrer noopener"
                     >
                       {pickText(l.label, locale)}
                     </a>
@@ -69,7 +86,7 @@ function ProjectDetailPage() {
                 ))}
               </ul>
             </div>
-          )}
+          ) : null}
         </div>
       </Section>
     </>
@@ -79,8 +96,8 @@ function ProjectDetailPage() {
 function CaseStudyBlock({ title, body }: { title: string; body: string }) {
   return (
     <section className="space-y-2">
-      <h2 className="text-lg font-semibold">{title}</h2>
-      <p className="text-sm leading-6 text-neutral-700">{body}</p>
+      <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+      <p className="text-sm leading-6 text-muted-foreground">{body}</p>
     </section>
   )
 }

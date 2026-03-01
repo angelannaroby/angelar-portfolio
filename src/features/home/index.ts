@@ -1,4 +1,3 @@
-export * from "./components"
-export * from "./data"
-export * from "./types"
-export * from "./utils"
+export { HomePage } from "./components/HomePage"
+export { homeContent } from "./content"
+export type { HomeContent, HomeTopLink } from "./types"

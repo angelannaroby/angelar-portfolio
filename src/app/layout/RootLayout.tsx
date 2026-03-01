@@ -13,12 +13,11 @@ export function RootLayout() {
   const isHome = pathname === "/"
 
   return (
-    <div className="min-h-dvh bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white">
+    <div className="min-h-dvh bg-background text-foreground">
       <SkipToContent />
 
-      {/* Keep your normal top nav for inner pages only */}
       {!isHome && (
-        <header className="border-b border-neutral-200 dark:border-neutral-800">
+        <header className="border-b border-border">
           <Container as="nav" className="flex items-center gap-6 py-4">
             <Link to="/" className="font-semibold">
               angelannaroby
@@ -64,10 +63,9 @@ export function RootLayout() {
         <Outlet />
       </main>
 
-      {/* Footer only for inner pages (Home has its own exact template footer layout) */}
       {!isHome && (
-        <footer className="border-t border-neutral-200 dark:border-neutral-800">
-          <Container className="py-6 text-center text-sm text-neutral-600 dark:text-neutral-400">
+        <footer className="border-t border-border">
+          <Container className="py-6 text-center text-sm text-muted-foreground">
             <p>© 2026 Angel Anna Roby. All rights reserved.</p>
             <p className="mt-1">Built with React, Tailwind CSS, and ❤️.</p>
           </Container>

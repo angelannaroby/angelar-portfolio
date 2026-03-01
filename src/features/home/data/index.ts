@@ -1,17 +1,17 @@
-import type { HomeContent } from "./types"
+import type { HomeContent } from "../types"
 
 export const homeContent: HomeContent = {
   topBrand: { en: "it’s me", de: "ich bin’s" },
   topLinks: [
     {
-      to: "/projects",
-      title: { en: "My Projects", de: "Meine Projekte" },
-      hint: { en: "See selected work", de: "Ausgewählte Arbeiten" },
-    },
-    {
       to: "/experience",
       title: { en: "About Me", de: "Über mich" },
       hint: { en: "Experience & education", de: "Erfahrung & Ausbildung" },
+    },
+    {
+      to: "/projects",
+      title: { en: "My Projects", de: "Meine Projekte" },
+      hint: { en: "See selected work", de: "Ausgewählte Arbeiten" },
     },
     {
       to: "/skills",
@@ -19,6 +19,17 @@ export const homeContent: HomeContent = {
       hint: { en: "Tech stack & strengths", de: "Tech-Stack & Stärken" },
     },
   ],
+
+  header: {
+    openMenu: { en: "Open menu", de: "Menü öffnen" },
+    closeMenu: { en: "Close menu", de: "Menü schließen" },
+    toggleTheme: { en: "Toggle theme", de: "Theme wechseln" },
+    toggleLanguage: { en: "Toggle language", de: "Sprache wechseln" },
+    navigation: { en: "Navigation", de: "Navigation" },
+    themeAndLanguage: { en: "Theme & language", de: "Theme & Sprache" },
+    themeLight: { en: "Light", de: "Hell" },
+    themeDark: { en: "Dark", de: "Dunkel" },
+  },
 
   hello: { en: "Hello! I’m", de: "Hallo! Ich bin" },
   name: "Angel",
@@ -50,6 +61,14 @@ export const homeContent: HomeContent = {
     de: "In Deutschland • Offen für Hybrid und Umzug",
   },
 
+  introSection: {
+    waveLabel: { en: "Wave", de: "Begrüßung" },
+    checklistIcon: { en: "Check", de: "Haken" },
+    imageAlt: { en: "Portrait of Angel", de: "Portrait von Angel" },
+    socialLinkedInAria: { en: "Open LinkedIn", de: "LinkedIn öffnen" },
+    socialGitHubAria: { en: "Open GitHub", de: "GitHub öffnen" },
+  },
+
   capabilityStrip: [
     { en: "WEB DEVELOPMENT", de: "WEB DEVELOPMENT" },
     { en: "UI ENGINEERING", de: "UI ENGINEERING" },
@@ -65,5 +84,16 @@ export const homeContent: HomeContent = {
   links: {
     linkedin: "https://www.linkedin.com/in/angel-roby/",
     github: "https://github.com/angelar-portfolio",
+  },
+
+  footer: {
+    copyright: {
+      en: "© {year} Angel Anna Roby. All rights reserved.",
+      de: "© {year} Angel Anna Roby. Alle Rechte vorbehalten.",
+    },
+    builtWith: {
+      en: "Built with React, Tailwind CSS, and ❤️",
+      de: "Erstellt mit React, Tailwind CSS und ❤️",
+    },
   },
 }
