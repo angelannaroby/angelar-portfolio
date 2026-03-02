@@ -1,15 +1,21 @@
-import type { ReactNode } from "react"
+import type { HTMLAttributes, PropsWithChildren } from "react"
 
 import { cn } from "@/shared/lib/cn"
 
-type TextProps = {
-  children: ReactNode
-  className?: string
-}
+type BaseProps<T> = PropsWithChildren<
+  HTMLAttributes<T> & {
+    className?: string
+  }
+>
 
-export function H1({ children, className }: TextProps) {
+export function H1({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLHeadingElement>) {
   return (
     <h1
+      {...props}
       className={cn(
         "text-3xl font-bold tracking-tight text-foreground",
         className,
@@ -20,9 +26,14 @@ export function H1({ children, className }: TextProps) {
   )
 }
 
-export function H2({ children, className }: TextProps) {
+export function H2({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLHeadingElement>) {
   return (
     <h2
+      {...props}
       className={cn(
         "text-2xl font-semibold tracking-tight text-foreground",
         className,
@@ -33,9 +44,14 @@ export function H2({ children, className }: TextProps) {
   )
 }
 
-export function H3({ children, className }: TextProps) {
+export function H3({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLHeadingElement>) {
   return (
     <h3
+      {...props}
       className={cn(
         "text-lg font-semibold tracking-tight text-foreground",
         className,
@@ -46,16 +62,26 @@ export function H3({ children, className }: TextProps) {
   )
 }
 
-export function P({ children, className }: TextProps) {
+export function P({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLParagraphElement>) {
   return (
-    <p className={cn("leading-relaxed text-foreground", className)}>
+    <p {...props} className={cn("text-sm leading-6", className)}>
       {children}
     </p>
   )
 }
 
-export function Small({ children, className }: TextProps) {
+export function Small({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLParagraphElement>) {
   return (
-    <p className={cn("text-sm text-muted-foreground", className)}>{children}</p>
+    <p {...props} className={cn("text-sm text-muted-foreground", className)}>
+      {children}
+    </p>
   )
 }

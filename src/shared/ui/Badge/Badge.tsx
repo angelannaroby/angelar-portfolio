@@ -10,7 +10,7 @@ type BadgeTone = "default" | "primary"
  */
 export type BadgeVariant = "neutral" | "subtle" | "accent" | "primary"
 
-type Props = {
+export type BadgeProps = {
   children: ReactNode
   className?: string
 
@@ -39,8 +39,7 @@ function resolveVariant(
   return "neutral"
 }
 
-export function Badge({ children, className, tone, variant }: Props) {
+export function Badge({ children, className, tone, variant }: BadgeProps) {
   const v = resolveVariant(variant, tone)
-
   return <span className={cn(base, styles[v], className)}>{children}</span>
 }

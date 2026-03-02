@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 
 import type { Locale } from "@/shared/i18n"
-import { BackgroundLayer } from "@/shared/ui/Background/BackgroundLayer"
 import { ViewportPage } from "@/shared/ui/ViewportPage"
 
 import { homeContent } from "../content"
