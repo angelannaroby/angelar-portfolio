@@ -4,9 +4,14 @@ export type ExperienceKind = "work" | "education"
 
 export type ExperienceLink = { label: LocalizedText; href: string }
 
+export type ExperienceLogo = {
+  src: string
+  alt: string
+}
+
 export type ExperienceEntry = {
   id: string
-  kind: ExperienceKind
+  kind: "work" | "education"
   role: LocalizedText
   org: string
   location: string
@@ -14,5 +19,6 @@ export type ExperienceEntry = {
   end?: string
   highlights: LocalizedText[]
   stack?: string[]
-  links?: ExperienceLink[]
+  website?: string
+  logo?: ExperienceLogo
 }

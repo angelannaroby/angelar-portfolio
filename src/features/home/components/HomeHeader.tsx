@@ -1,3 +1,4 @@
+// HomeHeader.tsx
 import { useEffect, useId, useMemo, useState } from "react"
 
 import { Link } from "@tanstack/react-router"
@@ -5,7 +6,7 @@ import { Link } from "@tanstack/react-router"
 import { useLocale, useTheme } from "@/app/providers"
 import { type Locale, pickText } from "@/shared/i18n"
 import { Container } from "@/shared/ui/Container"
-import { MoonIcon, SunIcon } from "@/shared/ui/Icons"
+import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from "@/shared/ui/Icons"
 
 import { homeContent } from "../content"
 import type { HomeTopLink } from "../types"
@@ -14,38 +15,6 @@ type Props = {
   locale: Locale
   brand: { en: string; de: string }
   links: HomeTopLink[]
-}
-
-function MenuIcon(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-    >
-      <path d="M4 7h16M4 12h16M4 17h16" />
-    </svg>
-  )
-}
-
-function CloseIcon(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-    >
-      <path d="M6 6l12 12M18 6l-12 12" />
-    </svg>
-  )
 }
 
 export function HomeHeader({ locale, brand, links }: Props) {
@@ -92,17 +61,21 @@ export function HomeHeader({ locale, brand, links }: Props) {
     <header className="pt-4 sm:pt-6">
       <Container size="wide">
         <div className="flex items-start justify-between gap-4 sm:gap-10">
-          <div className="shrink-0">
+          <Link
+            to="/"
+            className="shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            aria-label={pickText(brand, locale)}
+          >
             <div className="text-2xl font-semibold tracking-tight text-foreground">
               {pickText(brand, locale)}
             </div>
             <div className="mt-2 h-[3px] w-16 bg-foreground" />
-          </div>
+          </Link>
 
           <nav className="hidden flex-1 items-start justify-end gap-14 sm:flex">
             {links.map((item) => (
               <Link key={item.to} to={item.to} className="group lg:w-[150px]">
-                <div className="h-px w-full bg-border" />
+                {/* <div className="h-px w-full bg-border" /> */}
                 <div className="mt-3 flex items-start justify-between gap-3">
                   <div>
                     <div className="text-base font-semibold text-foreground">
@@ -211,7 +184,6 @@ export function HomeHeader({ locale, brand, links }: Props) {
                       {pickText(item.hint, locale)}
                     </div>
                   </div>
-                  <span className="mt-[2px] text-muted-foreground">↗</span>
                 </Link>
               ))}
             </div>

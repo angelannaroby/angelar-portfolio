@@ -43,3 +43,175 @@ export function GitHubIcon({ className }: IconProps) {
     </svg>
   )
 }
+
+export function FocusIcon({
+  id,
+  className,
+}: {
+  id: "frontend" | "ui" | "testing"
+  className?: string
+}) {
+  switch (id) {
+    case "frontend":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M8 9l-3 3 3 3" />
+          <path d="M16 9l3 3-3 3" />
+          <path d="M14 7l-4 10" />
+        </svg>
+      )
+    case "ui":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M4 4h6v6H4z" />
+          <path d="M14 4h6v6h-6z" />
+          <path d="M4 14h6v6H4z" />
+          <path d="M14 14h6v6h-6z" />
+        </svg>
+      )
+    case "testing":
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          className={className}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M9 11l2 2 4-4" />
+          <path d="M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
+        </svg>
+      )
+  }
+}
+
+export type ExperienceStatKind = "years" | "projects"
+
+export function ExperienceYearsIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 12a9 9 0 1 0 18 0" />
+      <path d="M12 3v9l3 3" />
+    </svg>
+  )
+}
+
+export function ExperienceProjectsIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 7h18" />
+      <path d="M6 7V5a2 2 0 0 1 2-2h3" />
+      <path d="M18 7V5a2 2 0 0 0-2-2h-3" />
+      <path d="M5 7v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7" />
+      <path d="M9 11h6" />
+      <path d="M9 15h6" />
+    </svg>
+  )
+}
+
+export function MenuIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    >
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  )
+}
+
+export function CloseIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    >
+      <path d="M6 6l12 12M18 6l-12 12" />
+    </svg>
+  )
+}
+
+export function ChevronRightIcon(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M9 18l6-6-6-6" />
+    </svg>
+  )
+}
+
+export function ExternalLinkIcon(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14 3h7v7" />
+      <path d="M10 14 21 3" />
+      <path d="M21 14v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+    </svg>
+  )
+}
