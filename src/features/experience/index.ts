@@ -1,9 +1,6 @@
-export { ExperienceCard } from "./components"
-export {
-  experienceContent,
-  formatExperienceText,
-  getPresentLabel,
-} from "./content"
+export * from "./components"
+export type { ExperienceContent } from "./content"
+export { experienceContent } from "./content"
 export { experience } from "./data"
-export type { ExperienceEntry, ExperienceKind, ExperienceLink } from "./types"
+export type { ExperienceEntry, ExperienceKind } from "./types"
 export { formatPeriod } from "./utils"

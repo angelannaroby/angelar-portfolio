@@ -11,6 +11,8 @@ export const experience: ExperienceEntry[] = [
     org: "osapiens Services GmbH",
     location: "Mannheim, Germany",
     start: "2022-12",
+    website: "https://osapiens.com/",
+    logo: { src: "/images/osap.png", alt: "osapiens" },
     highlights: [
       {
         en: "Developed React + TypeScript features for compliance-critical, form-heavy enterprise workflows.",
@@ -57,6 +59,8 @@ export const experience: ExperienceEntry[] = [
     location: "Trivandrum, India",
     start: "2021-09",
     end: "2022-07",
+    website: "https://www.kimballelectronics.com/",
+    logo: { src: "/images/kimball.png", alt: "Kimball Electronics" },
     highlights: [
       {
         en: "Delivered React dashboards and data visualizations for a production monitoring system with anomaly detection views.",
@@ -81,6 +85,8 @@ export const experience: ExperienceEntry[] = [
     location: "Calicut, India",
     start: "2019-10",
     end: "2021-08",
+    website: "https://www.ultsglobal.com/",
+    logo: { src: "/images/ults.svg", alt: "ULTS" },
     highlights: [
       {
         en: "Delivered end-to-end frontend features in React for a government-facing web portal, from implementation to maintenance.",
@@ -97,6 +103,8 @@ export const experience: ExperienceEntry[] = [
     ],
     stack: ["React", "Redux", "Axios", "SQL", "Bootstrap"],
   },
+
+  // EDUCATION
   {
     id: "rptu-msc",
     kind: "education",
@@ -107,6 +115,7 @@ export const experience: ExperienceEntry[] = [
     org: "Rhineland-Palatinate Technical University (RPTU)",
     location: "Kaiserslautern, Germany",
     start: "2022-10",
+    logo: { src: "/images/rptu.jpg", alt: "RPTU" },
     highlights: [
       {
         en: "Focus areas: software engineering, intelligent systems, and IT systems.",
@@ -125,6 +134,7 @@ export const experience: ExperienceEntry[] = [
     location: "Kerala, India",
     start: "2015-07",
     end: "2019-05",
+    logo: { src: "/images/ktu.webp", alt: "KTU" },
     highlights: [
       {
         en: "CGPA: 8.67/10 (German grade: 1.7). University rank holder (9th rank).",
