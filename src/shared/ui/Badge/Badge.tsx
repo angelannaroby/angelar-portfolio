@@ -1,35 +1,45 @@
-import type { HTMLAttributes, ReactNode } from "react"
+import type { ReactNode } from "react"
 
-type BadgeVariant = "neutral" | "accent"
+import { cn } from "@/shared/lib/cn"
 
-export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
+type BadgeTone = "default" | "primary"
+
+/**
+ * Standardize on `variant` going forward (neutral/subtle/accent/primary).
+ * `tone` remains supported for backwards compatibility.
+ */
+export type BadgeVariant = "neutral" | "subtle" | "accent" | "primary"
+
+export type BadgeProps = {
   children: ReactNode
+  className?: string
+
+  /** @deprecated Prefer `variant` */
+  tone?: BadgeTone
+
   variant?: BadgeVariant
 }
 
-const variants: Record<BadgeVariant, string> = {
-  neutral: "bg-neutral-100 text-neutral-800",
-  accent: "bg-neutral-900 text-white",
+const base =
+  "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset"
+
+const styles: Record<BadgeVariant, string> = {
+  neutral: "bg-surface text-foreground ring-border",
+  subtle: "bg-surface-2/60 text-foreground ring-border",
+  accent: "bg-accent text-accent-foreground ring-border",
+  primary: "bg-primary/15 text-foreground ring-primary/35",
 }
 
-export function Badge({
-  children,
-  variant = "neutral",
-  className,
-  ...rest
-}: BadgeProps) {
-  return (
-    <span
-      className={[
-        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium",
-        variants[variant],
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      {...rest}
-    >
-      {children}
-    </span>
-  )
+function resolveVariant(
+  variant: BadgeVariant | undefined,
+  tone: BadgeTone | undefined,
+): BadgeVariant {
+  if (variant) return variant
+  if (tone === "primary") return "primary"
+  return "neutral"
+}
+
+export function Badge({ children, className, tone, variant }: BadgeProps) {
+  const v = resolveVariant(variant, tone)
+  return <span className={cn(base, styles[v], className)}>{children}</span>
 }

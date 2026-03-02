@@ -1,6 +1,8 @@
-import type { LocalizedText } from "../../shared/i18n"
+import type { LocalizedText } from "@/shared/i18n"
 
 export type ExperienceKind = "work" | "education"
+
+export type ExperienceLink = { label: LocalizedText; href: string }
 
 export type ExperienceEntry = {
   id: string
@@ -12,5 +14,5 @@ export type ExperienceEntry = {
   end?: string
   highlights: LocalizedText[]
   stack?: string[]
-  links?: { label: LocalizedText; href: string }[]
+  links?: ExperienceLink[]
 }

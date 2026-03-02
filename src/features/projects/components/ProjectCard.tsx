@@ -1,53 +1,66 @@
 import { Link } from "@tanstack/react-router"
 
-import { type Locale, pickText } from "@/shared/i18n"
+import { pickText } from "@/shared/i18n"
 import { Badge } from "@/shared/ui/Badge"
-import { Card, CardContent, CardHeader } from "@/shared/ui/Card"
+import { Button } from "@/shared/ui/Button"
+import { Card, CardContent, CardFooter, CardHeader } from "@/shared/ui/Card"
 
-import type { Project } from "../types"
+import type { ProjectCardProps } from "../types"
 
-type ProjectCardProps = {
-  project: Project
-  locale: Locale
-}
+export function ProjectCard({ project, locale, labels }: ProjectCardProps) {
+  const title = pickText(project.title, locale)
+  const summary = pickText(project.summary, locale)
 
-export function ProjectCard({ project, locale }: ProjectCardProps) {
   return (
-    <Card>
+    <Card className="transition will-change-transform hover:-translate-y-0.5 hover:shadow-md">
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
-          <div className="space-y-1">
-            <p className="font-semibold">{pickText(project.title, locale)}</p>
-            <p className="text-sm text-neutral-600">
-              {pickText(project.summary, locale)}
+          <div className="min-w-0 space-y-1">
+            <p className="truncate text-base font-semibold tracking-tight text-foreground">
+              {title}
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {summary}
             </p>
           </div>
 
-          <Link
-            to="/projects/$projectId"
-            params={{ projectId: project.id }}
-            className="inline-flex h-9 items-center justify-center rounded-md bg-neutral-100 px-3 text-sm font-medium text-neutral-900 hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
-          >
-            View
-          </Link>
+          <Button asChild size="sm" variant="primary">
+            <Link
+              to="/projects/$projectId"
+              params={{ projectId: project.id }}
+              aria-label={`${labels.view}: ${title}`}
+              preload="intent"
+            >
+              {labels.view}
+            </Link>
+          </Button>
         </div>
       </CardHeader>
 
       <CardContent>
         <div className="flex flex-wrap gap-2">
           {project.stack.map((s) => (
-            <Badge key={s}>{s}</Badge>
+            <Badge key={`${project.id}-stack-${s}`} variant="subtle">
+              {s}
+            </Badge>
           ))}
-          {project.featured && <Badge variant="accent">Featured</Badge>}
+          {project.featured ? (
+            <Badge variant="accent">{labels.featured}</Badge>
+          ) : null}
         </div>
       </CardContent>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {project.tags.map((t) => (
-          <Badge key={t} className="opacity-80">
-            {t}
-          </Badge>
-        ))}
-      </div>
+
+      {project.tags.length > 0 ? (
+        <CardFooter>
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((t) => (
+              <Badge key={`${project.id}-tag-${t}`} className="opacity-80">
+                {t}
+              </Badge>
+            ))}
+          </div>
+        </CardFooter>
+      ) : null}
     </Card>
   )
 }

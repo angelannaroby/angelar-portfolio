@@ -1,46 +1,87 @@
-import type { ReactNode } from "react"
+import type { HTMLAttributes, PropsWithChildren } from "react"
 
-type TextProps = {
-  children: ReactNode
-  className?: string
-}
+import { cn } from "@/shared/lib/cn"
 
-function cx(...classes: Array<string | undefined>) {
-  return classes.filter(Boolean).join(" ")
-}
+type BaseProps<T> = PropsWithChildren<
+  HTMLAttributes<T> & {
+    className?: string
+  }
+>
 
-export function H1({ children, className }: TextProps) {
+export function H1({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLHeadingElement>) {
   return (
-    <h1 className={cx("text-3xl font-bold tracking-tight", className)}>
+    <h1
+      {...props}
+      className={cn(
+        "text-3xl font-bold tracking-tight text-foreground",
+        className,
+      )}
+    >
       {children}
     </h1>
   )
 }
 
-export function H2({ children, className }: TextProps) {
+export function H2({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLHeadingElement>) {
   return (
-    <h2 className={cx("text-2xl font-semibold tracking-tight", className)}>
+    <h2
+      {...props}
+      className={cn(
+        "text-2xl font-semibold tracking-tight text-foreground",
+        className,
+      )}
+    >
       {children}
     </h2>
   )
 }
 
-export function H3({ children, className }: TextProps) {
+export function H3({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLHeadingElement>) {
   return (
-    <h3 className={cx("text-lg font-semibold tracking-tight", className)}>
+    <h3
+      {...props}
+      className={cn(
+        "text-lg font-semibold tracking-tight text-foreground",
+        className,
+      )}
+    >
       {children}
     </h3>
   )
 }
 
-export function P({ children, className }: TextProps) {
+export function P({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLParagraphElement>) {
   return (
-    <p className={cx("leading-relaxed text-neutral-700", className)}>
+    <p {...props} className={cn("text-sm leading-6", className)}>
       {children}
     </p>
   )
 }
 
-export function Small({ children, className }: TextProps) {
-  return <p className={cx("text-sm text-neutral-600", className)}>{children}</p>
+export function Small({
+  children,
+  className,
+  ...props
+}: BaseProps<HTMLParagraphElement>) {
+  return (
+    <p {...props} className={cn("text-sm text-muted-foreground", className)}>
+      {children}
+    </p>
+  )
 }

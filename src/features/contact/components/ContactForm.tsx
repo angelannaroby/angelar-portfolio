@@ -3,36 +3,40 @@ import { useMemo } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
+import type { Locale } from "@/shared/i18n"
+import { pickText } from "@/shared/i18n"
 import { Button } from "@/shared/ui/Button"
 import { Card, CardContent, CardHeader } from "@/shared/ui/Card"
 import { TextArea, TextInput } from "@/shared/ui/TextInput"
 import { Small } from "@/shared/ui/Typography"
 
-import { type ContactFormValues, contactSchema } from "../lib/contactSchema"
+import { contactContent, formatContactText } from "../content"
+import { type ContactFormValues, makeContactSchema } from "../lib/contactSchema"
 
 type Props = {
-  locale: "en" | "de"
+  locale: Locale
 }
 
 export function ContactForm({ locale }: Props) {
-  const labels = useMemo(() => {
-    const t = (en: string, de: string) => (locale === "en" ? en : de)
+  const schema = useMemo(() => makeContactSchema(locale), [locale])
 
+  const labels = useMemo(() => {
+    const f = contactContent.form
     return {
-      title: t("Send me a message", "Nachricht senden"),
-      subtitle: t(
-        "I typically reply within 1–2 days.",
-        "Ich antworte normalerweise innerhalb von 1–2 Tagen.",
-      ),
-      name: t("Name", "Name"),
-      email: t("Email", "E-Mail"),
-      subject: t("Subject", "Betreff"),
-      message: t("Message", "Nachricht"),
-      submit: t("Send", "Senden"),
-      hint: t(
-        "This form uses a mailto fallback (opens your email app).",
-        "Dieses Formular nutzt einen Mailto-Fallback (öffnet dein E-Mail-Programm).",
-      ),
+      title: pickText(f.title, locale),
+      subtitle: pickText(f.subtitle, locale),
+
+      name: pickText(f.fields.name, locale),
+      email: pickText(f.fields.email, locale),
+      subject: pickText(f.fields.subject, locale),
+      message: pickText(f.fields.message, locale),
+
+      submit: pickText(f.actions.submit, locale),
+      submitting: pickText(f.actions.submitting, locale),
+      hint: pickText(f.hint, locale),
+
+      mailtoTo: f.mailto.to,
+      mailtoBodyTemplate: pickText(f.mailto.bodyTemplate, locale),
     }
   }, [locale])
 
@@ -41,7 +45,7 @@ export function ContactForm({ locale }: Props) {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(schema),
     mode: "onBlur",
     defaultValues: {
       name: "",
@@ -52,27 +56,28 @@ export function ContactForm({ locale }: Props) {
   })
 
   const onSubmit = (values: ContactFormValues) => {
-    const to = "angel.anna.roby@gmail.com" // change if needed
-    const subject = encodeURIComponent(values.subject)
+    const to = labels.mailtoTo
+    const subject = encodeURIComponent(values.subject.trim())
+
     const body = encodeURIComponent(
-      `Name: ${values.name}\nEmail: ${values.email}\n\n${values.message}`,
+      formatContactText(labels.mailtoBodyTemplate, {
+        name: values.name.trim(),
+        email: values.email.trim(),
+        message: values.message.trim(),
+      }),
     )
 
-    const href = `mailto:${to}?subject=${subject}&body=${body}`
-
-    // Avoid mutating window.location (eslint react-hooks/immutability)
-    const a = document.createElement("a")
-    a.href = href
-    a.rel = "noreferrer"
-    a.click()
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`
   }
 
   return (
     <Card>
       <CardHeader>
         <div className="space-y-1">
-          <h2 className="text-lg font-semibold">{labels.title}</h2>
-          <p className="text-sm text-neutral-600">{labels.subtitle}</p>
+          <h2 className="text-lg font-semibold text-foreground">
+            {labels.title}
+          </h2>
+          <p className="text-sm text-muted-foreground">{labels.subtitle}</p>
         </div>
       </CardHeader>
 
@@ -101,6 +106,7 @@ export function ContactForm({ locale }: Props) {
             label={labels.subject}
             {...register("subject")}
             error={errors.subject?.message}
+            autoComplete="off"
           />
 
           <TextArea
@@ -110,12 +116,20 @@ export function ContactForm({ locale }: Props) {
             rows={6}
           />
 
-          <div className="flex items-center justify-between gap-4">
-            <Small className="max-w-[34rem]">{labels.hint}</Small>
+          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <Small className="max-w-[34rem] text-muted-foreground">
+              {labels.hint}
+            </Small>
 
-            <Button type="submit" variant="primary" disabled={isSubmitting}>
-              {isSubmitting ? "…" : labels.submit}
-            </Button>
+            <div className="flex items-center gap-3">
+              <span className="sr-only" aria-live="polite">
+                {isSubmitting ? labels.submitting : ""}
+              </span>
+
+              <Button type="submit" variant="primary" disabled={isSubmitting}>
+                {isSubmitting ? labels.submitting : labels.submit}
+              </Button>
+            </div>
           </div>
         </form>
       </CardContent>

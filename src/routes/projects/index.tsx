@@ -1,9 +1,14 @@
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 
 import { createFileRoute } from "@tanstack/react-router"
 
 import { useLocale } from "@/app/providers"
 import { ProjectCard, projects } from "@/features/projects"
+import {
+  formatProjectsText,
+  getProjectCardLabels,
+  projectsContent,
+} from "@/features/projects/content"
 import { pickText } from "@/shared/i18n"
 import { Badge } from "@/shared/ui/Badge"
 import { PageHeader } from "@/shared/ui/PageHeader"
@@ -16,12 +21,15 @@ export const Route = createFileRoute("/projects/")({
 
 function ProjectsPage() {
   const { locale } = useLocale()
+
   const [query, setQuery] = useState("")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
+  const labels = useMemo(() => getProjectCardLabels(locale), [locale])
+
   const allTags = useMemo(() => {
     const tagSet = new Set<string>()
-    projects.forEach((p) => p.tags.forEach((t) => tagSet.add(t)))
+    for (const p of projects) for (const t of p.tags) tagSet.add(t)
     return Array.from(tagSet).sort((a, b) => a.localeCompare(b))
   }, [])
 
@@ -48,20 +56,37 @@ function ProjectsPage() {
     })
   }, [query, locale, selectedTags])
 
-  const toggleTag = (tag: string) => {
+  const toggleTag = useCallback((tag: string) => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     )
-  }
+  }, [])
+
+  const headerTitle = pickText(projectsContent.page.title, locale)
+  const headerSubtitle = pickText(projectsContent.page.subtitle, locale)
+
+  const searchLabel = pickText(projectsContent.page.searchLabel, locale)
+  const searchPlaceholder = pickText(
+    projectsContent.page.searchPlaceholder,
+    locale,
+  )
+
+  const showing = formatProjectsText(
+    pickText(projectsContent.page.showing, locale),
+    { shown: filtered.length, total: projects.length },
+  )
+
+  const noResults = pickText(projectsContent.page.noResults, locale)
 
   return (
     <>
-      <PageHeader title="Projects" subtitle="Selected work and case studies." />
+      <PageHeader title={headerTitle} subtitle={headerSubtitle} />
+
       <Section className="pt-6">
         <div className="space-y-6">
           <TextInput
-            label="Search"
-            placeholder="Search by title, tech, or tags…"
+            label={searchLabel}
+            placeholder={searchPlaceholder}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -75,30 +100,32 @@ function ProjectsPage() {
                   key={tag}
                   type="button"
                   onClick={() => toggleTag(tag)}
-                  className="rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+                  className="rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                   aria-pressed={active}
                 >
+                  {/* Badge API will be updated later; keep variants for now */}
                   <Badge variant={active ? "accent" : "neutral"}>{tag}</Badge>
                 </button>
               )
             })}
           </div>
 
-          <p className="text-sm text-neutral-600">
-            Showing {filtered.length} of {projects.length}
-          </p>
+          <p className="text-sm text-muted-foreground">{showing}</p>
 
           <div className="grid gap-4">
             {filtered.map((project) => (
-              <ProjectCard key={project.id} project={project} locale={locale} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                locale={locale}
+                labels={labels}
+              />
             ))}
           </div>
 
-          {filtered.length === 0 && (
-            <p className="text-sm text-neutral-600">
-              No projects match your search.
-            </p>
-          )}
+          {filtered.length === 0 ? (
+            <p className="text-sm text-muted-foreground">{noResults}</p>
+          ) : null}
         </div>
       </Section>
     </>

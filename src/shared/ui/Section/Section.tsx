@@ -1,4 +1,8 @@
+import { useId } from "react"
+
 import type { ReactNode } from "react"
+
+import { cn } from "@/shared/lib/cn"
 
 import { Container } from "../Container"
 
@@ -15,17 +19,35 @@ export function Section({
   description,
   className,
 }: SectionProps) {
+  const titleId = useId()
+  const descriptionId = useId()
+
   return (
-    <section className={["py-10", className].filter(Boolean).join(" ")}>
+    <section
+      className={cn("py-10", className)}
+      aria-labelledby={title ? titleId : undefined}
+      aria-describedby={description ? descriptionId : undefined}
+    >
       <Container>
-        {(title || description) && (
+        {title || description ? (
           <header className="mb-6 space-y-1">
-            {title && <h2 className="text-xl font-semibold">{title}</h2>}
-            {description && (
-              <p className="text-sm text-neutral-600">{description}</p>
-            )}
+            {title ? (
+              <h2
+                id={titleId}
+                className="text-xl font-semibold text-foreground"
+              >
+                {title}
+              </h2>
+            ) : null}
+
+            {description ? (
+              <p id={descriptionId} className="text-sm text-muted-foreground">
+                {description}
+              </p>
+            ) : null}
           </header>
-        )}
+        ) : null}
+
         {children}
       </Container>
     </section>

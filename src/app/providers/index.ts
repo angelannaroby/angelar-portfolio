@@ -1,3 +1,5 @@
 export { AppProviders } from "./AppProviders"
-export { LocaleProvider } from "./LocaleProvider"
-export { useLocale } from "./useLocale"
+export { useLocale } from "./hooks/useLocale"
+export { LocaleProvider } from "./locales/LocaleProvider"
+export { ThemeProvider } from "./theme/ThemeProvider"
+export { useTheme } from "./theme/ThemeProvider"

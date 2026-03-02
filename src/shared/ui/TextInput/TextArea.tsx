@@ -1,43 +1,63 @@
-import { forwardRef } from "react"
+import { forwardRef, useId } from "react"
 
-type Props = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+import type { TextareaHTMLAttributes } from "react"
+
+import { cn } from "@/shared/lib/cn"
+
+type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   label: string
+  hint?: string
   error?: string
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
-  ({ label, error, id, className, ...props }, ref) => {
-    const textareaId =
-      id ?? props.name ?? label.replace(/\s+/g, "-").toLowerCase()
-    const errorId = `${textareaId}-error`
+  function TextArea(
+    { label, hint, error, id, className, name, ...props },
+    ref,
+  ) {
+    const autoId = useId()
+    const textareaId = id ?? name ?? `textarea-${autoId}`
+
+    const hintId = hint ? `${textareaId}-hint` : undefined
+    const errorId = error ? `${textareaId}-error` : undefined
+    const describedBy = [errorId, hintId].filter(Boolean).join(" ") || undefined
 
     return (
       <div className="space-y-1">
-        <label htmlFor={textareaId} className="text-sm font-medium">
+        <label
+          htmlFor={textareaId}
+          className="text-sm font-medium text-foreground"
+        >
           {label}
         </label>
 
         <textarea
           ref={ref}
           id={textareaId}
-          aria-invalid={Boolean(error)}
-          aria-describedby={error ? errorId : undefined}
-          className={[
+          name={name}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
+          className={cn(
             "w-full rounded-md border px-3 py-2 text-sm",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900",
-            error ? "border-red-500" : "border-neutral-300",
+            "bg-background text-foreground placeholder:text-muted-foreground",
+            "border-border",
+            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+            "disabled:cursor-not-allowed disabled:opacity-60",
+            error && "border-red-500",
             className,
-          ]
-            .filter(Boolean)
-            .join(" ")}
+          )}
           {...props}
         />
 
-        {error && (
+        {error ? (
           <p id={errorId} className="text-sm text-red-600">
             {error}
           </p>
-        )}
+        ) : hint ? (
+          <p id={hintId} className="text-sm text-muted-foreground">
+            {hint}
+          </p>
+        ) : null}
       </div>
     )
   },

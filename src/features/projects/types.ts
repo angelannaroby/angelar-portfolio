@@ -1,4 +1,4 @@
-import type { LocalizedText } from "../../shared/i18n"
+import type { Locale, LocalizedText } from "@/shared/i18n"
 
 export type ProjectLink = {
   label: LocalizedText
@@ -21,4 +21,15 @@ export type Project = {
   period?: LocalizedText
   featured?: boolean
   caseStudy?: ProjectCaseStudy
+}
+
+export type ProjectCardLabels = {
+  view: string
+  featured: string
+}
+
+export type ProjectCardProps = {
+  project: Project
+  locale: Locale
+  labels: ProjectCardLabels
 }

@@ -1,16 +1,9 @@
-export type SkillGroup = {
-  id: string
-  label: {
-    en: string
-    de: string
-  }
-  skills: string[]
-}
+import type { SkillGroup } from "../types"
 
 export const skillGroups: SkillGroup[] = [
   {
     id: "frontend",
-    label: {
+    title: {
       en: "Frontend Development",
       de: "Frontend-Entwicklung",
     },
@@ -29,7 +22,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     id: "testing",
-    label: {
+    title: {
       en: "Testing & Quality",
       de: "Testing & Qualitätssicherung",
     },
@@ -43,7 +36,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     id: "architecture",
-    label: {
+    title: {
       en: "Architecture & Patterns",
       de: "Architektur & Patterns",
     },
@@ -57,7 +50,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     id: "backend-cloud",
-    label: {
+    title: {
       en: "Backend & Cloud Exposure",
       de: "Backend & Cloud Kenntnisse",
     },
@@ -65,7 +58,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     id: "tools",
-    label: {
+    title: {
       en: "Tools & Collaboration",
       de: "Tools & Zusammenarbeit",
     },
