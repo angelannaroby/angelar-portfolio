@@ -4,7 +4,6 @@ import { useLocale } from "@/app/providers"
 import { projects } from "@/features/projects"
 import { projectsContent } from "@/features/projects/content"
 import { pickText } from "@/shared/i18n"
-import { Badge } from "@/shared/ui/Badge"
 import { PageHeader } from "@/shared/ui/PageHeader"
 import { Section } from "@/shared/ui/Section"
 
@@ -40,14 +39,11 @@ function ProjectDetailPage() {
 
       <Section className="pt-6">
         <div className="space-y-10">
-          <div className="flex flex-wrap gap-2">
-            {project.stack.map((s) => (
-              <Badge key={`${project.id}-stack-${s}`}>{s}</Badge>
-            ))}
-            {project.featured ? (
-              <Badge variant="accent">{featuredLabel}</Badge>
-            ) : null}
-          </div>
+          {project.featured ? (
+            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              {featuredLabel}
+            </p>
+          ) : null}
 
           {project.caseStudy ? (
             <div className="space-y-6">

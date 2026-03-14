@@ -1,78 +1,83 @@
-import type { Locale, LocalizedText } from "@/shared/i18n"
-import { pickText } from "@/shared/i18n"
+import type { LocalizedText } from "@/shared/i18n"
 
 export const projectsContent = {
   page: {
-    title: { en: "Projects", de: "Projekte" },
+    title: {
+      a: { en: "Projects", de: "Projekte" },
+      b: { en: "Contributions", de: "Beiträge" },
+    },
     subtitle: {
-      en: "Selected work and case studies.",
-      de: "Ausgewählte Arbeiten und Case Studies.",
+      en: "A collection of projects I’ve built, contributed to, and learned from along the way.",
+      de: "Eine Sammlung von Projekten, die ich entwickelt, zu denen ich beigetragen und aus denen ich dabei gelernt habe.",
     },
 
-    searchLabel: { en: "Search", de: "Suche" },
-    searchPlaceholder: {
-      en: "Search by title, tech, or tags…",
-      de: "Suche nach Titel, Tech oder Tags…",
+    stats: {
+      yearsValue: { en: "5+", de: "5+" },
+      yearsLabel: { en: "Years of Experience", de: "Jahre Erfahrung" },
+      enterpriseValue: { en: "5+", de: "5+" },
+      enterpriseLabel: { en: "Enterprise Projects", de: "Enterprise-Projekte" },
     },
 
-    showing: {
-      en: "Showing {shown} of {total}",
-      de: "{shown} von {total} angezeigt",
-    },
-
-    noResults: {
-      en: "No projects match your search.",
-      de: "Keine Projekte passen zu deiner Suche.",
+    toggle: {
+      professional: { en: "Industry Contributions", de: "Berufliche Beiträge" },
+      personal: { en: "Personal Projects", de: "Persönliche Projekte" },
     },
   },
 
   card: {
-    view: { en: "View", de: "Ansehen" },
-    featured: { en: "Featured", de: "Featured" },
+    interested: { en: "Interested", de: "Interessiert" },
   },
 
   detail: {
-    caseStudy: {
+    title: { en: "Project overview", de: "Projektüberblick" },
+    close: { en: "Close", de: "Schließen" },
+    stackTitle: { en: "Stack", de: "Stack" },
+    linksTitle: { en: "Links", de: "Links" },
+
+    professional: {
+      overview: { en: "Overview", de: "Überblick" },
+      capabilities: { en: "Capabilities", de: "Funktionen" },
+      businessValue: { en: "Business value", de: "Geschäftlicher Mehrwert" },
+    },
+
+    personal: {
       problem: { en: "Problem", de: "Problem" },
       solution: { en: "Solution", de: "Lösung" },
-      impact: { en: "Impact", de: "Impact" },
+      impact: { en: "Impact", de: "Wirkung" },
     },
-    linksTitle: { en: "Links", de: "Links" },
-    featured: { en: "Featured", de: "Featured" },
   },
 } satisfies {
   page: {
-    title: LocalizedText
+    title: { a: LocalizedText; b: LocalizedText }
     subtitle: LocalizedText
-    searchLabel: LocalizedText
-    searchPlaceholder: LocalizedText
-    showing: LocalizedText
-    noResults: LocalizedText
+    stats: {
+      yearsValue: LocalizedText
+      yearsLabel: LocalizedText
+      enterpriseValue: LocalizedText
+      enterpriseLabel: LocalizedText
+    }
+    toggle: {
+      professional: LocalizedText
+      personal: LocalizedText
+    }
   }
-  card: { view: LocalizedText; featured: LocalizedText }
+  card: {
+    interested: LocalizedText
+  }
   detail: {
-    caseStudy: {
+    title: LocalizedText
+    close: LocalizedText
+    stackTitle: LocalizedText
+    linksTitle: LocalizedText
+    professional: {
+      overview: LocalizedText
+      capabilities: LocalizedText
+      businessValue: LocalizedText
+    }
+    personal: {
       problem: LocalizedText
       solution: LocalizedText
       impact: LocalizedText
     }
-    linksTitle: LocalizedText
-    featured: LocalizedText
-  }
-}
-
-export function formatProjectsText(
-  template: string,
-  vars: Record<string, string | number>,
-) {
-  return template.replace(/\{(\w+)\}/g, (_, key: string) =>
-    String(vars[key] ?? `{${key}}`),
-  )
-}
-
-export function getProjectCardLabels(locale: Locale) {
-  return {
-    view: pickText(projectsContent.card.view, locale),
-    featured: pickText(projectsContent.card.featured, locale),
   }
 }

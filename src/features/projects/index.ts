@@ -1,13 +1,4 @@
-export { ProjectCard } from "./components/ProjectCard"
-export {
-  formatProjectsText,
-  getProjectCardLabels,
-  projectsContent,
-} from "./content"
+export { ProjectCard } from "./components"
+export { projectsContent } from "./content"
 export { projects } from "./data"
-export type {
-  Project,
-  ProjectCardLabels,
-  ProjectCaseStudy,
-  ProjectLink,
-} from "./types"
+export type { Project } from "./types"

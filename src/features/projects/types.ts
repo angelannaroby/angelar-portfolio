@@ -1,5 +1,7 @@
 import type { Locale, LocalizedText } from "@/shared/i18n"
 
+export type ProjectCategory = "professional" | "personal"
+
 export type ProjectLink = {
   label: LocalizedText
   href: string
@@ -11,6 +13,17 @@ export type ProjectCaseStudy = {
   impact: LocalizedText
 }
 
+export type ProjectEnterpriseDetails = {
+  whatItDoes: LocalizedText
+  keyCapabilities: LocalizedText
+  whyItMatters: LocalizedText
+}
+
+export type ProjectImage = {
+  src: string
+  alt: LocalizedText
+}
+
 export type Project = {
   id: string
   title: LocalizedText
@@ -20,16 +33,13 @@ export type Project = {
   links: ProjectLink[]
   period?: LocalizedText
   featured?: boolean
+  category: ProjectCategory
+  image?: ProjectImage
   caseStudy?: ProjectCaseStudy
-}
-
-export type ProjectCardLabels = {
-  view: string
-  featured: string
+  details?: ProjectEnterpriseDetails
 }
 
 export type ProjectCardProps = {
   project: Project
   locale: Locale
-  labels: ProjectCardLabels
 }
