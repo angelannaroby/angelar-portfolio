@@ -18,16 +18,12 @@ function ProjectDetailPage() {
   const project = projects.find((p) => p.id === projectId)
   if (!project) throw notFound()
 
-  const featuredLabel = pickText(projectsContent.detail.featured, locale)
-  const problemTitle = pickText(
-    projectsContent.detail.caseStudy.problem,
-    locale,
-  )
+  const problemTitle = pickText(projectsContent.detail.personal.problem, locale)
   const solutionTitle = pickText(
-    projectsContent.detail.caseStudy.solution,
+    projectsContent.detail.personal.solution,
     locale,
   )
-  const impactTitle = pickText(projectsContent.detail.caseStudy.impact, locale)
+  const impactTitle = pickText(projectsContent.detail.personal.impact, locale)
   const linksTitle = pickText(projectsContent.detail.linksTitle, locale)
 
   return (
@@ -39,12 +35,6 @@ function ProjectDetailPage() {
 
       <Section className="pt-6">
         <div className="space-y-10">
-          {project.featured ? (
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              {featuredLabel}
-            </p>
-          ) : null}
-
           {project.caseStudy ? (
             <div className="space-y-6">
               <CaseStudyBlock

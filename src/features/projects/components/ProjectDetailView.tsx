@@ -99,7 +99,9 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
           "relative z-10 max-h-[90vh] w-full max-w-4xl overflow-hidden border-border bg-background shadow-2xl",
           "animate-in zoom-in-95 slide-in-from-bottom-4 duration-200",
         )}
-        onClick={(event) => event.stopPropagation()}
+        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+          event.stopPropagation()
+        }
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-4 sm:px-6">
           <div className="min-w-0">
@@ -117,7 +119,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
           <Button
             type="button"
             variant="ghost"
-            size="icon"
+            size="sm"
             onClick={onClose}
             aria-label={pickText(projectsContent.detail.close, locale)}
           >
