@@ -20,24 +20,24 @@ body {
   -webkit-font-smoothing: antialiased;
   background:
     radial-gradient(
-      900px 620px at 48% 52%,
-      rgb(var(--gradient-hero-glow-1) / 0.1),
+      900px 700px at 54% 54%,
+      rgb(var(--gradient-hero-glow-1) / 0.16),
+      transparent 52%
+    ),
+    radial-gradient(
+      700px 520px at 82% 18%,
+      rgb(var(--gradient-hero-glow-2) / 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      760px 540px at 16% 78%,
+      rgb(var(--gradient-section-glow) / 0.1),
       transparent 58%
-    ),
-    radial-gradient(
-      700px 500px at 92% 14%,
-      rgb(var(--gradient-hero-glow-2) / 0.06),
-      transparent 56%
-    ),
-    radial-gradient(
-      760px 520px at 14% 76%,
-      rgb(var(--gradient-section-glow) / 0.04),
-      transparent 60%
     ),
     linear-gradient(
       180deg,
       rgb(var(--gradient-bg-start)) 0%,
-      rgb(var(--gradient-bg-mid)) 50%,
+      rgb(var(--gradient-bg-mid)) 46%,
       rgb(var(--gradient-bg-end)) 100%
     );
   background-attachment: fixed;

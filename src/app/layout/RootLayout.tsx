@@ -11,10 +11,6 @@ export function RootLayout() {
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
-      {/* <div className="pointer-events-none fixed inset-0 -z-10">
-        <BackgroundLayer variant="warmBeigeLuxury" />
-      </div> */}
-
       {!isHome ? (
         <HomeHeader
           locale={locale}

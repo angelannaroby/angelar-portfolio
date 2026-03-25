@@ -30,7 +30,7 @@ export function HomeIntroSection({ locale, content }: Props) {
     <section className="py-6 lg:h-full lg:py-0">
       <Container size="wide" className="lg:h-full">
         <div className="grid h-full grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1fr_0.68fr] lg:items-start lg:gap-8 xl:gap-12">
-          <div className="order-2 lg:order-1 lg:pt-40">
+          <div className="order-2 lg:order-1 lg:pt-36">
             <div className="max-w-[360px]">
               <div className="inline-flex h-10 items-center rounded-[2px] bg-[rgb(34_34_36_/_0.9)] px-7 text-sm shadow-[0_4px_12px_rgb(0_0_0_/_0.12)]">
                 <span className="font-semibold text-white">
