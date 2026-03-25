@@ -1,7 +1,15 @@
 import type { LocalizedText } from "@/shared/i18n"
 
-export type SkillGroup = {
+export type SkillItem = {
   id: string
-  title: LocalizedText
-  skills: string[]
+  label: string
+}
+
+export type Recommendation = {
+  id: string
+  quote: LocalizedText
+  name: string
+  role: LocalizedText
+  company?: string
+  linkedinHref?: string
 }
