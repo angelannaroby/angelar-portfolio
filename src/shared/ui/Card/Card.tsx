@@ -19,7 +19,9 @@ export const Card = forwardRef(function Card<TAs extends ElementType = "div">(
     <Comp
       ref={ref}
       className={cn(
-        "rounded-xl border border-border bg-surface-2/60 backdrop-blur-sm",
+        "rounded-2xl border border-border/80 bg-surface/72 backdrop-blur-md",
+        "shadow-[inset_0_1px_0_rgb(255_255_255_/_0.04),0_18px_50px_rgb(0_0_0_/_0.22)]",
+        "transition-all duration-200",
         className,
       )}
       {...props}

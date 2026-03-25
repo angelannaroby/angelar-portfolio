@@ -21,13 +21,18 @@ export type BadgeProps = {
 }
 
 const base =
-  "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset"
+  "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium tracking-[0.01em] " +
+  "ring-1 ring-inset transition-colors"
 
 const styles: Record<BadgeVariant, string> = {
-  neutral: "bg-surface text-foreground ring-border",
-  subtle: "bg-surface-2/60 text-foreground ring-border",
-  accent: "bg-accent text-accent-foreground ring-border",
-  primary: "bg-primary/15 text-foreground ring-primary/35",
+  neutral:
+    "bg-surface/70 text-foreground ring-border/80 backdrop-blur-sm shadow-[inset_0_1px_0_rgb(255_255_255_/_0.03)]",
+  subtle:
+    "bg-surface-2/70 text-foreground ring-border/70 backdrop-blur-sm shadow-[inset_0_1px_0_rgb(255_255_255_/_0.03)]",
+  accent:
+    "bg-accent/80 text-accent-foreground ring-border/70 backdrop-blur-sm shadow-[inset_0_1px_0_rgb(255_255_255_/_0.03)]",
+  primary:
+    "bg-primary/14 text-foreground ring-primary/30 backdrop-blur-sm shadow-[inset_0_1px_0_rgb(255_255_255_/_0.02)]",
 }
 
 function resolveVariant(
@@ -41,5 +46,6 @@ function resolveVariant(
 
 export function Badge({ children, className, tone, variant }: BadgeProps) {
   const v = resolveVariant(variant, tone)
+
   return <span className={cn(base, styles[v], className)}>{children}</span>
 }

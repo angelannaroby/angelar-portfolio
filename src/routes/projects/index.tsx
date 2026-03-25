@@ -32,12 +32,12 @@ function ProjectsPage() {
 
   return (
     <>
-      <Section>
+      {/* <Section>
         <ProjectsHero locale={locale} />
-      </Section>
+      </Section> */}
 
       {/* Toggle */}
-      <Section className="pt-0">
+      <Section className="pt-20">
         <div className="flex items-center justify-center">
           <div
             className="inline-flex rounded-full border border-border bg-card p-1 shadow-sm"

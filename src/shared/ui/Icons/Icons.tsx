@@ -1,27 +1,5 @@
 type IconProps = { className?: string }
 
-export function MoonIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
-      <path
-        fill="currentColor"
-        d="M21.64 13a1 1 0 0 0-1.05-.24A7.5 7.5 0 0 1 11.24 3.4a1 1 0 0 0-1.29-1.29A9.5 9.5 0 1 0 21.88 14.3a1 1 0 0 0-.24-1.3ZM12 20a7.5 7.5 0 0 1-3.1-14.33A9.5 9.5 0 0 0 18.33 15.1 7.48 7.48 0 0 1 12 20Z"
-      />
-    </svg>
-  )
-}
-
-export function SunIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
-      <path
-        fill="currentColor"
-        d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-16a1 1 0 0 1 1 1v1.25a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18.75a1 1 0 0 1 1 1V23a1 1 0 1 1-2 0v-1.25a1 1 0 0 1 1-1ZM3 11a1 1 0 0 1 1 1v0a1 1 0 1 1-2 0v0a1 1 0 0 1 1-1Zm18 0a1 1 0 0 1 1 1v0a1 1 0 1 1-2 0v0a1 1 0 0 1 1-1ZM5.22 5.22a1 1 0 0 1 1.41 0l.89.89a1 1 0 0 1-1.41 1.41l-.89-.89a1 1 0 0 1 0-1.41Zm12.67 12.67a1 1 0 0 1 1.41 0l.89.89a1 1 0 1 1-1.41 1.41l-.89-.89a1 1 0 0 1 0-1.41ZM18.78 5.22a1 1 0 0 1 0 1.41l-.89.89a1 1 0 1 1-1.41-1.41l.89-.89a1 1 0 0 1 1.41 0ZM6.63 17.48a1 1 0 0 1 0 1.41l-.89.89a1 1 0 1 1-1.41-1.41l.89-.89a1 1 0 0 1 1.41 0Z"
-      />
-    </svg>
-  )
-}
-
 export function LinkedInIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>

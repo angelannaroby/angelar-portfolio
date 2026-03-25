@@ -28,11 +28,11 @@ function SkillsPage() {
 
   return (
     <>
-      <Section>
+      {/* <Section>
         <SkillsHero locale={locale} />
-      </Section>
+      </Section> */}
 
-      <Section className="pt-0">
+      <Section className="pt-20">
         <SkillsList items={skillItems} locale={locale} />
       </Section>
 

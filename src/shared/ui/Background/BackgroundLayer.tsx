@@ -12,7 +12,7 @@ export function BackgroundLayer({ variant, className }: Props) {
     <div
       aria-hidden
       className={cn(
-        "pointer-events-none absolute inset-0 z-0",
+        "pointer-events-none absolute inset-0 z-0 overflow-hidden",
         BG[variant],
         className,
       )}

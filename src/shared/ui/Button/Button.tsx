@@ -32,19 +32,32 @@ type AsChildProps = CommonProps & {
 export type ButtonProps = NativeButtonProps | AsChildProps
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md font-medium transition " +
+  "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 " +
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring " +
-  "disabled:pointer-events-none disabled:opacity-50"
+  "disabled:pointer-events-none disabled:opacity-50 " +
+  "shadow-[0_1px_2px_rgb(0_0_0_/_0.18)]"
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/85",
+    "bg-primary text-primary-foreground " +
+    "shadow-[0_10px_30px_rgb(var(--color-primary)/0.18),0_1px_2px_rgb(0_0_0_/_0.2)] " +
+    "hover:-translate-y-0.5 hover:bg-primary/92 hover:shadow-[0_14px_34px_rgb(var(--color-primary)/0.22),0_4px_12px_rgb(0_0_0_/_0.24)] " +
+    "active:translate-y-0 active:bg-primary/88",
+
   secondary:
-    "bg-surface text-foreground hover:bg-surface/85 active:bg-surface/80",
+    "border border-border/80 bg-surface/85 text-foreground backdrop-blur-sm " +
+    "shadow-[inset_0_1px_0_rgb(255_255_255_/_0.04),0_6px_18px_rgb(0_0_0_/_0.18)] " +
+    "hover:-translate-y-0.5 hover:bg-surface-2/88 hover:border-border hover:shadow-[inset_0_1px_0_rgb(255_255_255_/_0.05),0_10px_24px_rgb(0_0_0_/_0.22)] " +
+    "active:translate-y-0 active:bg-surface-2/78",
+
   outline:
-    "border border-border bg-transparent text-foreground hover:bg-surface/60 active:bg-surface/55",
+    "border border-border bg-background/20 text-foreground backdrop-blur-sm " +
+    "hover:-translate-y-0.5 hover:bg-surface/55 hover:border-border-strong " +
+    "active:translate-y-0 active:bg-surface/48",
+
   ghost:
-    "bg-transparent text-foreground hover:bg-surface/60 active:bg-surface/55",
+    "bg-transparent text-foreground " +
+    "hover:bg-surface/55 hover:text-foreground active:bg-surface/48",
 }
 
 const sizes: Record<ButtonSize, string> = {

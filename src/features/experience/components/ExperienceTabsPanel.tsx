@@ -62,8 +62,7 @@ export function ExperienceTabsPanel({
         aria-hidden
         className={cn(
           "pointer-events-none absolute inset-0 opacity-70",
-          "bg-[radial-gradient(900px_circle_at_0%_0%,rgba(99,102,241,0.06),transparent_55%),radial-gradient(900px_circle_at_100%_30%,rgba(16,185,129,0.06),transparent_55%)]",
-          "dark:bg-[radial-gradient(900px_circle_at_0%_0%,rgba(99,102,241,0.10),transparent_55%),radial-gradient(900px_circle_at_100%_30%,rgba(16,185,129,0.10),transparent_55%)]",
+          "bg-[radial-gradient(900px_circle_at_0%_0%,rgba(99,102,241,0.10),transparent_55%),radial-gradient(900px_circle_at_100%_30%,rgba(16,185,129,0.10),transparent_55%)]",
         )}
       />
 

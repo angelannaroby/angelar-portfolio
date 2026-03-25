@@ -17,7 +17,7 @@ export function H1({
     <h1
       {...props}
       className={cn(
-        "text-3xl font-bold tracking-tight text-foreground",
+        "text-3xl font-bold tracking-tight text-foreground sm:text-4xl",
         className,
       )}
     >
@@ -68,7 +68,10 @@ export function P({
   ...props
 }: BaseProps<HTMLParagraphElement>) {
   return (
-    <p {...props} className={cn("text-sm leading-6", className)}>
+    <p
+      {...props}
+      className={cn("text-sm leading-6 text-foreground/90", className)}
+    >
       {children}
     </p>
   )

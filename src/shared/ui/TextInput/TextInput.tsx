@@ -30,7 +30,7 @@ export function TextInput({
   const describedBy = [errorId, hintId].filter(Boolean).join(" ") || undefined
 
   return (
-    <div className="space-y-1">
+    <div className="space-y-1.5">
       {label ? (
         <label
           htmlFor={inputId}
@@ -44,12 +44,12 @@ export function TextInput({
         id={inputId}
         name={name}
         className={cn(
-          "h-10 w-full rounded-md border px-3 text-sm",
-          "bg-background text-foreground placeholder:text-muted-foreground",
-          "border-border",
+          "h-10 w-full rounded-xl border px-3 text-sm shadow-sm transition-colors",
+          "bg-surface/70 text-foreground placeholder:text-muted-foreground backdrop-blur-sm",
+          "border-border/80",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
           "disabled:cursor-not-allowed disabled:opacity-60",
-          error && "border-red-500",
+          error && "border-red-400/80",
           className,
         )}
         aria-invalid={error ? true : undefined}
@@ -58,7 +58,7 @@ export function TextInput({
       />
 
       {error ? (
-        <p id={errorId} className="text-sm text-red-600">
+        <p id={errorId} className="text-sm text-red-300">
           {error}
         </p>
       ) : hint ? (

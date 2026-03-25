@@ -18,11 +18,11 @@ function ExperiencePage() {
 
   return (
     <>
-      <Section>
+      {/* <Section>
         <ExperienceHero locale={locale} content={experienceContent} />
-      </Section>
+      </Section> */}
 
-      <Section className="pt-0 pb-14 sm:pb-16">
+      <Section className="pt-20 pb-14 sm:pb-16">
         <div className="space-y-10">
           <ExperienceFocusPills
             locale={locale}

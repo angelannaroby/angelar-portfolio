@@ -18,7 +18,7 @@ export function HomeFooter({ locale, content }: Props) {
   const builtWith = pickText(content.footer.builtWith, locale)
 
   return (
-    <footer className="border-t border-border py-5">
+    <footer className="bg-surface/20 py-5 backdrop-blur-md">
       <Container
         size="wide"
         className="text-center text-sm text-muted-foreground"

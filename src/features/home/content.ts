@@ -5,11 +5,8 @@ export const homeContent = {
     mobileNavTitle: { en: "Navigation", de: "Navigation" },
     openMenu: { en: "Open menu", de: "Menü öffnen" },
     closeMenu: { en: "Close menu", de: "Menü schließen" },
-    toggleTheme: { en: "Toggle theme", de: "Theme wechseln" },
     toggleLanguage: { en: "Toggle language", de: "Sprache wechseln" },
-    themeAndLanguage: { en: "Theme & language", de: "Theme & Sprache" },
-    light: { en: "Light", de: "Hell" },
-    dark: { en: "Dark", de: "Dunkel" },
+    language: { en: "Language", de: "Sprache" },
   },
 
   topBrand: { en: "it’s me", de: "ich bin’s" },
@@ -33,9 +30,10 @@ export const homeContent = {
   ],
 
   intro: {
-    hello: { en: "Hello! I’m", de: "Hallo! Ich bin" },
-    name: "Angel",
-    role: { en: "Frontend Developer", de: "Frontend Entwicklerin" },
+    helloLead: { en: "Hello!", de: "Hallo!" },
+    helloTrail: { en: "I’m", de: "ich bin" },
+    firstName: { en: "Angel", de: "Angel" },
+    lastName: { en: "Anna Roby", de: "Anna Roby" },
     availability: {
       en: "Based in Germany • Open to hybrid and relocation",
       de: "In Deutschland • Offen für Hybrid und Umzug",
@@ -44,26 +42,22 @@ export const homeContent = {
       en: "I build production-grade web applications with React and TypeScript — focusing on clean UI, accessibility, and maintainable architecture.",
       de: "Ich entwickle produktionsreife Webanwendungen mit React und TypeScript — mit Fokus auf saubere UI, Accessibility und wartbare Architektur.",
     },
-    bullets: [
-      {
-        en: "Clean, scalable UI components",
-        de: "Saubere, skalierbare UI-Komponenten",
-      },
-      {
-        en: "Form-heavy enterprise workflows",
-        de: "Formularlastige Enterprise-Workflows",
-      },
-      {
-        en: "Testing mindset (Vitest / RTL / Playwright)",
-        de: "Testing-Fokus (Vitest / RTL / Playwright)",
-      },
-    ],
     ctaPrimary: { en: "Let’s Talk", de: "Kontakt" },
-    ctaSecondary: { en: "Download CV", de: "CV herunterladen" },
-    portraitAlt: { en: "Portrait of Angel", de: "Porträt von Angel" },
+    portraitAlt: {
+      en: "Portrait of Angel Anna Roby",
+      de: "Porträt von Angel Anna Roby",
+    },
+
     social: {
       linkedinAria: { en: "LinkedIn", de: "LinkedIn" },
       githubAria: { en: "GitHub", de: "GitHub" },
+      linkedinText: { en: "LinkedIn", de: "LinkedIn" },
+      githubText: { en: "GitHub", de: "GitHub" },
+    },
+
+    sideRole: {
+      eyebrow: { en: "Frontend", de: "Frontend" },
+      title: { en: "Developer", de: "Entwicklerin" },
     },
   },
 
@@ -97,15 +91,22 @@ export const homeContent = {
   topLinks: Array<{ to: string; title: LocalizedText; hint: LocalizedText }>
   intro: {
     hello: LocalizedText
-    name: string
-    role: LocalizedText
+    firstName: LocalizedText
+    lastName: LocalizedText
     availability: LocalizedText
     introText: LocalizedText
-    bullets: LocalizedText[]
     ctaPrimary: LocalizedText
-    ctaSecondary: LocalizedText
     portraitAlt: LocalizedText
-    social: { linkedinAria: LocalizedText; githubAria: LocalizedText }
+    social: {
+      linkedinAria: LocalizedText
+      githubAria: LocalizedText
+      linkedinText: LocalizedText
+      githubText: LocalizedText
+    }
+    sideRole: {
+      eyebrow: LocalizedText
+      title: LocalizedText
+    }
   }
   capabilityStrip: LocalizedText[]
   links: { linkedin: string; github: string; cvHref: string }

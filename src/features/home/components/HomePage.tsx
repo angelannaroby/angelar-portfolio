@@ -5,7 +5,6 @@ import { ViewportPage } from "@/shared/ui/ViewportPage"
 
 import { homeContent } from "../content"
 
-import { HomeCapabilityStrip } from "./HomeCapabilityStrip"
 import { HomeFooter } from "./HomeFooter"
 import { HomeHeader } from "./HomeHeader"
 import { HomeIntroSection } from "./HomeIntroSection"
@@ -29,8 +28,6 @@ export function HomePage({ locale }: Props) {
 
   return (
     <div className="relative min-h-screen overflow-hidden text-foreground">
-      {/* <BackgroundLayer variant="warmBeigeLuxury" /> */}
-
       <div className="relative z-10">
         <ViewportPage
           className="bg-transparent"
@@ -41,12 +38,9 @@ export function HomePage({ locale }: Props) {
               links={homeContent.topLinks}
             />
           }
-          strip={<HomeCapabilityStrip locale={locale} content={homeContent} />}
           footer={<HomeFooter locale={locale} content={homeContent} />}
         >
-          <div className="h-full">
-            <HomeIntroSection locale={locale} content={homeContent} />
-          </div>
+          <HomeIntroSection locale={locale} content={homeContent} />
         </ViewportPage>
       </div>
     </div>

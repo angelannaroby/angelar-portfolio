@@ -14,109 +14,126 @@ type Props = {
 
 export function HomeIntroSection({ locale, content }: Props) {
   const portraitAlt = pickText(content.intro.portraitAlt, locale)
+
   const linkedInAria = pickText(content.intro.social.linkedinAria, locale)
   const githubAria = pickText(content.intro.social.githubAria, locale)
+  const linkedInText = pickText(content.intro.social.linkedinText, locale)
+  const githubText = pickText(content.intro.social.githubText, locale)
+
+  const sideRoleEyebrow = pickText(content.intro.sideRole.eyebrow, locale)
+  const sideRoleTitle = pickText(content.intro.sideRole.title, locale)
+
+  const firstName = pickText(content.intro.firstName, locale)
+  const lastName = pickText(content.intro.lastName, locale)
 
   return (
-    <section className="py-8 lg:h-full lg:py-0">
+    <section className="py-6 lg:h-full lg:py-0">
       <Container size="wide" className="lg:h-full">
-        <div className="grid h-full grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-12 lg:pt-10">
-          <div className="min-h-0 lg:flex lg:flex-col lg:justify-center lg:pb-6">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl leading-none">👋</span>
-              <span className="inline-flex items-center rounded-full border border-border bg-accent px-3 py-1 text-xs text-accent-foreground">
-                {pickText(content.intro.availability, locale)}
-              </span>
-            </div>
-
-            <div className="mt-6">
-              <h1 className="tracking-tight">
-                <span
-                  className="font-medium leading-[0.92]"
-                  style={{ fontSize: "clamp(2.0rem, 4.2vw, 3.6rem)" }}
-                >
-                  {pickText(content.intro.hello, locale)}
-                  {"\u00A0"}
+        <div className="grid h-full grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1fr_0.68fr] lg:items-start lg:gap-8 xl:gap-12">
+          <div className="order-2 lg:order-1 lg:pt-40">
+            <div className="max-w-[360px]">
+              <div className="inline-flex h-10 items-center rounded-[2px] bg-[rgb(34_34_36_/_0.9)] px-7 text-sm shadow-[0_4px_12px_rgb(0_0_0_/_0.12)]">
+                <span className="font-semibold text-white">
+                  {pickText(content.intro.helloLead, locale)}
                 </span>
-                <span
-                  className="font-extrabold leading-[0.92]"
-                  style={{ fontSize: "clamp(2.6rem, 5.0vw, 4.4rem)" }}
-                >
-                  {content.intro.name}
+                <span className="ml-1.5 font-normal text-white/65">
+                  {pickText(content.intro.helloTrail, locale)}
                 </span>
-              </h1>
-
-              <div className="mt-3 flex items-center gap-3">
-                <div className="h-px w-16 bg-border" />
-                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/90">
-                  {pickText(content.intro.role, locale)}
-                </div>
-                <div className="h-px flex-1 bg-border" />
               </div>
-            </div>
 
-            <p className="mt-6 max-w-prose text-sm leading-relaxed text-muted-foreground">
-              {pickText(content.intro.introText, locale)}
-            </p>
-
-            <ul className="mt-6 space-y-2 text-sm text-foreground">
-              {content.intro.bullets.map((b) => (
-                <li key={b.en} className="flex gap-3">
-                  <span aria-hidden className="mt-[2px] text-muted-foreground">
-                    ✓
+              <div className="mt-7">
+                <h1 className="leading-[0.88] tracking-[-0.03em] text-foreground">
+                  <span
+                    className="block font-bold"
+                    style={{ fontSize: "clamp(3.55rem, 5.4vw, 5.3rem)" }}
+                  >
+                    {firstName}
                   </span>
-                  <span>{pickText(b, locale)}</span>
-                </li>
-              ))}
-            </ul>
+                </h1>
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Button asChild>
-                <Link to="/contact">
-                  {pickText(content.intro.ctaPrimary, locale)}
-                </Link>
-              </Button>
+                <div className="mt-5 flex items-center gap-4">
+                  <div className="h-[3px] w-20 shrink-0 rounded-full bg-primary sm:w-24" />
+                  <span
+                    className="whitespace-nowrap font-medium text-foreground/96"
+                    style={{ fontSize: "clamp(1.7rem, 2vw, 2.25rem)" }}
+                  >
+                    {lastName}
+                  </span>
+                </div>
+              </div>
 
-              <Button asChild variant="secondary">
-                <a href={content.links.cvHref} download>
-                  {pickText(content.intro.ctaSecondary, locale)}
+              <div className="mt-14 max-w-[330px]">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-12 w-full rounded-r-3xl rounded-l-none border-primary/80 text-base text-foreground hover:border-primary hover:bg-primary/6"
+                >
+                  <Link to="/contact">
+                    {pickText(content.intro.ctaPrimary, locale)}
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-foreground/92">
+                <a
+                  href={content.links.linkedin}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={linkedInAria}
+                  className="inline-flex items-center gap-2 rounded-full px-1 py-1 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  <LinkedInIcon className="h-5 w-5 shrink-0" />
+                  <span>{linkedInText}</span>
                 </a>
-              </Button>
-            </div>
 
-            <div className="mt-5 flex items-center gap-3">
-              <a
-                href={content.links.linkedin}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex rounded-full p-2 ring-1 ring-border transition hover:bg-surface/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                aria-label={linkedInAria}
-              >
-                <LinkedInIcon className="h-6 w-6" />
-              </a>
+                <span aria-hidden className="text-muted-foreground">
+                  |
+                </span>
 
-              <a
-                href={content.links.github}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex rounded-full p-2 ring-1 ring-border transition hover:bg-surface/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                aria-label={githubAria}
-              >
-                <GitHubIcon className="h-6 w-6" />
-              </a>
+                <a
+                  href={content.links.github}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={githubAria}
+                  className="inline-flex items-center gap-2 rounded-full px-1 py-1 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  <GitHubIcon className="h-5 w-5 shrink-0" />
+                  <span>{githubText}</span>
+                </a>
+              </div>
             </div>
           </div>
 
-          <div className="min-h-0 lg:flex lg:items-end lg:justify-end">
-            <div className="relative w-full max-w-[560px]">
-              <div className="relative h-[clamp(260px,44vh,420px)] overflow-hidden rounded-[28px] lg:h-full lg:max-h-[680px]">
-                <img
-                  src="/images/angel.png"
-                  alt={portraitAlt}
-                  className="h-full w-full object-contain sm:object-cover sm:object-[center_18%] lg:object-top"
-                  draggable={false}
-                />
+          <div className="order-1 flex justify-center lg:order-2 lg:pt-16">
+            <div className="relative flex h-[430px] w-full max-w-[500px] items-end justify-center sm:h-[500px] sm:max-w-[560px] lg:h-[640px] lg:max-w-[620px]">
+              <div className="absolute left-1/2 top-[52%] h-[240px] w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary sm:h-[320px] sm:w-[320px] lg:h-[395px] lg:w-[395px]" />
+
+              <div className="pointer-events-none absolute left-1/2 top-[52%] h-[310px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl sm:h-[380px] sm:w-[380px] lg:h-[480px] lg:w-[480px]" />
+              <img
+                src="/images/angel.png"
+                alt={portraitAlt}
+                className="relative z-10 translate-y-10 max-h-[114%] w-auto object-contain object-bottom sm:translate-y-12 sm:max-h-[116%] lg:translate-y-16 lg:max-h-[121%]"
+                draggable={false}
+              />
+            </div>
+          </div>
+
+          <div className="order-3 lg:justify-self-end lg:pt-60">
+            <div className="max-w-[255px] lg:ml-auto xl:max-w-[275px]">
+              <div className="text-[0.95rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-base">
+                {sideRoleEyebrow}
               </div>
+
+              <div
+                className="mt-1 font-semibold leading-[0.98] tracking-[-0.02em] text-foreground"
+                style={{ fontSize: "clamp(2rem, 2.55vw, 2.7rem)" }}
+              >
+                {sideRoleTitle}
+              </div>
+
+              <p className="mt-6 text-[14px] leading-8 text-fg-soft">
+                {pickText(content.intro.introText, locale)}
+              </p>
             </div>
           </div>
         </div>
