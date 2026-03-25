@@ -1,3 +1,4 @@
 export { skillsContent } from "./content"
-export { skillGroups } from "./data"
-export type { SkillGroup } from "./types"
+export { recommendations } from "./data/recommendations"
+export { skillItems } from "./data/skills"
+export type { Recommendation, SkillItem } from "./types"

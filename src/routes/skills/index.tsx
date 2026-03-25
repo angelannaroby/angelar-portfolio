@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router"
 
 import { useLocale } from "@/app/providers"
-import { skillGroups, skillsContent } from "@/features/skills"
+import { recommendations, skillItems, skillsContent } from "@/features/skills"
+import {
+  RecommendationCard,
+  SkillsHero,
+  SkillsList,
+} from "@/features/skills/components"
 import { pickText } from "@/shared/i18n"
-import { Badge } from "@/shared/ui/Badge"
-import { PageHeader } from "@/shared/ui/PageHeader"
 import { Section } from "@/shared/ui/Section"
 
 export const Route = createFileRoute("/skills/")({
@@ -14,30 +17,45 @@ export const Route = createFileRoute("/skills/")({
 function SkillsPage() {
   const { locale } = useLocale()
 
-  const title = pickText(skillsContent.page.title, locale)
-  const subtitle = pickText(skillsContent.page.subtitle, locale)
+  const recommendationsTitle = pickText(
+    skillsContent.recommendations.title,
+    locale,
+  )
+  const recommendationsSubtitle = pickText(
+    skillsContent.recommendations.subtitle,
+    locale,
+  )
 
   return (
     <>
-      <PageHeader title={title} subtitle={subtitle} />
+      <Section>
+        <SkillsHero locale={locale} />
+      </Section>
 
-      <Section className="pt-6">
-        <div className="space-y-10">
-          {skillGroups.map((group) => (
-            <section key={group.id} className="space-y-4">
-              <h2 className="text-lg font-semibold text-foreground">
-                {pickText(group.title, locale)}
-              </h2>
+      <Section className="pt-0">
+        <SkillsList items={skillItems} locale={locale} />
+      </Section>
 
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <Badge key={`${group.id}-${skill}`} variant="neutral">
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </section>
-          ))}
+      <Section className="pt-10">
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              {recommendationsTitle}
+            </h2>
+            <p className="max-w-[65ch] text-sm leading-7 text-muted-foreground sm:text-base">
+              {recommendationsSubtitle}
+            </p>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            {recommendations.map((recommendation) => (
+              <RecommendationCard
+                key={recommendation.id}
+                recommendation={recommendation}
+                locale={locale}
+              />
+            ))}
+          </div>
         </div>
       </Section>
     </>

@@ -24,7 +24,7 @@ export function Section({
 
   return (
     <section
-      className={cn("py-10", className)}
+      className={cn("py-0", className)}
       aria-labelledby={title ? titleId : undefined}
       aria-describedby={description ? descriptionId : undefined}
     >

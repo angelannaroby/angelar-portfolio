@@ -37,7 +37,7 @@ function ProjectsPage() {
       </Section>
 
       {/* Toggle */}
-      <Section className="pt-2">
+      <Section className="pt-0">
         <div className="flex items-center justify-center">
           <div
             className="inline-flex rounded-full border border-border bg-card p-1 shadow-sm"
