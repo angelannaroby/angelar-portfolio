@@ -4,7 +4,6 @@ import { useLocale } from "@/app/providers"
 import { projects } from "@/features/projects"
 import { projectsContent } from "@/features/projects/content"
 import { pickText } from "@/shared/i18n"
-import { Badge } from "@/shared/ui/Badge"
 import { PageHeader } from "@/shared/ui/PageHeader"
 import { Section } from "@/shared/ui/Section"
 
@@ -19,16 +18,12 @@ function ProjectDetailPage() {
   const project = projects.find((p) => p.id === projectId)
   if (!project) throw notFound()
 
-  const featuredLabel = pickText(projectsContent.detail.featured, locale)
-  const problemTitle = pickText(
-    projectsContent.detail.caseStudy.problem,
-    locale,
-  )
+  const problemTitle = pickText(projectsContent.detail.personal.problem, locale)
   const solutionTitle = pickText(
-    projectsContent.detail.caseStudy.solution,
+    projectsContent.detail.personal.solution,
     locale,
   )
-  const impactTitle = pickText(projectsContent.detail.caseStudy.impact, locale)
+  const impactTitle = pickText(projectsContent.detail.personal.impact, locale)
   const linksTitle = pickText(projectsContent.detail.linksTitle, locale)
 
   return (
@@ -40,15 +35,6 @@ function ProjectDetailPage() {
 
       <Section className="pt-6">
         <div className="space-y-10">
-          <div className="flex flex-wrap gap-2">
-            {project.stack.map((s) => (
-              <Badge key={`${project.id}-stack-${s}`}>{s}</Badge>
-            ))}
-            {project.featured ? (
-              <Badge variant="accent">{featuredLabel}</Badge>
-            ) : null}
-          </div>
-
           {project.caseStudy ? (
             <div className="space-y-6">
               <CaseStudyBlock

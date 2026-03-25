@@ -1,4 +1,3 @@
-// HomeHeader.tsx
 import { useEffect, useId, useMemo, useState } from "react"
 
 import { Link } from "@tanstack/react-router"

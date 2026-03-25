@@ -3,21 +3,30 @@ import { pickText } from "@/shared/i18n"
 import { ExperienceProjectsIcon, ExperienceYearsIcon } from "@/shared/ui/Icons"
 import { HeroSplit, StatItem, StatsCard } from "@/shared/ui/Section"
 
-import type { ExperienceContent } from "../content"
+import { projectsContent } from "../content"
 
 type Props = {
   locale: Locale
-  content: ExperienceContent
   className?: string
 }
 
-export function ExperienceHero({ locale, content, className }: Props) {
-  const titleA = pickText(content.page.title.experience, locale)
-  const titleB = pickText(content.page.title.education, locale)
-  const subtitle = pickText(content.page.subtitle, locale)
+export function ProjectsHero({ locale, className }: Props) {
+  const titleA = pickText(projectsContent.page.title.a, locale)
+  const titleB = pickText(projectsContent.page.title.b, locale)
 
-  const yearsLabel = pickText(content.stats.years.label, locale)
-  const projectsLabel = pickText(content.stats.projects.label, locale)
+  const subtitle = pickText(projectsContent.page.subtitle, locale)
+
+  const yearsValue = pickText(projectsContent.page.stats.yearsValue, locale)
+  const yearsLabel = pickText(projectsContent.page.stats.yearsLabel, locale)
+
+  const enterpriseValue = pickText(
+    projectsContent.page.stats.enterpriseValue,
+    locale,
+  )
+  const enterpriseLabel = pickText(
+    projectsContent.page.stats.enterpriseLabel,
+    locale,
+  )
 
   return (
     <HeroSplit
@@ -27,7 +36,6 @@ export function ExperienceHero({ locale, content, className }: Props) {
           <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             {titleA} <span className="text-primary">& {titleB}</span>
           </h1>
-
           <p className="max-w-[60ch] text-sm leading-relaxed text-muted-foreground sm:text-base">
             {subtitle}
           </p>
@@ -37,13 +45,13 @@ export function ExperienceHero({ locale, content, className }: Props) {
         <StatsCard>
           <StatItem
             icon={<ExperienceYearsIcon className="h-6 w-6 text-primary" />}
-            value={content.stats.years.value}
+            value={yearsValue}
             label={yearsLabel}
           />
           <StatItem
             icon={<ExperienceProjectsIcon className="h-6 w-6 text-primary" />}
-            value={content.stats.projects.value}
-            label={projectsLabel}
+            value={enterpriseValue}
+            label={enterpriseLabel}
           />
         </StatsCard>
       }
