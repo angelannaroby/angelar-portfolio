@@ -7,7 +7,7 @@ import {
   ExperienceHero,
   ExperienceTabsPanel,
 } from "@/features/experience/components"
-import { Container } from "@/shared/ui/Container"
+import { Section } from "@/shared/ui/Section"
 
 export const Route = createFileRoute("/experience/")({
   component: ExperiencePage,
@@ -18,11 +18,11 @@ function ExperiencePage() {
 
   return (
     <>
-      <Container size="wide" className="pt-14 pb-6 sm:pt-16 sm:pb-8">
+      <Section>
         <ExperienceHero locale={locale} content={experienceContent} />
-      </Container>
+      </Section>
 
-      <Container size="wide" className="pt-0 pb-14 sm:pb-16">
+      <Section className="pt-0 pb-14 sm:pb-16">
         <div className="space-y-10">
           <ExperienceFocusPills
             locale={locale}
@@ -36,7 +36,7 @@ function ExperiencePage() {
             entries={experience}
           />
         </div>
-      </Container>
+      </Section>
     </>
   )
 }
