@@ -32,12 +32,12 @@ export function ExperienceTabsPanel({
 
   const { work, education } = useMemo(() => {
     const workEntries = entries
-      .filter((e) => e.kind === "work")
+      .filter((entry) => entry.kind === "work")
       .slice()
       .sort(sortDescByStart)
 
     const educationEntries = entries
-      .filter((e) => e.kind === "education")
+      .filter((entry) => entry.kind === "education")
       .slice()
       .sort(sortDescByStart)
 
@@ -46,80 +46,59 @@ export function ExperienceTabsPanel({
 
   const tabLabelExperience = pickText(content.tabs.experience, locale)
   const tabLabelEducation = pickText(content.tabs.education, locale)
-
-  const active = tab === "experience" ? work : education
+  const activeEntries = tab === "experience" ? work : education
 
   return (
-    <section
-      className={cn(
-        "relative overflow-hidden rounded-3xl border border-border/70",
-        "bg-surface-2/70 shadow-[0_14px_36px_-26px_rgba(0,0,0,0.35)] backdrop-blur",
-        className,
-      )}
-    >
-      {/* subtle template-like wash */}
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-0 opacity-70",
-          "bg-[radial-gradient(900px_circle_at_0%_0%,rgba(99,102,241,0.10),transparent_55%),radial-gradient(900px_circle_at_100%_30%,rgba(16,185,129,0.10),transparent_55%)]",
-        )}
-      />
-
-      <div className="relative">
-        <div className="px-4 pt-4 sm:px-6 sm:pt-6">
-          <div
-            role="tablist"
-            aria-label={`${pickText(
-              content.page.title.experience,
-              locale,
-            )} & ${pickText(content.page.title.education, locale)}`}
+    <section className={cn("space-y-7 sm:space-y-8", className)}>
+      <div className="flex justify-center pt-2 sm:pt-3">
+        <div
+          role="tablist"
+          aria-label={`${tabLabelExperience} & ${tabLabelEducation}`}
+          className={cn(
+            "inline-flex items-center rounded-2xl p-1",
+            "border border-[rgb(var(--color-border)/0.7)]",
+            "bg-[rgb(var(--color-bg-elevated)/0.7)]",
+            "backdrop-blur-sm",
+          )}
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === "experience"}
+            onClick={() => setTab("experience")}
             className={cn(
-              "inline-flex items-center rounded-2xl p-1",
-              "bg-background/70 ring-1 ring-border/80 shadow-sm",
+              "rounded-xl px-4 py-2.5 text-sm font-semibold transition",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-elevated))]",
+              tab === "experience"
+                ? "bg-[rgb(var(--color-card))] text-[rgb(var(--color-fg))] ring-1 ring-[rgb(var(--color-primary)/0.25)] shadow-[0_6px_18px_rgba(0,0,0,0.25)]"
+                : "text-[rgb(var(--color-muted-fg))] hover:text-[rgb(var(--color-fg))]",
             )}
           >
-            <button
-              type="button"
-              role="tab"
-              aria-selected={tab === "experience"}
-              className={cn(
-                "rounded-xl px-4 py-2 text-sm font-semibold transition",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                tab === "experience"
-                  ? "bg-foreground text-background shadow-sm"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-              onClick={() => setTab("experience")}
-            >
-              {tabLabelExperience}
-            </button>
+            {tabLabelExperience}
+          </button>
 
-            <button
-              type="button"
-              role="tab"
-              aria-selected={tab === "education"}
-              className={cn(
-                "rounded-xl px-4 py-2 text-sm font-semibold transition",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                tab === "education"
-                  ? "bg-foreground text-background shadow-sm"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-              onClick={() => setTab("education")}
-            >
-              {tabLabelEducation}
-            </button>
-          </div>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === "education"}
+            onClick={() => setTab("education")}
+            className={cn(
+              "rounded-xl px-4 py-2.5 text-sm font-semibold transition",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-ring))] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-elevated))]",
+              tab === "education"
+                ? "bg-[rgb(var(--color-card))] text-[rgb(var(--color-fg))] ring-1 ring-[rgb(var(--color-primary)/0.25)] shadow-[0_6px_18px_rgba(0,0,0,0.25)]"
+                : "text-[rgb(var(--color-muted-fg))] hover:text-[rgb(var(--color-fg))]",
+            )}
+          >
+            {tabLabelEducation}
+          </button>
         </div>
+      </div>
 
-        <div className="px-4 pb-5 pt-4 sm:px-6 sm:pb-6">
-          <div className="grid gap-5">
-            {active.map((entry) => (
-              <ExperienceCard key={entry.id} entry={entry} locale={locale} />
-            ))}
-          </div>
-        </div>
+      <div className="grid gap-5 sm:gap-6">
+        {activeEntries.map((entry) => (
+          <ExperienceCard key={entry.id} entry={entry} locale={locale} />
+        ))}
       </div>
     </section>
   )

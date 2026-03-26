@@ -14,12 +14,12 @@ export const homeContent = {
   topLinks: [
     {
       to: "/experience",
-      title: { en: "About Me", de: "Über mich" },
+      title: { en: "Journey", de: "Reise" },
       hint: { en: "Experience & education", de: "Erfahrung & Ausbildung" },
     },
     {
       to: "/projects",
-      title: { en: "My Projects", de: "Meine Projekte" },
+      title: { en: "Projects", de: "Projekte" },
       hint: { en: "See selected work", de: "Ausgewählte Arbeiten" },
     },
     {

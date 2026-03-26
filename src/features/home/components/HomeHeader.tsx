@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router"
 
 import { useLocale } from "@/app/providers"
 import { type Locale, pickText } from "@/shared/i18n"
+import { cn } from "@/shared/lib/cn"
 import { Container } from "@/shared/ui/Container"
 import { CloseIcon, MenuIcon } from "@/shared/ui/Icons"
 
@@ -56,13 +57,15 @@ export function HomeHeader({ locale, brand, links }: Props) {
         <div className="flex items-center justify-between gap-4">
           <Link
             to="/"
-            className="shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            aria-label={pickText(brand, locale)}
+            activeOptions={{ exact: true }}
+            className="group shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            aria-label="A²R"
           >
-            <div className="text-2xl font-semibold tracking-tight text-foreground">
-              {pickText(brand, locale)}
-            </div>
-            <div className="mt-2 h-[3px] w-14 rounded-full bg-primary" />
+            <img
+              src="images/logo.png"
+              alt="A²R Logo"
+              className="h-10 sm:h-12 lg:h-14 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+            />
           </Link>
 
           <nav className="hidden items-center gap-10 md:flex">
@@ -70,10 +73,27 @@ export function HomeHeader({ locale, brand, links }: Props) {
               <Link
                 key={item.to}
                 to={item.to}
-                className="group relative text-sm font-semibold text-foreground/85 transition-colors hover:text-foreground"
+                activeOptions={{ exact: true }}
+                className={({ isActive }) =>
+                  cn(
+                    "group relative text-sm font-semibold transition-colors",
+                    isActive
+                      ? "text-foreground"
+                      : "text-foreground/85 hover:text-foreground",
+                  )
+                }
               >
-                {pickText(item.title, locale)}
-                <span className="absolute -bottom-2 left-0 h-[2px] w-0 rounded-full bg-primary transition-all duration-200 group-hover:w-full" />
+                {({ isActive }) => (
+                  <>
+                    {pickText(item.title, locale)}
+                    <span
+                      className={cn(
+                        "absolute -bottom-2 left-0 h-[2px] rounded-full bg-primary transition-all duration-200",
+                        isActive ? "w-full" : "w-0 group-hover:w-full",
+                      )}
+                    />
+                  </>
+                )}
               </Link>
             ))}
           </nav>
@@ -145,8 +165,16 @@ export function HomeHeader({ locale, brand, links }: Props) {
                 <Link
                   key={item.to}
                   to={item.to}
+                  activeOptions={{ exact: true }}
                   onClick={() => setOpen(false)}
-                  className="block rounded-2xl border border-border/60 bg-surface/35 px-4 py-3 text-sm font-medium text-foreground hover:bg-surface/55"
+                  className={({ isActive }) =>
+                    cn(
+                      "block rounded-2xl border px-4 py-3 text-sm font-medium transition-colors",
+                      isActive
+                        ? "border-primary/30 bg-surface/55 text-foreground"
+                        : "border-border/60 bg-surface/35 text-foreground hover:bg-surface/55",
+                    )
+                  }
                 >
                   {pickText(item.title, locale)}
                 </Link>

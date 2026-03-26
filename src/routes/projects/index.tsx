@@ -32,12 +32,7 @@ function ProjectsPage() {
 
   return (
     <>
-      {/* <Section>
-        <ProjectsHero locale={locale} />
-      </Section> */}
-
-      {/* Toggle */}
-      <Section className="pt-20">
+      <Section className="pt-10 sm:pt-8 pb-4 sm:pb-0">
         <div className="flex items-center justify-center">
           <div
             className="inline-flex rounded-full border border-border bg-card p-1 shadow-sm"
@@ -60,7 +55,7 @@ function ProjectsPage() {
       </Section>
 
       {/* Grid */}
-      <Section className="pt-6">
+      <Section className="pt-10 sm:pt-10 pb-4 sm:pb-0">
         <div className="flex flex-wrap justify-center gap-5">
           {filtered.map((project) => (
             <div

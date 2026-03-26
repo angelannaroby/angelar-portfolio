@@ -1,62 +1,59 @@
 :root {
   /* ============================================================
      CORE SURFACES
-     Replace this file to switch the entire portal palette.
   ============================================================ */
 
-  --color-bg: 12 15 20;
-  --color-bg-elevated: 16 20 26;
+  --color-bg: 9 14 22;
+  --color-bg-elevated: 13 19 29;
 
-  --color-surface: 20 25 33;
-  --color-surface-2: 25 31 40;
-  --color-card: 22 28 36;
-  --color-card-hover: 28 35 45;
+  --color-surface: 18 26 38;
+  --color-surface-2: 24 34 48;
+  --color-card: 26 36 50;
+  --color-card-hover: 32 43 59;
 
   /* ============================================================
      TYPOGRAPHY
   ============================================================ */
 
-  --color-fg: 240 244 248;
-  --color-fg-soft: 210 217 226;
-  --color-muted-fg: 149 160 174;
+  --color-fg: 243 247 252;
+  --color-fg-soft: 210 220 232;
+  --color-muted-fg: 154 167 183;
 
   /* ============================================================
      BORDERS
   ============================================================ */
 
-  --color-border: 50 61 75;
-  --color-border-strong: 72 85 102;
+  --color-border: 62 76 95;
+  --color-border-strong: 86 103 126;
 
   /* ============================================================
      BRAND / INTERACTIVE
   ============================================================ */
 
-  --color-primary: 255 179 0;
-  --color-primary-fg: 24 18 4;
+  --color-primary: 255 191 71;
+  --color-primary-fg: 26 21 8;
 
-  --color-accent: 26 38 49;
-  --color-accent-fg: 240 244 248;
+  --color-accent: 34 46 63;
+  --color-accent-fg: 243 247 252;
 
-  --color-ring: 255 179 0;
+  --color-ring: 255 191 71;
 
   /* ============================================================
      PAGE BACKGROUND GRADIENT
-     More visible cool-dark depth
   ============================================================ */
 
-  --gradient-bg-start: 28 36 48;
-  --gradient-bg-mid: 22 29 40;
-  --gradient-bg-end: 16 22 31;
+  --gradient-bg-start: 16 24 38;
+  --gradient-bg-mid: 11 18 29;
+  --gradient-bg-end: 8 13 21;
 
-  --gradient-hero-glow-1: 86 176 190;
-  --gradient-hero-glow-2: 98 128 205;
-  --gradient-section-glow: 58 96 124;
+  --gradient-hero-glow-1: 64 115 168;
+  --gradient-hero-glow-2: 52 86 130;
+  --gradient-section-glow: 34 61 96;
 
   --gradient-vignette: 0 0 0;
 
   /* ============================================================
      LEGACY HELPERS
-     Keep only if existing shared background utilities use them.
   ============================================================ */
 
   --palette-cream: 245 231 198;

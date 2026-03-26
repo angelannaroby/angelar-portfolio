@@ -30,7 +30,7 @@ export function HomeIntroSection({ locale, content }: Props) {
     <section className="py-6 lg:h-full lg:py-0">
       <Container size="wide" className="lg:h-full">
         <div className="grid h-full grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1fr_0.68fr] lg:items-start lg:gap-8 xl:gap-12">
-          <div className="order-2 lg:order-1 lg:pt-36">
+          <div className="order-2 lg:order-1 lg:pt-28">
             <div className="max-w-[360px]">
               <div className="inline-flex h-10 items-center rounded-[2px] bg-[rgb(34_34_36_/_0.9)] px-7 text-sm shadow-[0_4px_12px_rgb(0_0_0_/_0.12)]">
                 <span className="font-semibold text-white">
@@ -106,13 +106,13 @@ export function HomeIntroSection({ locale, content }: Props) {
 
           <div className="order-1 flex justify-center lg:order-2 lg:pt-16">
             <div className="relative flex h-[430px] w-full max-w-[500px] items-end justify-center sm:h-[500px] sm:max-w-[560px] lg:h-[640px] lg:max-w-[620px]">
-              <div className="absolute left-1/2 top-[52%] h-[240px] w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary sm:h-[320px] sm:w-[320px] lg:h-[395px] lg:w-[395px]" />
+              <div className="absolute left-1/2 top-[38%] h-[240px] w-[240px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary sm:h-[220px] sm:w-[220px] lg:h-[280px] lg:w-[280px]" />
 
               <div className="pointer-events-none absolute left-1/2 top-[52%] h-[310px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl sm:h-[380px] sm:w-[380px] lg:h-[480px] lg:w-[480px]" />
               <img
                 src="/images/angel.png"
                 alt={portraitAlt}
-                className="relative z-10 translate-y-10 max-h-[114%] w-auto object-contain object-bottom sm:translate-y-12 sm:max-h-[116%] lg:translate-y-16 lg:max-h-[121%]"
+                className="relative z-10 translate-y-4 max-h-[114%] w-auto object-contain object-bottom sm:translate-y-6 sm:max-h-[116%] lg:translate-y-8 lg:max-h-[121%]"
                 draggable={false}
               />
             </div>
