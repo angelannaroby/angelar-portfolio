@@ -43,3 +43,14 @@ export type ProjectCardProps = {
   project: Project
   locale: Locale
 }
+
+export type ProjectDetailViewProps = {
+  project: Project
+  locale: Locale
+}
+
+export type ProjectsTabsSectionProps = {
+  projects: Project[]
+  locale: Locale
+  className?: string
+}

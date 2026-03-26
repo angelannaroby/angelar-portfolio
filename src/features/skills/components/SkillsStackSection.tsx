@@ -12,7 +12,7 @@ type Props = {
   className?: string
 }
 
-export function SkillsList({ items, locale, className }: Props) {
+export function SkillsStackSection({ items, locale, className }: Props) {
   const title = pickText(skillsContent.skills.title, locale)
 
   return (
@@ -20,7 +20,10 @@ export function SkillsList({ items, locale, className }: Props) {
       <CardContent className="p-6 sm:p-8">
         <div className="space-y-5">
           <div className="flex items-center gap-3">
-            <span className="text-xl leading-none">🛠️</span>
+            <span className="text-xl leading-none" aria-hidden="true">
+              🛠️
+            </span>
+
             <h2 className="text-2xl font-semibold tracking-tight text-foreground">
               {title}
             </h2>

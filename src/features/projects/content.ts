@@ -10,17 +10,21 @@ export const projectsContent = {
       en: "A collection of projects I’ve built, contributed to, and learned from along the way.",
       de: "Eine Sammlung von Projekten, die ich entwickelt, zu denen ich beigetragen und aus denen ich dabei gelernt habe.",
     },
-
     stats: {
       yearsValue: { en: "5+", de: "5+" },
       yearsLabel: { en: "Years of Experience", de: "Jahre Erfahrung" },
       enterpriseValue: { en: "5+", de: "5+" },
       enterpriseLabel: { en: "Enterprise Projects", de: "Enterprise-Projekte" },
     },
-
     toggle: {
       professional: { en: "Industry Contributions", de: "Berufliche Beiträge" },
       personal: { en: "Personal Projects", de: "Persönliche Projekte" },
+    },
+    aria: {
+      categoryToggle: {
+        en: "Projects category",
+        de: "Projektkategorie",
+      },
     },
   },
 
@@ -59,6 +63,9 @@ export const projectsContent = {
     toggle: {
       professional: LocalizedText
       personal: LocalizedText
+    }
+    aria: {
+      categoryToggle: LocalizedText
     }
   }
   card: {

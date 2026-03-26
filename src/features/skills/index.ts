@@ -1,3 +1,4 @@
+export * from "./components"
 export { skillsContent } from "./content"
 export { recommendations } from "./data/recommendations"
 export { skillItems } from "./data/skills"

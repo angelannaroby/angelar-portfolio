@@ -1,2 +1,3 @@
 export { ProjectCard } from "./ProjectCard"
-export { ProjectsHero } from "./ProjectHero"
+export { ProjectDetailView } from "./ProjectDetailView"
+export { ProjectsTabsSection } from "./ProjectTabsSection"

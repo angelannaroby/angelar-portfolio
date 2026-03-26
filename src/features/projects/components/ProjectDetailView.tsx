@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { type MouseEvent, useEffect } from "react"
 
 import { type Locale, pickText } from "@/shared/i18n"
 import { cn } from "@/shared/lib/cn"
@@ -9,7 +9,7 @@ import { projectsContent } from "../content"
 import type { Project } from "../types"
 
 type Props = {
-  project: Project | null
+  project: Project
   locale: Locale
   open: boolean
   onClose: () => void
@@ -53,7 +53,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
     }
   }, [open, onClose])
 
-  if (!open || !project) return null
+  if (!open) return null
 
   const isProfessional = project.category === "professional"
 
@@ -99,9 +99,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
           "relative z-10 max-h-[90vh] w-full max-w-4xl overflow-hidden border-border bg-background shadow-2xl",
           "animate-in zoom-in-95 slide-in-from-bottom-4 duration-200",
         )}
-        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
-          event.stopPropagation()
-        }
+        onClick={(event: MouseEvent<HTMLDivElement>) => event.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-4 sm:px-6">
           <div className="min-w-0">
@@ -266,7 +264,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
                             key={`${label}-${link.href}`}
                             href={link.href}
                             target="_blank"
-                            rel="noreferrer"
+                            rel="noreferrer noopener"
                             className="inline-flex items-center rounded-full border border-border px-3 py-1.5 text-sm font-medium text-foreground transition hover:bg-muted"
                           >
                             {label}
