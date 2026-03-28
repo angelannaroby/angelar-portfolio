@@ -17,7 +17,7 @@ function SkillsPage() {
 
   return (
     <>
-      <Section className="pt-20">
+      <Section className="pt-24 sm:pt-38">
         <SkillsStackSection items={skillItems} locale={locale} />
       </Section>
 

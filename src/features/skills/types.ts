@@ -12,4 +12,5 @@ export type Recommendation = {
   role: LocalizedText
   company?: string
   linkedinHref?: string
+  avatarSrc?: string
 }

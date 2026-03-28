@@ -1,7 +1,6 @@
 import type { Locale } from "@/shared/i18n"
 import { pickText } from "@/shared/i18n"
-import { Badge } from "@/shared/ui/Badge"
-import { Card, CardContent } from "@/shared/ui/Card"
+import { cn } from "@/shared/lib/cn"
 
 import { skillsContent } from "../content"
 import type { SkillItem } from "../types"
@@ -12,36 +11,43 @@ type Props = {
   className?: string
 }
 
+const highlightedSkillIds = new Set(["react", "typescript", "playwright"])
+
 export function SkillsStackSection({ items, locale, className }: Props) {
   const title = pickText(skillsContent.skills.title, locale)
 
   return (
-    <Card className={className}>
-      <CardContent className="p-6 sm:p-8">
-        <div className="space-y-5">
-          <div className="flex items-center gap-3">
-            <span className="text-xl leading-none" aria-hidden="true">
-              🛠️
-            </span>
+    <section className={cn("relative", className)}>
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_12%,rgba(var(--color-primary),0.18),transparent_42%),radial-gradient(circle_at_50%_0%,rgba(var(--color-primary),0.08),transparent_62%)]" />
 
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              {title}
-            </h2>
-          </div>
+      <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
+        <div className="space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[rgb(var(--color-primary)/0.88)]">
+            {title}
+          </p>
+        </div>
 
-          <div className="flex flex-wrap items-start gap-3">
-            {items.map((item) => (
-              <Badge
+        <div className="mt-10 flex flex-wrap justify-center gap-3.5">
+          {items.map((item) => {
+            const isHighlighted = highlightedSkillIds.has(item.id)
+
+            return (
+              <span
                 key={item.id}
-                variant="neutral"
-                className="rounded-full border-border bg-muted/60 px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-muted"
+                className={cn(
+                  "rounded-full px-4 py-2 text-sm font-medium text-foreground",
+                  "border transition-none",
+                  "border-[rgb(var(--color-primary)/0.32)]",
+                  "bg-[linear-gradient(180deg,rgba(var(--color-primary),0.06)_0%,rgba(var(--color-bg-elevated),0.98)_100%)]",
+                  "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
+                )}
               >
                 {item.label}
-              </Badge>
-            ))}
-          </div>
+              </span>
+            )
+          })}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </section>
   )
 }
