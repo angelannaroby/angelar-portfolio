@@ -2,38 +2,67 @@ import { useState } from "react"
 
 import type { UseFormReset, UseFormSetError } from "react-hook-form"
 
-import { sendContactMessage } from "../api/sendContactMessage"
 import type { ContactFormValues } from "../lib/contactSchema"
 
 type Params = {
-  setError: UseFormSetError<ContactFormValues>
   reset: UseFormReset<ContactFormValues>
-  errorMessage: string
+  setError: UseFormSetError<ContactFormValues>
+  fallbackErrorMessage: string
 }
 
-export function useContactForm({ setError, reset, errorMessage }: Params) {
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+type SubmitState = "idle" | "success" | "error"
+
+type FormspreeResponse = {
+  ok?: boolean
+  errors?: Array<{ message?: string }>
+}
+
+export function useContactForm({
+  reset,
+  setError,
+  fallbackErrorMessage,
+}: Params) {
+  const [submitState, setSubmitState] = useState<SubmitState>("idle")
 
   const onSubmit = async (values: ContactFormValues) => {
-    try {
-      setStatus("idle")
+    setSubmitState("idle")
 
-      await sendContactMessage(values)
+    try {
+      const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT
+
+      if (!endpoint) {
+        throw new Error("Contact form is not configured.")
+      }
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+
+      const result = (await response.json()) as FormspreeResponse
+
+      if (!response.ok) {
+        const message = result.errors?.[0]?.message || fallbackErrorMessage
+        throw new Error(message)
+      }
 
       reset()
-      setStatus("success")
+      setSubmitState("success")
     } catch (error) {
-      setStatus("error")
-
+      setSubmitState("error")
       setError("root", {
         type: "server",
-        message: error instanceof Error ? error.message : errorMessage,
+        message: error instanceof Error ? error.message : fallbackErrorMessage,
       })
     }
   }
 
   return {
     onSubmit,
-    status,
+    submitState,
   }
 }

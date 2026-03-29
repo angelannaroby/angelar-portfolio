@@ -77,10 +77,10 @@ export function ContactForm({ locale }: Props) {
     },
   })
 
-  const { onSubmit, status } = useContactForm({
+  const { onSubmit, submitState } = useContactForm({
     setError,
     reset,
-    errorMessage: labels.error,
+    fallbackErrorMessage: labels.error,
   })
 
   return (
@@ -217,7 +217,7 @@ export function ContactForm({ locale }: Props) {
                 </p>
               )}
 
-              {status === "success" && (
+              {submitState === "success" && (
                 <p className="text-sm text-primary/90">{labels.success}</p>
               )}
 
