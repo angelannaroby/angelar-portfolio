@@ -6,11 +6,10 @@ import { useForm } from "react-hook-form"
 import type { Locale } from "@/shared/i18n"
 import { pickText } from "@/shared/i18n"
 import { Button } from "@/shared/ui/Button"
-import { Card, CardContent, CardHeader } from "@/shared/ui/Card"
+import { Card, CardContent } from "@/shared/ui/Card"
 import { TextArea, TextInput } from "@/shared/ui/TextInput"
-import { Small } from "@/shared/ui/Typography"
 
-import { contactContent, formatContactText } from "../content"
+import { contactContent } from "../content"
 import { type ContactFormValues, makeContactSchema } from "../lib/contactSchema"
 
 type Props = {
@@ -21,29 +20,51 @@ export function ContactForm({ locale }: Props) {
   const schema = useMemo(() => makeContactSchema(locale), [locale])
 
   const labels = useMemo(() => {
-    const f = contactContent.form
+    const page = contactContent.page
+    const form = contactContent.form
+    const panel = contactContent.panel
+
     return {
-      title: pickText(f.title, locale),
-      subtitle: pickText(f.subtitle, locale),
+      eyebrow: pickText(page.eyebrow, locale),
+      title: pickText(page.title, locale),
+      subtitle: pickText(page.subtitle, locale),
 
-      name: pickText(f.fields.name, locale),
-      email: pickText(f.fields.email, locale),
-      subject: pickText(f.fields.subject, locale),
-      message: pickText(f.fields.message, locale),
+      panelTitle: pickText(panel.title, locale),
+      panelText: pickText(panel.text, locale),
+      emailLabel: pickText(panel.emailLabel, locale),
+      locationLabel: pickText(panel.locationLabel, locale),
+      availabilityLabel: pickText(panel.availabilityLabel, locale),
+      linkedinLabel: pickText(panel.linkedinLabel, locale),
+      cvLabel: pickText(panel.cvLabel, locale),
 
-      submit: pickText(f.actions.submit, locale),
-      submitting: pickText(f.actions.submitting, locale),
-      hint: pickText(f.hint, locale),
+      formTitle: pickText(form.title, locale),
+      formSubtitle: pickText(form.subtitle, locale),
 
-      mailtoTo: f.mailto.to,
-      mailtoBodyTemplate: pickText(f.mailto.bodyTemplate, locale),
+      name: pickText(form.fields.name, locale),
+      email: pickText(form.fields.email, locale),
+      subject: pickText(form.fields.subject, locale),
+      message: pickText(form.fields.message, locale),
+
+      submit: pickText(form.actions.submit, locale),
+      submitting: pickText(form.actions.submitting, locale),
+
+      success: pickText(form.feedback.success, locale),
+      error: pickText(form.feedback.error, locale),
+
+      contactEmail: contactContent.meta.email,
+      location: pickText(contactContent.meta.location, locale),
+      availability: pickText(contactContent.meta.availability, locale),
+      linkedinUrl: contactContent.meta.linkedinUrl,
+      cvUrl: contactContent.meta.cvUrl,
     }
   }, [locale])
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    reset,
+    setError,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(schema),
     mode: "onBlur",
@@ -55,83 +76,180 @@ export function ContactForm({ locale }: Props) {
     },
   })
 
-  const onSubmit = (values: ContactFormValues) => {
-    const to = labels.mailtoTo
-    const subject = encodeURIComponent(values.subject.trim())
+  const onSubmit = async (values: ContactFormValues) => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
 
-    const body = encodeURIComponent(
-      formatContactText(labels.mailtoBodyTemplate, {
-        name: values.name.trim(),
-        email: values.email.trim(),
-        message: values.message.trim(),
-      }),
-    )
+      if (!response.ok) {
+        throw new Error("REQUEST_FAILED")
+      }
 
-    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`
+      reset()
+    } catch {
+      setError("root", {
+        type: "server",
+        message: labels.error,
+      })
+    }
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <div className="space-y-1">
-          <h2 className="text-lg font-semibold text-foreground">
-            {labels.title}
-          </h2>
-          <p className="text-sm text-muted-foreground">{labels.subtitle}</p>
-        </div>
-      </CardHeader>
+    <Card className="overflow-hidden">
+      <CardContent className="p-0">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+          {/* LEFT PANEL */}
+          <aside className="border-b p-6 sm:p-8 lg:border-b-0 lg:border-r">
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">
+                  {labels.eyebrow}
+                </p>
 
-      <CardContent>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4"
-          noValidate
-        >
-          <TextInput
-            label={labels.name}
-            {...register("name")}
-            error={errors.name?.message}
-            autoComplete="name"
-          />
+                <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                  {labels.title}
+                </h1>
 
-          <TextInput
-            label={labels.email}
-            {...register("email")}
-            error={errors.email?.message}
-            autoComplete="email"
-            inputMode="email"
-          />
+                <p className="max-w-md text-sm leading-7 text-muted-foreground sm:text-base">
+                  {labels.subtitle}
+                </p>
+              </div>
 
-          <TextInput
-            label={labels.subject}
-            {...register("subject")}
-            error={errors.subject?.message}
-            autoComplete="off"
-          />
+              <div className="rounded-[1.5rem] border bg-muted/20 p-5">
+                <h2 className="text-base font-semibold">{labels.panelTitle}</h2>
 
-          <TextArea
-            label={labels.message}
-            {...register("message")}
-            error={errors.message?.message}
-            rows={6}
-          />
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                  {labels.panelText}
+                </p>
 
-          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <Small className="max-w-[34rem] text-muted-foreground">
-              {labels.hint}
-            </Small>
+                <dl className="mt-6 space-y-4 text-sm">
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/70">
+                      {labels.emailLabel}
+                    </dt>
+                    <dd className="mt-1">
+                      <a
+                        href={`mailto:${labels.contactEmail}`}
+                        className="transition-colors hover:text-primary"
+                      >
+                        {labels.contactEmail}
+                      </a>
+                    </dd>
+                  </div>
 
-            <div className="flex items-center gap-3">
-              <span className="sr-only" aria-live="polite">
-                {isSubmitting ? labels.submitting : ""}
-              </span>
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/70">
+                      {labels.locationLabel}
+                    </dt>
+                    <dd className="mt-1 text-muted-foreground">
+                      {labels.location}
+                    </dd>
+                  </div>
 
-              <Button type="submit" variant="primary" disabled={isSubmitting}>
-                {isSubmitting ? labels.submitting : labels.submit}
-              </Button>
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-primary/70">
+                      {labels.availabilityLabel}
+                    </dt>
+                    <dd className="mt-1 text-muted-foreground">
+                      {labels.availability}
+                    </dd>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <a
+                      href={labels.linkedinUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition hover:text-primary"
+                    >
+                      {labels.linkedinLabel}
+                    </a>
+
+                    <a
+                      href={labels.cvUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition hover:bg-primary/10"
+                    >
+                      {labels.cvLabel}
+                    </a>
+                  </div>
+                </dl>
+              </div>
             </div>
-          </div>
-        </form>
+          </aside>
+
+          {/* FORM */}
+          <section className="p-6 sm:p-8">
+            <div className="mb-6 space-y-1">
+              <h2 className="text-xl font-semibold">{labels.formTitle}</h2>
+              <p className="text-sm text-muted-foreground">
+                {labels.formSubtitle}
+              </p>
+            </div>
+
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-5"
+              noValidate
+            >
+              <TextInput
+                label={labels.name}
+                {...register("name")}
+                error={errors.name?.message}
+                autoComplete="name"
+              />
+
+              <TextInput
+                label={labels.email}
+                {...register("email")}
+                error={errors.email?.message}
+                autoComplete="email"
+                inputMode="email"
+              />
+
+              <TextInput
+                label={labels.subject}
+                {...register("subject")}
+                error={errors.subject?.message}
+                autoComplete="off"
+              />
+
+              <TextArea
+                label={labels.message}
+                {...register("message")}
+                error={errors.message?.message}
+                rows={7}
+              />
+
+              {errors.root?.message && (
+                <p className="text-sm text-destructive">
+                  {errors.root.message}
+                </p>
+              )}
+
+              {isSubmitSuccessful && (
+                <p className="text-sm text-primary/90">{labels.success}</p>
+              )}
+
+              <div className="flex justify-end pt-2">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  disabled={isSubmitting}
+                  className="min-w-[140px]"
+                >
+                  {isSubmitting ? labels.submitting : labels.submit}
+                </Button>
+              </div>
+            </form>
+          </section>
+        </div>
       </CardContent>
     </Card>
   )
