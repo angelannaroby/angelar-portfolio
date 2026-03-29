@@ -20,17 +20,15 @@ export function SkillsStackSection({ items, locale, className }: Props) {
     <section className={cn("relative", className)}>
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_12%,rgba(var(--color-primary),0.18),transparent_42%),radial-gradient(circle_at_50%_0%,rgba(var(--color-primary),0.08),transparent_62%)]" />
 
-      <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
+      <div className="mx-auto max-w-4xl px-4 pb-6 text-center sm:px-6 sm:pb-10">
         <div className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[rgb(var(--color-primary)/0.88)]">
             {title}
           </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-3.5">
+        <div className="mt-12 flex flex-wrap justify-center gap-3.5 sm:mt-14">
           {items.map((item) => {
-            const isHighlighted = highlightedSkillIds.has(item.id)
-
             return (
               <span
                 key={item.id}

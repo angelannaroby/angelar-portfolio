@@ -17,8 +17,8 @@ export const projectsContent = {
       enterpriseLabel: { en: "Enterprise projects", de: "Enterprise-Projekte" },
     },
     toggle: {
-      professional: { en: "Industry Contributions", de: "Berufliche Beiträge" },
-      personal: { en: "Personal Projects", de: "Persönliche Projekte" },
+      professional: { en: "Enterprise", de: "Enterprise" },
+      personal: { en: "Personal", de: "Persönliche" },
     },
     aria: {
       categoryToggle: {

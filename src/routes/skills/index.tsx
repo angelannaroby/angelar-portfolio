@@ -17,11 +17,11 @@ function SkillsPage() {
 
   return (
     <>
-      <Section className="pt-24 sm:pt-38">
+      <Section className="pt-14 sm:pt-16">
         <SkillsStackSection items={skillItems} locale={locale} />
       </Section>
 
-      <Section className="pt-10">
+      <Section className="pt-6 sm:pt-8">
         <RecommendationsSection items={recommendations} locale={locale} />
       </Section>
     </>

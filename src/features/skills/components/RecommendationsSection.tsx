@@ -38,10 +38,10 @@ export function RecommendationsSection({ items, locale, className }: Props) {
       <div
         className={cn(
           "mx-auto flex max-w-4xl flex-col items-center text-center",
-          "px-4 py-4 sm:px-6",
+          "px-4 py-6 sm:px-6 sm:py-8",
         )}
       >
-        <div className="space-y-2">
+        <div className="space-y-3">
           <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             {title}
           </h2>
@@ -51,13 +51,13 @@ export function RecommendationsSection({ items, locale, className }: Props) {
           </p>
         </div>
 
-        <div className="mt-10 max-w-3xl">
+        <div className="mt-14 max-w-3xl sm:mt-16">
           <p className="text-sm leading-8 text-muted-foreground sm:text-[15px] sm:leading-9">
             “{quote}”
           </p>
         </div>
 
-        <div className="mt-8 space-y-1">
+        <div className="mt-10 space-y-1.5">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[rgb(var(--color-primary)/0.85)]">
             {activeRecommendation.name}
           </p>
@@ -65,7 +65,7 @@ export function RecommendationsSection({ items, locale, className }: Props) {
           <p className="text-sm text-muted-foreground">{roleLine}</p>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-10 flex items-center justify-center gap-4">
           {items.map((item) => {
             const isActive = item.id === activeRecommendation.id
             const itemRole = pickText(item.role, locale)

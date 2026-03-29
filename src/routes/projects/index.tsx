@@ -13,7 +13,7 @@ function ProjectsPage() {
   const { locale } = useLocale()
 
   return (
-    <Section className="pt-8 pb-4 sm:pt-4 sm:pb-0">
+    <Section className="pt-8 pb-4 sm:pt-8 sm:pb-0">
       <ProjectsTabsSection locale={locale} projects={projects} />
     </Section>
   )
