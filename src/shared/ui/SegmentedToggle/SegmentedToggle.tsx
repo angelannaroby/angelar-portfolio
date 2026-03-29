@@ -57,19 +57,10 @@ export function SegmentedToggle<T extends string>({
               option.disabled
                 ? "cursor-not-allowed opacity-50"
                 : "cursor-pointer",
-              isActive
-                ? [
-                    "bg-white/[0.03]",
-                    "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
-                    "active:bg-white/[0.05]",
-                  ]
-                : [
-                    "bg-transparent",
-                    "text-foreground/72",
-                    "hover:bg-white/[0.02]",
-                    "hover:text-foreground/90",
-                    "active:bg-white/[0.04]",
-                  ],
+              isActive &&
+                "bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] active:bg-white/[0.05]",
+              !isActive &&
+                "bg-transparent text-foreground/72 hover:bg-white/[0.02] hover:text-foreground/90 active:bg-white/[0.04]",
             )}
           >
             <span className="relative z-10 whitespace-nowrap">

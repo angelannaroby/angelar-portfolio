@@ -1,12 +1,17 @@
 import type { KeyboardEvent } from "react"
 
+import type { Locale } from "@/shared/i18n"
 import { pickText } from "@/shared/i18n"
 import { cn } from "@/shared/lib/cn"
 import { Card, CardContent } from "@/shared/ui/Card"
 
-// type Props = ProjectCardProps & {
-//   onOpen: () => void
-// }
+import type { Project } from "../types"
+
+type Props = {
+  project: Project
+  locale: Locale
+  onOpen: () => void
+}
 
 export function ProjectCard({ project, locale, onOpen }: Props) {
   const title = pickText(project.title, locale)

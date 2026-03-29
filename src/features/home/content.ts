@@ -28,7 +28,6 @@ export const homeContent = {
       hint: { en: "Tech stack & strengths", de: "Tech-Stack & Stärken" },
     },
   ],
-
   intro: {
     helloLead: { en: "Hello!", de: "Hallo!" },
     helloTrail: { en: "I’m", de: "ich bin" },
@@ -59,6 +58,24 @@ export const homeContent = {
       eyebrow: { en: "Frontend", de: "Frontend" },
       title: { en: "Developer", de: "Entwicklerin" },
     },
+    role: {
+      en: "Frontend Developer",
+      de: "Frontend-Entwicklerin",
+    },
+    bullets: [
+      {
+        en: "React + TypeScript",
+        de: "React + TypeScript",
+      },
+      {
+        en: "Accessible, maintainable UI",
+        de: "Barrierefreie, wartbare UI",
+      },
+      {
+        en: "Testing-first mindset",
+        de: "Testing-orientierte Arbeitsweise",
+      },
+    ],
   },
 
   capabilityStrip: [
@@ -90,11 +107,14 @@ export const homeContent = {
   topBrand: LocalizedText
   topLinks: Array<{ to: string; title: LocalizedText; hint: LocalizedText }>
   intro: {
-    hello: LocalizedText
+    helloLead: LocalizedText
+    helloTrail: LocalizedText
     firstName: LocalizedText
     lastName: LocalizedText
+    role: LocalizedText
     availability: LocalizedText
     introText: LocalizedText
+    bullets: LocalizedText[]
     ctaPrimary: LocalizedText
     portraitAlt: LocalizedText
     social: {

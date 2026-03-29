@@ -18,18 +18,16 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "Portfolio <onboarding@resend.dev>",
       to: "robyangelanna@gmail.com",
-      subject: subject,
+      subject,
       reply_to: email,
-      text: `
-Name: ${name}
+      text: `Name: ${name}
 Email: ${email}
 
-${message}
-      `,
+${message}`,
     })
 
     return Response.json({ ok: true })
-  } catch (error) {
+  } catch {
     return new Response(
       JSON.stringify({ ok: false, message: "Failed to send" }),
       { status: 500 },

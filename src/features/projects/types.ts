@@ -28,3 +28,5 @@ export type Project = {
   image?: ProjectImage
   content?: ProjectContent
 }
+
+export type ProjectCategory = "professional" | "personal"

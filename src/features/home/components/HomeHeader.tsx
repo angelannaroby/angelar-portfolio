@@ -70,21 +70,16 @@ export function HomeHeader({ locale, brand, links }: Props) {
 
           <nav className="hidden items-center gap-10 md:flex">
             {links.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                activeOptions={{ exact: true }}
-                className={({ isActive }) =>
-                  cn(
-                    "group relative text-sm font-semibold transition-colors",
-                    isActive
-                      ? "text-foreground"
-                      : "text-foreground/85 hover:text-foreground",
-                  )
-                }
-              >
+              <Link key={item.to} to={item.to} activeOptions={{ exact: true }}>
                 {({ isActive }) => (
-                  <>
+                  <span
+                    className={cn(
+                      "group relative text-sm font-semibold transition-colors",
+                      isActive
+                        ? "text-foreground"
+                        : "text-foreground/85 hover:text-foreground",
+                    )}
+                  >
                     {pickText(item.title, locale)}
                     <span
                       className={cn(
@@ -92,7 +87,7 @@ export function HomeHeader({ locale, brand, links }: Props) {
                         isActive ? "w-full" : "w-0 group-hover:w-full",
                       )}
                     />
-                  </>
+                  </span>
                 )}
               </Link>
             ))}
@@ -167,16 +162,19 @@ export function HomeHeader({ locale, brand, links }: Props) {
                   to={item.to}
                   activeOptions={{ exact: true }}
                   onClick={() => setOpen(false)}
-                  className={({ isActive }) =>
-                    cn(
-                      "block rounded-2xl border px-4 py-3 text-sm font-medium transition-colors",
-                      isActive
-                        ? "border-primary/30 bg-surface/55 text-foreground"
-                        : "border-border/60 bg-surface/35 text-foreground hover:bg-surface/55",
-                    )
-                  }
                 >
-                  {pickText(item.title, locale)}
+                  {({ isActive }) => (
+                    <span
+                      className={cn(
+                        "block rounded-2xl border px-4 py-3 text-sm font-medium transition-colors",
+                        isActive
+                          ? "border-primary/30 bg-surface/55 text-foreground"
+                          : "border-border/60 bg-surface/35 text-foreground hover:bg-surface/55",
+                      )}
+                    >
+                      {pickText(item.title, locale)}
+                    </span>
+                  )}
                 </Link>
               ))}
             </div>

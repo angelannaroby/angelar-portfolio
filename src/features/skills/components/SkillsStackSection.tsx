@@ -11,8 +11,6 @@ type Props = {
   className?: string
 }
 
-const highlightedSkillIds = new Set(["react", "typescript", "playwright"])
-
 export function SkillsStackSection({ items, locale, className }: Props) {
   const title = pickText(skillsContent.skills.title, locale)
 
