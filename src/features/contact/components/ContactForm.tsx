@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/shared/ui/Card"
 import { TextArea, TextInput } from "@/shared/ui/TextInput"
 
 import { contactContent } from "../content"
+import { useContactForm } from "../hooks/useContactForm"
 import { type ContactFormValues, makeContactSchema } from "../lib/contactSchema"
 
 type Props = {
@@ -64,7 +65,7 @@ export function ContactForm({ locale }: Props) {
     handleSubmit,
     reset,
     setError,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(schema),
     mode: "onBlur",
@@ -76,28 +77,11 @@ export function ContactForm({ locale }: Props) {
     },
   })
 
-  const onSubmit = async (values: ContactFormValues) => {
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
-
-      if (!response.ok) {
-        throw new Error("REQUEST_FAILED")
-      }
-
-      reset()
-    } catch {
-      setError("root", {
-        type: "server",
-        message: labels.error,
-      })
-    }
-  }
+  const { onSubmit, status } = useContactForm({
+    setError,
+    reset,
+    errorMessage: labels.error,
+  })
 
   return (
     <Card className="overflow-hidden">
@@ -233,7 +217,7 @@ export function ContactForm({ locale }: Props) {
                 </p>
               )}
 
-              {isSubmitSuccessful && (
+              {status === "success" && (
                 <p className="text-sm text-primary/90">{labels.success}</p>
               )}
 
