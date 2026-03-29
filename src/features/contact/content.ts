@@ -2,11 +2,25 @@ import type { LocalizedText } from "@/shared/i18n"
 
 export const contactContent = {
   page: {
-    title: { en: "Contact", de: "Kontakt" },
+    eyebrow: { en: "Get in touch", de: "Kontakt" },
+    title: { en: "Let’s talk", de: "Lass uns sprechen" },
     subtitle: {
-      en: "Let’s connect — I’m open to internships and working student roles.",
-      de: "Lass uns sprechen — ich bin offen für Praktika und Werkstudentenstellen.",
+      en: "Interested in collaborating, hiring, or discussing a frontend opportunity? Send me a message and I’ll get back to you soon.",
+      de: "Du möchtest zusammenarbeiten, hast eine Stelle oder möchtest dich über eine Frontend-Rolle austauschen? Schreib mir gerne eine Nachricht.",
     },
+  },
+
+  panel: {
+    title: { en: "Contact details", de: "Kontaktinformationen" },
+    text: {
+      en: "I’m currently open to internships and working student roles in frontend development.",
+      de: "Ich bin aktuell offen für Praktika und Werkstudentenstellen im Frontend-Bereich.",
+    },
+    emailLabel: { en: "Email", de: "E-Mail" },
+    locationLabel: { en: "Location", de: "Standort" },
+    availabilityLabel: { en: "Availability", de: "Verfügbarkeit" },
+    linkedinLabel: { en: "LinkedIn", de: "LinkedIn" },
+    cvLabel: { en: "Download CV", de: "Lebenslauf" },
   },
 
   form: {
@@ -15,32 +29,26 @@ export const contactContent = {
       en: "I typically reply within 1–2 days.",
       de: "Ich antworte normalerweise innerhalb von 1–2 Tagen.",
     },
-
     fields: {
       name: { en: "Name", de: "Name" },
       email: { en: "Email", de: "E-Mail" },
       subject: { en: "Subject", de: "Betreff" },
       message: { en: "Message", de: "Nachricht" },
     },
-
     actions: {
-      submit: { en: "Send", de: "Senden" },
-      submitting: { en: "Sending…", de: "Sende…" },
+      submit: { en: "Send message", de: "Nachricht senden" },
+      submitting: { en: "Sending...", de: "Wird gesendet..." },
     },
-
-    hint: {
-      en: "This form uses a mailto fallback (opens your email app).",
-      de: "Dieses Formular nutzt einen Mailto-Fallback (öffnet dein E-Mail-Programm).",
-    },
-
-    mailto: {
-      to: "angel.anna.roby@gmail.com",
-      bodyTemplate: {
-        en: "Name: {name}\nEmail: {email}\n\n{message}",
-        de: "Name: {name}\nE-Mail: {email}\n\n{message}",
+    feedback: {
+      success: {
+        en: "Your message was sent successfully.",
+        de: "Deine Nachricht wurde erfolgreich gesendet.",
+      },
+      error: {
+        en: "Something went wrong. Please try again.",
+        de: "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
       },
     },
-
     validation: {
       nameMin: {
         en: "Please enter your name.",
@@ -60,8 +68,36 @@ export const contactContent = {
       },
     },
   },
+
+  // ✅ NEW (required by your component)
+  meta: {
+    email: "robyangelanna@gmail.com",
+    location: {
+      en: "Kaiserslautern, Germany",
+      de: "Kaiserslautern, Deutschland",
+    },
+    availability: {
+      en: "Open to internships and working student roles",
+      de: "Offen für Praktika und Werkstudentenstellen",
+    },
+    linkedinUrl: "https://www.linkedin.com/in/angel-anna-roby/",
+    cvUrl: "/AngelAnnaRoby_CV.pdf",
+  },
 } satisfies {
-  page: { title: LocalizedText; subtitle: LocalizedText }
+  page: {
+    eyebrow: LocalizedText
+    title: LocalizedText
+    subtitle: LocalizedText
+  }
+  panel: {
+    title: LocalizedText
+    text: LocalizedText
+    emailLabel: LocalizedText
+    locationLabel: LocalizedText
+    availabilityLabel: LocalizedText
+    linkedinLabel: LocalizedText
+    cvLabel: LocalizedText
+  }
   form: {
     title: LocalizedText
     subtitle: LocalizedText
@@ -71,11 +107,13 @@ export const contactContent = {
       subject: LocalizedText
       message: LocalizedText
     }
-    actions: { submit: LocalizedText; submitting: LocalizedText }
-    hint: LocalizedText
-    mailto: {
-      to: string
-      bodyTemplate: LocalizedText
+    actions: {
+      submit: LocalizedText
+      submitting: LocalizedText
+    }
+    feedback: {
+      success: LocalizedText
+      error: LocalizedText
     }
     validation: {
       nameMin: LocalizedText
@@ -84,13 +122,11 @@ export const contactContent = {
       messageMin: LocalizedText
     }
   }
-}
-
-export function formatContactText(
-  template: string,
-  vars: Record<string, string | number>,
-) {
-  return template.replace(/\{(\w+)\}/g, (_, key: string) =>
-    String(vars[key] ?? `{${key}}`),
-  )
+  meta: {
+    email: string
+    location: LocalizedText
+    availability: LocalizedText
+    linkedinUrl: string
+    cvUrl: string
+  }
 }

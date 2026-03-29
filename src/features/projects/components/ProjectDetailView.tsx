@@ -1,15 +1,15 @@
-import { useEffect } from "react"
+import { type MouseEvent, useEffect } from "react"
 
 import { type Locale, pickText } from "@/shared/i18n"
 import { cn } from "@/shared/lib/cn"
 import { Button } from "@/shared/ui/Button"
-import { Card, CardContent, CardHeader } from "@/shared/ui/Card"
+import { Card } from "@/shared/ui/Card"
 
 import { projectsContent } from "../content"
 import type { Project } from "../types"
 
 type Props = {
-  project: Project | null
+  project: Project
   locale: Locale
   open: boolean
   onClose: () => void
@@ -53,33 +53,23 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
     }
   }, [open, onClose])
 
-  if (!open || !project) return null
-
-  const isProfessional = project.category === "professional"
+  if (!open) return null
 
   const title = pickText(project.title, locale)
-  const summary = pickText(project.summary, locale)
   const imgAlt = project.image ? pickText(project.image.alt, locale) : ""
 
-  const overview = project.details
-    ? pickText(project.details.whatItDoes, locale)
-    : ""
-  const capabilities = project.details
-    ? pickText(project.details.keyCapabilities, locale)
-    : ""
-  const businessValue = project.details
-    ? pickText(project.details.whyItMatters, locale)
+  const intro = project.content?.intro
+    ? pickText(project.content.intro, locale)
     : ""
 
-  const problem = project.caseStudy
-    ? pickText(project.caseStudy.problem, locale)
+  const story =
+    project.content?.story?.map((entry) => pickText(entry, locale)) ?? []
+
+  const contribution = project.content?.contribution
+    ? pickText(project.content.contribution, locale)
     : ""
-  const solution = project.caseStudy
-    ? pickText(project.caseStudy.solution, locale)
-    : ""
-  const impact = project.caseStudy
-    ? pickText(project.caseStudy.impact, locale)
-    : ""
+
+  const hasLinks = project.links.length > 0
 
   return (
     <div
@@ -92,28 +82,89 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
       aria-labelledby="project-detail-title"
       onClick={onClose}
     >
-      <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-background/75 backdrop-blur-md" />
 
       <Card
         className={cn(
-          "relative z-10 max-h-[90vh] w-full max-w-4xl overflow-hidden border-border bg-background shadow-2xl",
+          "relative z-10 flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl",
+          "border border-primary/30 bg-background/95 shadow-2xl",
+          "ring-1 ring-primary/20",
+          "before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:p-[1px]",
+          "before:[background:linear-gradient(135deg,hsl(var(--primary)/0.65),transparent_28%,transparent_72%,hsl(var(--primary)/0.35))]",
+          "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
+          "before:[mask-composite:xor] before:[-webkit-mask-composite:xor]",
           "animate-in zoom-in-95 slide-in-from-bottom-4 duration-200",
         )}
-        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
-          event.stopPropagation()
-        }
+        onClick={(event: MouseEvent<HTMLDivElement>) => event.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-border px-5 py-4 sm:px-6">
-          <div className="min-w-0">
-            <p className="text-sm text-muted-foreground">
-              {pickText(projectsContent.detail.title, locale)}
-            </p>
-            <h2
-              id="project-detail-title"
-              className="truncate text-xl font-semibold tracking-tight text-foreground"
-            >
-              {title}
-            </h2>
+        <div className="relative shrink-0 border-b border-border/70">
+          <div className="grid gap-0 lg:grid-cols-[1.12fr_0.88fr]">
+            <div className="relative min-h-[150px] overflow-hidden border-b border-border/70 sm:min-h-[170px] lg:h-full lg:min-h-0 lg:border-r lg:border-b-0">
+              {project.image?.src ? (
+                <img
+                  src={project.image.src}
+                  alt={imgAlt}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+              ) : (
+                <div
+                  aria-hidden
+                  className="absolute inset-0 h-full w-full bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary)/0.28),transparent_42%),radial-gradient(circle_at_80%_30%,hsl(var(--primary)/0.16),transparent_38%),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)))]"
+                />
+              )}
+
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent" />
+
+              <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-3">
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/15 bg-black/25 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm sm:px-3 sm:text-[11px]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex h-full flex-col justify-center p-4 pr-14 sm:p-4 sm:pr-16 lg:p-5 lg:pr-16">
+              <div className="space-y-1.5">
+                <h2
+                  id="project-detail-title"
+                  className="text-[1.9rem] font-semibold tracking-tight text-foreground sm:text-[2.2rem] lg:text-[2.25rem]"
+                >
+                  {title}
+                </h2>
+
+                {intro ? (
+                  <p className="max-w-lg text-sm leading-6 text-muted-foreground sm:text-[15px]">
+                    {intro}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="mt-3">
+                <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground/80">
+                  {pickText(projectsContent.detail.stackTitle, locale)}
+                </h3>
+
+                <div className="flex flex-wrap gap-1.5">
+                  {project.stack.map((item) => (
+                    <span
+                      key={item}
+                      className={cn(
+                        "rounded-full border px-2.5 py-1 text-[11px] font-medium",
+                        "border-primary/25 bg-primary/8 text-foreground",
+                      )}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           <Button
@@ -122,162 +173,85 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
             size="sm"
             onClick={onClose}
             aria-label={pickText(projectsContent.detail.close, locale)}
+            className="absolute right-3 top-3 rounded-full border border-white/10 bg-black/20 text-white backdrop-blur-sm hover:bg-black/35 sm:right-4 sm:top-4"
           >
             <CloseIcon className="h-5 w-5" />
           </Button>
         </div>
 
-        <div className="max-h-[calc(90vh-73px)] overflow-y-auto">
-          <div className="grid gap-0 md:grid-cols-[1.1fr_0.9fr]">
-            <div className="border-b border-border md:border-r md:border-b-0">
-              <div className="aspect-[16/10] w-full bg-muted">
-                {project.image?.src ? (
-                  <img
-                    src={project.image.src}
-                    alt={imgAlt}
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  <div
-                    aria-hidden
-                    className="h-full w-full bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.25),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(99,102,241,0.18),transparent_40%),linear-gradient(to_bottom,rgba(15,23,42,0.04),transparent)]"
-                  />
-                )}
-              </div>
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <div
+            className={cn(
+              "grid min-h-full gap-0",
+              hasLinks
+                ? "lg:grid-cols-[minmax(0,1fr)_260px]"
+                : "lg:grid-cols-1",
+            )}
+          >
+            <div
+              className={cn(
+                "p-5 sm:p-6 lg:p-8",
+                hasLinks ? "pr-4 sm:pr-5 lg:pr-6" : "pr-5 sm:pr-6 lg:pr-8",
+              )}
+            >
+              <div className="space-y-5">
+                {story.map((paragraph, index) => (
+                  <p
+                    key={`${project.id}-story-${index}`}
+                    className="text-sm leading-8 text-muted-foreground sm:text-[15px]"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
 
-              <CardContent className="space-y-5 p-5 sm:p-6">
-                {isProfessional && project.details ? (
-                  <>
-                    <div className="space-y-2">
-                      <h3 className="text-base font-semibold text-foreground">
-                        {pickText(
-                          projectsContent.detail.professional.overview,
-                          locale,
-                        )}
-                      </h3>
-                      <p className="text-sm leading-7 text-muted-foreground">
-                        {overview}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <h3 className="text-base font-semibold text-foreground">
-                        {pickText(
-                          projectsContent.detail.professional.capabilities,
-                          locale,
-                        )}
-                      </h3>
-                      <p className="text-sm leading-7 text-muted-foreground">
-                        {capabilities}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <h3 className="text-base font-semibold text-foreground">
-                        {pickText(
-                          projectsContent.detail.professional.businessValue,
-                          locale,
-                        )}
-                      </h3>
-                      <p className="text-sm leading-7 text-muted-foreground">
-                        {businessValue}
-                      </p>
-                    </div>
-                  </>
-                ) : project.caseStudy ? (
-                  <>
-                    <div className="space-y-2">
-                      <h3 className="text-base font-semibold text-foreground">
-                        {pickText(
-                          projectsContent.detail.personal.problem,
-                          locale,
-                        )}
-                      </h3>
-                      <p className="text-sm leading-7 text-muted-foreground">
-                        {problem}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <h3 className="text-base font-semibold text-foreground">
-                        {pickText(
-                          projectsContent.detail.personal.solution,
-                          locale,
-                        )}
-                      </h3>
-                      <p className="text-sm leading-7 text-muted-foreground">
-                        {solution}
-                      </p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <h3 className="text-base font-semibold text-foreground">
-                        {pickText(
-                          projectsContent.detail.personal.impact,
-                          locale,
-                        )}
-                      </h3>
-                      <p className="text-sm leading-7 text-muted-foreground">
-                        {impact}
-                      </p>
-                    </div>
-                  </>
-                ) : null}
-              </CardContent>
-            </div>
-
-            <div className="p-5 sm:p-6">
-              <CardHeader className="space-y-3 p-0">
-                <p className="text-sm leading-7 text-muted-foreground">
-                  {summary}
-                </p>
-              </CardHeader>
-
-              <div className="mt-6 space-y-6">
-                <section className="space-y-3">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-foreground/90">
-                    {pickText(projectsContent.detail.stackTitle, locale)}
-                  </h3>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-foreground"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-
-                {project.links.length > 0 ? (
-                  <section className="space-y-3">
-                    <h3 className="text-sm font-semibold uppercase tracking-wide text-foreground/90">
-                      {pickText(projectsContent.detail.linksTitle, locale)}
+                {contribution ? (
+                  <section className="mt-6 rounded-2xl border border-border bg-muted/35 p-4 sm:p-5">
+                    <h3 className="mb-2 text-sm font-semibold tracking-wide text-foreground">
+                      {pickText(
+                        projectsContent.detail.storyContribution,
+                        locale,
+                      )}
                     </h3>
-
-                    <div className="flex flex-wrap gap-3">
-                      {project.links.map((link) => {
-                        const label = pickText(link.label, locale)
-
-                        return (
-                          <a
-                            key={`${label}-${link.href}`}
-                            href={link.href}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center rounded-full border border-border px-3 py-1.5 text-sm font-medium text-foreground transition hover:bg-muted"
-                          >
-                            {label}
-                          </a>
-                        )
-                      })}
-                    </div>
+                    <p className="whitespace-pre-line text-sm leading-7 text-muted-foreground">
+                      {contribution}
+                    </p>
                   </section>
                 ) : null}
               </div>
             </div>
+
+            {hasLinks ? (
+              <aside className="border-t border-border/70 p-5 sm:p-6 lg:border-l lg:border-t-0">
+                <div className="space-y-3">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/80">
+                    {pickText(projectsContent.detail.linksTitle, locale)}
+                  </h3>
+
+                  <div className="flex flex-col gap-3">
+                    {project.links.map((link) => {
+                      const label = pickText(link.label, locale)
+
+                      return (
+                        <a
+                          key={`${label}-${link.href}`}
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className={cn(
+                            "inline-flex items-center justify-between rounded-2xl border border-border",
+                            "bg-muted/40 px-4 py-3 text-sm font-medium text-foreground transition",
+                            "hover:border-primary/30 hover:bg-primary/10",
+                          )}
+                        >
+                          <span>{label}</span>
+                          <span aria-hidden>↗</span>
+                        </a>
+                      )
+                    })}
+                  </div>
+                </div>
+              </aside>
+            ) : null}
           </div>
         </div>
       </Card>

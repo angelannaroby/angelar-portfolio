@@ -1,3 +1,2 @@
-export { RecommendationCard } from "./RecommendationCard"
-export { SkillsHero } from "./SkillsHero"
-export { SkillsList } from "./SkillsList"
+export { RecommendationsSection } from "./RecommendationsSection"
+export { SkillsStackSection } from "./SkillsStackSection"

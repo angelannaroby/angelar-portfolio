@@ -2,42 +2,64 @@ import type { Project } from "../types"
 
 export const projects: Project[] = [
   {
-    id: "osapiens-brandos",
+    id: "osapiens-orca",
     title: {
-      en: "BrandOs",
-      de: "BrandOs",
+      en: "ORCA",
+      de: "ORCA",
     },
     summary: {
-      en: "A brand-protection platform for verifying product authenticity and unlocking item-level product information.",
-      de: "Eine Brand-Protection-Plattform zur Prüfung der Produktauthentizität und zur Bereitstellung artikelbezogener Produktinformationen.",
+      en: "A regulatory compliance platform for managing and exchanging structured medical device data across global standards like UDI and EUDAMED.",
+      de: "Eine regulatorische Compliance-Plattform zur Verwaltung und zum Austausch strukturierter Medizinproduktdaten nach globalen Standards wie UDI und EUDAMED.",
     },
-    tags: ["enterprise", "traceability", "brand-protection"],
-    stack: ["React", "TypeScript", "Monorepo", "i18n", "Vitest", "Playwright"],
+    tags: ["enterprise", "medical-devices", "compliance"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Material UI",
+      "React Hook Form",
+      "Zod",
+      "Vitest",
+      "Monorepo",
+    ],
     links: [],
     category: "professional",
     image: {
-      src: "/images/brandos.png",
+      src: "/images/orca.png",
       alt: {
-        en: "Brand protection dashboard preview",
-        de: "Vorschau des Brand-Protection-Dashboards",
+        en: "ORCA medical device platform preview",
+        de: "Vorschau der ORCA-Medizinprodukteplattform",
       },
     },
-    details: {
-      whatItDoes: {
-        en: "BrandOs helps companies protect products against counterfeiting by linking products or packaging to unique codes that can be scanned or entered to verify authenticity and access item-specific information.",
-        de: "BrandOs hilft Unternehmen, Produkte vor Fälschungen zu schützen, indem Produkte oder Verpackungen mit eindeutigen Codes verknüpft werden, die gescannt oder eingegeben werden können, um die Echtheit zu prüfen und artikelbezogene Informationen abzurufen.",
+    content: {
+      intro: {
+        en: "A regulatory compliance platform for managing and exchanging structured medical device data across global standards like UDI and EUDAMED.",
+        de: "Eine regulatorische Compliance-Plattform zur Verwaltung und zum Austausch strukturierter Medizinproduktdaten nach globalen Standards wie UDI und EUDAMED.",
       },
-      keyCapabilities: {
-        en: "It combines product authentication, traceability, item-level information, scan-driven workflows, alerts for recalls or counterfeit detection, and customer-facing interactions such as promotions and engagement experiences.",
-        de: "Die Lösung kombiniert Produktauthentifizierung, Rückverfolgbarkeit, artikelbezogene Informationen, scanbasierte Workflows, Warnungen für Rückrufe oder Fälschungserkennung sowie kundennahe Interaktionen wie Aktionen und Engagement-Erlebnisse.",
-      },
-      whyItMatters: {
-        en: "It gives brands better transparency across product journeys, helps detect grey-market or counterfeit activity, and creates more trustworthy customer interactions around every scanned item.",
-        de: "Sie schafft mehr Transparenz entlang der Produktreise, hilft bei der Erkennung von Grau- oder Fälschungsmärkten und ermöglicht vertrauenswürdigere Kundeninteraktionen rund um jeden Scan.",
+      story: [
+        {
+          en: "ORCA operates in one of the most demanding domains: medical device compliance. It helps manufacturers manage product data and exchange it with regulatory systems such as EUDAMED, GUDID, and GDSN.",
+          de: "ORCA bewegt sich in einem der anspruchsvollsten Bereiche: der Medizinprodukte-Compliance. Die Plattform hilft Herstellern dabei, Produktdaten zu verwalten und mit regulatorischen Systemen wie EUDAMED, GUDID und GDSN auszutauschen.",
+        },
+        {
+          en: "The challenge is not only handling large amounts of structured data, but making sure that data stays accurate, validated, and compliant across different systems and regions. The platform supports workflows such as aggregation, validation, submission, and synchronization, all within strict regulatory requirements. That makes the user experience especially important, because users need to enter and verify sensitive data with confidence and without errors.",
+          de: "Die Herausforderung liegt nicht nur in der Verarbeitung großer Mengen strukturierter Daten, sondern auch darin, diese Daten über verschiedene Systeme und Regionen hinweg korrekt, validiert und regelkonform zu halten. Die Plattform unterstützt Workflows wie Aggregation, Validierung, Übermittlung und Synchronisierung – alles unter strengen regulatorischen Anforderungen. Dadurch wird die User Experience besonders wichtig, weil Nutzer sensible Daten sicher und möglichst fehlerfrei eingeben und prüfen müssen.",
+        },
+      ],
+      contribution: {
+        en: `I worked on the frontend implementation of compliance-driven workflows, especially around multi-step forms, validation, and structured data-entry interfaces. Using React Hook Form and schema validation, I helped make sure data was checked properly before submission.
+
+I also contributed to reusable, type-safe UI components and shared utilities within the monorepo, which improved consistency and reduced duplication across modules.
+
+On top of that, I worked on API-connected views and error handling so users received clear feedback when something went wrong. My work helped turn complex regulatory processes into UI flows that felt more structured and manageable in day-to-day use.`,
+        de: `Ich habe an der Frontend-Umsetzung compliance-getriebener Workflows gearbeitet, insbesondere rund um mehrstufige Formulare, Validierung und strukturierte Dateneingabe-Oberflächen. Mit React Hook Form und Schema-Validierung habe ich dazu beigetragen, dass Daten vor der Übermittlung zuverlässig geprüft werden.
+
+Außerdem habe ich zu wiederverwendbaren, typsicheren UI-Komponenten und gemeinsamen Utilities im Monorepo beigetragen, was die Konsistenz verbessert und Duplikate zwischen Modulen reduziert hat.
+
+Darüber hinaus habe ich an API-verbundenen Ansichten und am Error Handling gearbeitet, damit Nutzer im Fehlerfall klares Feedback erhalten. Meine Arbeit hat geholfen, komplexe regulatorische Prozesse in UI-Abläufe zu übersetzen, die sich im Alltag strukturierter und besser handhaben lassen.`,
       },
     },
   },
-
   {
     id: "osapiens-ftrace",
     title: {
@@ -45,187 +67,363 @@ export const projects: Project[] = [
       de: "FTrace",
     },
     summary: {
-      en: "A food traceability platform for tracking fresh products across the supply chain from origin to shelf.",
-      de: "Eine Food-Traceability-Plattform zur Nachverfolgung frischer Produkte entlang der Lieferkette vom Ursprung bis ins Regal.",
+      en: "A supply-chain traceability platform that tracks food products from origin to consumer, ensuring transparency, safety, and compliance.",
+      de: "Eine Supply-Chain-Traceability-Plattform, die Lebensmittel vom Ursprung bis zum Verbraucher nachverfolgt und so Transparenz, Sicherheit und Compliance unterstützt.",
     },
     tags: ["enterprise", "food-traceability", "supply-chain"],
-    stack: ["React", "TypeScript", "Monorepo", "i18n", "Vitest", "Playwright"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Zustand",
+      "React Query",
+      "Vitest",
+      "Playwright",
+      "Monorepo",
+    ],
     links: [],
     category: "professional",
     image: {
       src: "/images/ftrace.png",
       alt: {
-        en: "Food traceability dashboard preview",
-        de: "Vorschau des Food-Traceability-Dashboards",
+        en: "FTrace dashboard preview",
+        de: "Vorschau des FTrace-Dashboards",
       },
     },
-    details: {
-      whatItDoes: {
-        en: "FTrace enables end-to-end food traceability across the supply chain, helping businesses track fresh products such as meat, fish, and seafood from origin to consumer.",
-        de: "FTrace ermöglicht eine durchgängige Rückverfolgbarkeit von Lebensmitteln entlang der Lieferkette und hilft Unternehmen dabei, Frischwaren wie Fleisch, Fisch und Meeresfrüchte vom Ursprung bis zum Verbraucher nachzuverfolgen.",
+    content: {
+      intro: {
+        en: "A supply-chain traceability platform that tracks food products from origin to consumer, ensuring transparency, safety, and compliance.",
+        de: "Eine Supply-Chain-Traceability-Plattform, die Lebensmittel vom Ursprung bis zum Verbraucher nachverfolgt und so Transparenz, Sicherheit und Compliance unterstützt.",
       },
-      keyCapabilities: {
-        en: "It supports full supply-chain visibility, standards-based traceability data exchange, compliance workflows, and consumer-facing transparency with origin, processing, and transport information.",
-        de: "Die Lösung unterstützt vollständige Sichtbarkeit in der Lieferkette, standardisierten Austausch von Traceability-Daten, Compliance-Workflows sowie verbrauchernahe Transparenz mit Informationen zu Herkunft, Verarbeitung und Transport.",
-      },
-      whyItMatters: {
-        en: "It helps organizations strengthen compliance readiness, reduce manual effort, improve supplier collaboration, reduce waste through better batch visibility, and build consumer trust with verifiable product data.",
-        de: "Sie hilft Unternehmen dabei, Compliance-Anforderungen besser zu erfüllen, manuellen Aufwand zu reduzieren, die Zusammenarbeit mit Lieferanten zu verbessern, Abfälle durch bessere Chargentransparenz zu verringern und Vertrauen durch verifizierbare Produktdaten aufzubauen.",
+      story: [
+        {
+          en: "FTrace is built to bring more transparency into food supply chains, where knowing the origin and path of a product matters for compliance, safety, and trust. The platform brings together data from different stages such as production, processing, and logistics, and turns it into one connected traceability view.",
+          de: "FTrace wurde entwickelt, um mehr Transparenz in Lebensmittel-Lieferketten zu bringen, in denen Herkunft und Weg eines Produkts für Compliance, Sicherheit und Vertrauen entscheidend sind. Die Plattform führt Daten aus verschiedenen Phasen wie Produktion, Verarbeitung und Logistik zusammen und macht daraus eine verknüpfte Traceability-Ansicht.",
+        },
+        {
+          en: "Unlike systems that treat information as isolated records, FTrace helps users understand how data points relate across the supply chain. That becomes especially important during recalls or audits, where fast access to accurate and structured information can directly affect decision-making and risk management.",
+          de: "Anders als Systeme, die Informationen als isolierte Datensätze behandeln, hilft FTrace dabei, Zusammenhänge entlang der Lieferkette sichtbar zu machen. Das ist besonders bei Rückrufen oder Audits wichtig, wenn ein schneller Zugriff auf genaue und strukturierte Informationen direkten Einfluss auf Entscheidungen und Risikomanagement haben kann.",
+        },
+      ],
+      contribution: {
+        en: `I contributed to the frontend development of traceability workflows, focusing on making complex supply-chain data easier to navigate and understand. I worked on reusable UI components and structured, data-heavy views that helped users move from high-level transparency information to more detailed product-level insights.
+
+I also worked with API-driven and template-based rendering patterns, helping keep the UI flexible and maintainable as data and business requirements evolved. Alongside that, I supported stateful frontend behavior and data synchronization in a monorepo setup, where consistency across shared packages mattered.
+
+I also took part in testing efforts with Vitest and Playwright to help reduce regressions and keep important user flows stable.`,
+        de: `Ich habe zur Frontend-Entwicklung von Traceability-Workflows beigetragen, mit dem Fokus, komplexe Lieferkettendaten leichter navigierbar und verständlicher zu machen. Dabei habe ich an wiederverwendbaren UI-Komponenten und strukturierten, datenintensiven Ansichten gearbeitet, die Nutzern den Wechsel von allgemeinen Transparenzinformationen zu detaillierten Produktinformationen erleichtern.
+
+Außerdem habe ich mit API-gesteuerten und template-basierten Rendering-Mustern gearbeitet und so dazu beigetragen, die UI flexibel und wartbar zu halten, auch wenn sich Daten und fachliche Anforderungen weiterentwickelt haben. Gleichzeitig habe ich stateful Frontend-Verhalten und Datensynchronisierung in einem Monorepo-Setup unterstützt, in dem Konsistenz über gemeinsame Pakete hinweg wichtig war.
+
+Zusätzlich war ich an Testing-Aktivitäten mit Vitest und Playwright beteiligt, um Regressionen zu reduzieren und wichtige User Flows stabil zu halten.`,
       },
     },
   },
 
   {
-    id: "osapiens-orca",
+    id: "osapiens-brandos",
     title: {
-      en: "Orca",
-      de: "Orca",
+      en: "BrandOS",
+      de: "BrandOS",
     },
     summary: {
-      en: "A medical device data platform for managing compliant product information and sharing it with authorities and trading partners.",
-      de: "Eine Plattform für Medizinproduktdaten zur Verwaltung konformer Produktinformationen und deren Weitergabe an Behörden und Handelspartner.",
+      en: "A brand protection platform for product authentication, traceability, and secure customer interaction across global supply chains.",
+      de: "Eine Brand-Protection-Plattform für Produktauthentifizierung, Rückverfolgbarkeit und sichere Kundeninteraktion entlang globaler Lieferketten.",
     },
-    tags: ["enterprise", "medical-devices", "compliance"],
-    stack: ["React", "TypeScript", "Monorepo", "i18n", "Vitest", "Playwright"],
+    tags: ["enterprise", "traceability", "brand-protection"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Material UI",
+      "MobX",
+      "React Router",
+      "i18n",
+      "REST APIs",
+    ],
     links: [],
     category: "professional",
     image: {
-      src: "/images/orca.png",
+      src: "/images/brandos.png",
       alt: {
-        en: "Medical devices platform preview",
-        de: "Vorschau der Medizinprodukte-Plattform",
+        en: "BrandOS dashboard preview",
+        de: "Vorschau des BrandOS-Dashboards",
       },
     },
-    details: {
-      whatItDoes: {
-        en: "Orca supports manufacturers in managing medical device product data and syndicating that information to regulatory databases, hospitals, and trading partners worldwide.",
-        de: "Orca unterstützt Hersteller bei der Verwaltung von Medizinproduktdaten und bei der Syndizierung dieser Informationen an regulatorische Datenbanken, Krankenhäuser und Handelspartner weltweit.",
+    content: {
+      intro: {
+        en: "A brand protection platform enabling product authentication, traceability, and secure customer interaction across global supply chains.",
+        de: "Eine Brand-Protection-Plattform, die Produktauthentifizierung, Rückverfolgbarkeit und sichere Kundeninteraktion entlang globaler Lieferketten ermöglicht.",
       },
-      keyCapabilities: {
-        en: "It supports structured product-data aggregation, validation, publication, and syndication while aligning data with global requirements such as UDI, EUDAMED, GUDID, and GDSN.",
-        de: "Die Lösung unterstützt strukturierte Aggregation, Validierung, Publikation und Syndizierung von Produktdaten und richtet diese an globale Anforderungen wie UDI, EUDAMED, GUDID und GDSN aus.",
-      },
-      whyItMatters: {
-        en: "It reduces friction in regulatory data exchange, improves data quality and consistency, lowers manual effort, and helps teams maintain trusted and compliant product information across markets.",
-        de: "Sie reduziert Reibung im regulatorischen Datenaustausch, verbessert Datenqualität und Konsistenz, senkt manuellen Aufwand und hilft Teams, vertrauenswürdige und konforme Produktinformationen über Märkte hinweg zu pflegen.",
+      story: [
+        {
+          en: "BrandOS sits at the intersection of product authenticity, traceability, and customer trust. Companies can assign digital identities to physical products, which makes it possible to verify authenticity, follow product journeys, and respond to issues such as counterfeiting or grey-market distribution.",
+          de: "BrandOS bewegt sich an der Schnittstelle von Produktauthentizität, Rückverfolgbarkeit und Kundenvertrauen. Unternehmen können physischen Produkten digitale Identitäten zuweisen, um Echtheit zu prüfen, Produktwege nachzuvollziehen und auf Themen wie Fälschungen oder Graumarktvertrieb zu reagieren.",
+        },
+        {
+          en: "What makes the platform challenging is not only the amount of data, but also how that data is used. Teams rely on it for real operational decisions, so the interface has to present detailed, connected information in a way that stays clear and actionable. The product combines compliance-heavy workflows with usability, so even non-technical users can work confidently with complex product data and traceability events.",
+          de: "Herausfordernd ist nicht nur die Menge an Daten, sondern auch die Art, wie diese Daten genutzt werden. Teams treffen damit echte operative Entscheidungen, deshalb muss die Oberfläche detaillierte und verknüpfte Informationen so darstellen, dass sie klar und handhabbar bleiben. Das Produkt verbindet stark compliance-geprägte Workflows mit guter Nutzbarkeit, damit auch nicht-technische Nutzer sicher mit komplexen Produktdaten und Traceability-Ereignissen arbeiten können.",
+        },
+      ],
+      contribution: {
+        en: `I worked on building and refining frontend features in a large React + TypeScript enterprise application, with a strong focus on reusable UI patterns and workflow-driven interfaces. I translated Figma designs into scalable components aligned with the design system, helping keep the experience consistent across different areas of the product.
+
+A big part of my work was around form-heavy, data-driven interfaces where users interact with complex product information. That included validation logic, REST API integration, and structuring workflows in a way that felt reliable and intuitive.
+
+I also contributed to reusable component patterns, supported data-heavy views such as dashboards and reporting flows, and helped maintain frontend quality through testing, code reviews, and consistent engineering practices.`,
+        de: `Ich habe an der Entwicklung und Weiterentwicklung von Frontend-Features in einer großen React- und TypeScript-Enterprise-Anwendung gearbeitet, mit starkem Fokus auf wiederverwendbare UI-Muster und workflow-orientierte Oberflächen. Dabei habe ich Figma-Designs in skalierbare Komponenten überführt, die sich am Design System orientieren und für Konsistenz in verschiedenen Produktbereichen sorgen.
+
+Ein großer Teil meiner Arbeit lag in formularlastigen, datengetriebenen Oberflächen, in denen Nutzer mit komplexen Produktinformationen arbeiten. Dazu gehörten Validierungslogik, REST-API-Integration und die Strukturierung von Workflows, damit sie verlässlich und intuitiv wirken.
+
+Außerdem habe ich zu wiederverwendbaren Komponentenmustern beigetragen, datenintensive Ansichten wie Dashboards und Reporting-Flows unterstützt und zur Frontend-Qualität durch Tests, Code Reviews und konsistente Engineering-Praktiken beigetragen.`,
       },
     },
   },
 
   {
-    id: "emtab-machine-anomaly-detection",
+    id: "emtab-machine-monitoring",
     title: {
       en: "EMTab",
       de: "EMTab",
     },
     summary: {
-      en: "A manufacturing monitoring platform for machine data visualization, anomaly detection, alarms, and production analytics.",
-      de: "Eine Monitoring-Plattform für die Fertigung mit Maschinen-Datenvisualisierung, Anomalieerkennung, Alarmen und Produktionsanalysen.",
+      en: "A real-time production monitoring system for machine analytics, anomaly detection, and predictive maintenance.",
+      de: "Ein Echtzeit-Produktionsmonitoring-System für Maschinenanalysen, Anomalieerkennung und vorausschauende Wartung.",
     },
-    tags: ["manufacturing", "monitoring", "anomaly-detection"],
-    stack: ["React", "TypeScript", "InfluxDB", "Charts", "REST API"],
+    tags: ["manufacturing", "monitoring", "real-time-data"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Material UI",
+      "Charts",
+      "REST APIs",
+      "Axios",
+    ],
     links: [],
     category: "professional",
     image: {
       src: "/images/emtab.png",
       alt: {
-        en: "Machine anomaly detection dashboard preview",
-        de: "Vorschau des Dashboards zur Maschinenanomalie-Erkennung",
+        en: "EMTab dashboard preview",
+        de: "Vorschau des EMTab-Dashboards",
       },
     },
-    details: {
-      whatItDoes: {
-        en: "EMTab is a web-based manufacturing management platform used to monitor production machines, visualize machine and product data, identify anomalies, and support predictive maintenance workflows.",
-        de: "EMTab ist eine webbasierte Manufacturing-Management-Plattform zur Überwachung von Produktionsmaschinen, zur Visualisierung von Maschinen- und Produktdaten, zur Erkennung von Anomalien und zur Unterstützung prädiktiver Wartungsprozesse.",
+    content: {
+      intro: {
+        en: "A real-time production monitoring system for machine analytics, anomaly detection, and predictive maintenance.",
+        de: "Ein Echtzeit-Produktionsmonitoring-System für Maschinenanalysen, Anomalieerkennung und vorausschauende Wartung.",
       },
-      keyCapabilities: {
-        en: "It provides custom dashboards, real-time and historical monitoring, alarms and notifications, cycle-time analysis, audit trail, machine data visualization, line-audit workflows, export features, and backup and restore support.",
-        de: "Die Lösung bietet individuelle Dashboards, Echtzeit- und historische Überwachung, Alarme und Benachrichtigungen, Cycle-Time-Analysen, Audit Trail, Maschinen-Datenvisualisierung, Line-Audit-Workflows, Exportfunktionen sowie Backup- und Restore-Unterstützung.",
-      },
-      whyItMatters: {
-        en: "It helps teams reduce downtime, monitor production conditions continuously, surface issues earlier, and make operational decisions faster through clearer data visibility and more efficient analytics.",
-        de: "Sie hilft Teams, Ausfallzeiten zu reduzieren, Produktionsbedingungen kontinuierlich zu überwachen, Probleme früher sichtbar zu machen und operative Entscheidungen durch bessere Datensichtbarkeit und effizientere Analysen schneller zu treffen.",
+      story: [
+        {
+          en: "EMTab is a manufacturing-focused platform that collects machine data and turns it into practical insights through dashboards and analytics. It helps operators monitor production lines, spot anomalies early, and make more informed decisions to improve efficiency.",
+          de: "EMTab ist eine Plattform für die Fertigung, die Maschinendaten erfasst und über Dashboards und Analysen in praktische Erkenntnisse übersetzt. Sie hilft Operatoren dabei, Produktionslinien zu überwachen, Anomalien früh zu erkennen und fundiertere Entscheidungen zur Effizienzsteigerung zu treffen.",
+        },
+        {
+          en: "Because the system works with continuous streams of data, performance, visual clarity, and usability all matter. The goal is not only to show machine data, but to help teams reduce downtime and move toward more proactive maintenance instead of reacting only after issues appear.",
+          de: "Da das System mit kontinuierlichen Datenströmen arbeitet, sind Performance, visuelle Klarheit und Nutzbarkeit gleichermaßen wichtig. Ziel ist es nicht nur, Maschinendaten anzuzeigen, sondern Teams dabei zu helfen, Ausfallzeiten zu verringern und Wartung proaktiver statt rein reaktiv zu gestalten.",
+        },
+      ],
+      contribution: {
+        en: `I developed interactive dashboards and data-visualization components that helped users monitor machine performance and identify anomalies more easily. A large part of my work was around chart-based UI components, making sure data was presented clearly and updated efficiently.
+
+I also built reusable UI components and responsive layouts, which improved usability across different screen sizes used in production environments.
+
+In addition, I handled API integration and asynchronous data flows to keep communication between frontend and backend smooth and reliable. I was actively involved in Agile workflows as well, collaborating with stakeholders and regularly presenting feature updates.`,
+        de: `Ich habe interaktive Dashboards und Datenvisualisierungs-Komponenten entwickelt, mit denen Nutzer Maschinenleistung leichter überwachen und Anomalien erkennen können. Ein großer Teil meiner Arbeit drehte sich um chart-basierte UI-Komponenten, damit Daten klar dargestellt und effizient aktualisiert werden.
+
+Außerdem habe ich wiederverwendbare UI-Komponenten und responsive Layouts entwickelt, was die Nutzbarkeit auf unterschiedlichen Bildschirmgrößen in Produktionsumgebungen verbessert hat.
+
+Zusätzlich habe ich API-Integration und asynchrone Datenflüsse umgesetzt, damit die Kommunikation zwischen Frontend und Backend reibungslos und verlässlich bleibt. Ich war außerdem aktiv in Agile-Workflows eingebunden, habe mit Stakeholdern zusammengearbeitet und regelmäßig Feature-Updates vorgestellt.`,
       },
     },
   },
 
   {
-    id: "ipms-property-management",
+    id: "ipms-property-system",
     title: {
       en: "IPMS",
       de: "IPMS",
     },
     summary: {
-      en: "A GIS-powered intelligent property management system for map-based property insights and operational decision-making.",
-      de: "Ein GIS-gestütztes intelligentes Property-Management-System für kartenbasierte Immobilien-Einblicke und operative Entscheidungen.",
+      en: "A GIS-powered decision-support system for managing and analyzing property and demographic data.",
+      de: "Ein GIS-gestütztes Entscheidungsunterstützungssystem zur Verwaltung und Analyse von Immobilien- und demografischen Daten.",
     },
     tags: ["gis", "property-management", "maps"],
-    stack: ["React", "TypeScript", "Maps", "GIS", "REST API"],
+    stack: [
+      "React",
+      "JavaScript",
+      "Redux",
+      "ArcGIS",
+      "HTML",
+      "CSS",
+      "Bootstrap",
+      "REST APIs",
+    ],
     links: [],
     category: "professional",
     image: {
       src: "/images/ipms.png",
       alt: {
-        en: "Property management dashboard preview",
-        de: "Vorschau des Property-Management-Dashboards",
+        en: "IPMS property system preview",
+        de: "Vorschau des IPMS-Property-Systems",
       },
     },
-    details: {
-      whatItDoes: {
-        en: "IPMS is an intelligent property management system that combines GIS and business intelligence to support property-related data exploration and map-based workflows.",
-        de: "IPMS ist ein intelligentes Property-Management-System, das GIS und Business Intelligence kombiniert, um die Analyse von Immobiliendaten und kartenbasierte Workflows zu unterstützen.",
+    content: {
+      intro: {
+        en: "A GIS-powered decision-support system for managing and analyzing property and demographic data.",
+        de: "Ein GIS-gestütztes Entscheidungsunterstützungssystem zur Verwaltung und Analyse von Immobilien- und demografischen Daten.",
       },
-      keyCapabilities: {
-        en: "It brings property records, location intelligence, and visual map interactions together in one system so users can inspect assets, navigate property data, and access operational details more intuitively.",
-        de: "Die Lösung vereint Immobiliendaten, Standortintelligenz und visuelle Karteninteraktionen in einem System, sodass Nutzer Assets prüfen, Immobiliendaten durchsuchen und operative Details intuitiver abrufen können.",
-      },
-      whyItMatters: {
-        en: "By connecting geospatial context with property information, it supports faster understanding, cleaner decision-making, and a more practical workflow for property and estate management teams.",
-        de: "Durch die Verknüpfung von geografischem Kontext mit Immobiliendaten unterstützt sie ein schnelleres Verständnis, klarere Entscheidungen und einen praktischeren Workflow für Property- und Estate-Management-Teams.",
+      story: [
+        {
+          en: "IPMS is a government-facing platform that combines property records with geospatial data to support better decision-making. Instead of looking at properties as isolated entries, users can understand them in geographic context, including location, surroundings, and socio-economic factors.",
+          de: "IPMS ist eine Plattform für den öffentlichen Bereich, die Immobiliendaten mit Geodaten kombiniert, um bessere Entscheidungen zu unterstützen. Anstatt Immobilien als isolierte Einträge zu betrachten, können Nutzer sie im geografischen Kontext verstehen – einschließlich Lage, Umgebung und sozioökonomischer Faktoren.",
+        },
+        {
+          en: "By bringing GIS together with business data, the platform supports more intuitive workflows, especially in large-scale public-sector data management. The value comes from helping users explore and analyze property information in a way that feels visual, contextual, and practical.",
+          de: "Durch die Verbindung von GIS mit fachlichen Daten unterstützt die Plattform intuitivere Workflows, besonders im großflächigen öffentlichen Datenmanagement. Der Mehrwert entsteht dadurch, dass Nutzer Immobiliendaten visuell, kontextbezogen und praxisnah erkunden und analysieren können.",
+        },
+      ],
+      contribution: {
+        en: `I worked on the frontend development of GIS-integrated interfaces, building features that combined map interactions with property-data visualization.
+
+I implemented data-driven UI components and dashboards that allowed users to explore and analyze property information more efficiently. I also worked closely with backend and GIS teams to make sure data flow and spatial rendering were accurate.
+
+Beyond development, I was involved in deployment, testing, and maintenance, which gave me experience taking ownership of features from implementation through to production support.`,
+        de: `Ich habe an der Frontend-Entwicklung GIS-integrierter Oberflächen gearbeitet und Features umgesetzt, die Karteninteraktionen mit der Visualisierung von Immobiliendaten verbinden.
+
+Ich habe datengetriebene UI-Komponenten und Dashboards entwickelt, mit denen Nutzer Property-Informationen effizienter erkunden und analysieren können. Außerdem habe ich eng mit Backend- und GIS-Teams zusammengearbeitet, um korrekten Datenfluss und präzises räumliches Rendering sicherzustellen.
+
+Über die Entwicklung hinaus war ich auch in Deployment, Testing und Wartung eingebunden, wodurch ich Erfahrung gesammelt habe, Features von der Implementierung bis zur Produktionsunterstützung zu begleiten.`,
       },
     },
   },
-
   {
-    id: "portfolio-website",
+    id: "developer-portfolio",
     title: {
       en: "Developer Portfolio",
       de: "Developer Portfolio",
     },
     summary: {
-      en: "A bilingual personal portfolio built to present projects, experience, and skills through a polished, recruiter-friendly frontend.",
-      de: "Ein zweisprachiges persönliches Portfolio, das Projekte, Erfahrung und Skills über ein modernes und recruiter-freundliches Frontend präsentiert.",
+      en: "A bilingual portfolio website built to present my projects, experience, and skills through a clean, recruiter-friendly frontend.",
+      de: "Eine zweisprachige Portfolio-Website, die meine Projekte, Erfahrungen und Skills über ein klares und recruiter-freundliches Frontend präsentiert.",
     },
-    tags: ["portfolio", "frontend", "personal-branding"],
+    tags: ["personal", "portfolio", "frontend"],
     stack: [
       "React",
       "TypeScript",
       "Tailwind CSS",
       "TanStack Router",
-      "i18n",
       "Vite",
+      "i18n",
     ],
-    links: [],
+    links: [
+      {
+        href: "https://github.com/angelannaroby/angelar-portfolio",
+        label: {
+          en: "Source code",
+          de: "Quellcode",
+        },
+      },
+    ],
     category: "personal",
     image: {
-      src: "/images/portfolio.png",
+      src: "/images/portfolio.jpg",
       alt: {
-        en: "Portfolio project preview",
-        de: "Vorschau des Portfolio-Projekts",
+        en: "Portfolio website preview",
+        de: "Vorschau der Portfolio-Website",
       },
     },
-    caseStudy: {
-      problem: {
-        en: "I wanted a portfolio that felt professional, modern, and personal at the same time, while still being fast, responsive, and easy to maintain.",
-        de: "Ich wollte ein Portfolio, das gleichzeitig professionell, modern und persönlich wirkt und dabei schnell, responsiv und leicht wartbar bleibt.",
+    content: {
+      intro: {
+        en: "A bilingual portfolio website built to present my projects, experience, and skills through a clean, recruiter-friendly frontend.",
+        de: "Eine zweisprachige Portfolio-Website, die meine Projekte, Erfahrungen und Skills über ein klares und recruiter-freundliches Frontend präsentiert.",
       },
-      solution: {
-        en: "I designed and built a bilingual portfolio with structured routes, reusable UI components, polished project cards, theme-aware styling, and focused content for both professional and personal work.",
-        de: "Ich habe ein zweisprachiges Portfolio mit klaren Routen, wiederverwendbaren UI-Komponenten, ausgereiften Projektkarten, theme-fähigem Styling und fokussierten Inhalten für berufliche und persönliche Projekte entworfen und umgesetzt.",
+      story: [
+        {
+          en: "I wanted the portfolio to feel professional and intentional without becoming overloaded. The goal was not just to create a personal website, but to build something that feels structured, polished, and easy to navigate for recruiters and hiring teams.",
+          de: "Ich wollte, dass sich das Portfolio professionell und bewusst gestaltet anfühlt, ohne überladen zu wirken. Das Ziel war nicht einfach, eine persönliche Website zu bauen, sondern etwas zu entwickeln, das für Recruiter und Hiring Teams strukturiert, hochwertig und leicht navigierbar ist.",
+        },
+        {
+          en: "A big part of the work was shaping the UI and content together. That meant building reusable components, organizing routes and page structure carefully, supporting both English and German content, and making sure the design stays consistent across sections like projects, experience, and skills.",
+          de: "Ein großer Teil der Arbeit bestand darin, UI und Inhalte gemeinsam zu gestalten. Dazu gehörten der Aufbau wiederverwendbarer Komponenten, eine saubere Routing- und Seitenstruktur, die Unterstützung von englischen und deutschen Inhalten sowie die Sicherstellung eines konsistenten Designs über Bereiche wie Projekte, Erfahrung und Skills hinweg.",
+        },
+      ],
+      contribution: {
+        en: `I designed and built the portfolio end to end, covering layout, component structure, theming, and bilingual content. The focus was on reusable UI patterns and a clean, maintainable codebase so it feels like a real frontend product rather than a static site.
+
+I worked a lot on structuring pages and interactions in a way that is easy to scan for recruiters, while keeping the design consistent across projects, experience, and skills.
+
+For parts of the process, I used AI as a support tool — mainly for exploring color palettes, refining gradients, and generating initial translation drafts. Everything was reviewed and adjusted manually to fit the overall design and ensure consistency.`,
+
+        de: `Ich habe das Portfolio vollständig selbst umgesetzt – von Layout und Komponentenstruktur bis hin zu Theming und zweisprachigen Inhalten. Der Fokus lag auf wiederverwendbaren UI-Mustern und einer sauberen, wartbaren Codebasis, sodass sich das Projekt wie ein echtes Frontend-Produkt anfühlt.
+
+Ein wichtiger Teil der Arbeit war die Strukturierung von Seiten und Interaktionen, sodass Inhalte für Recruiter schnell erfassbar sind und das Design über Projekte, Erfahrung und Skills hinweg konsistent bleibt.
+
+Für einzelne Schritte habe ich AI als unterstützendes Werkzeug genutzt – vor allem zur Exploration von Farbpaletten, zum Verfeinern von Gradients und für erste Entwürfe von Übersetzungen. Alle Ergebnisse wurden anschließend manuell geprüft und angepasst.`,
       },
-      impact: {
-        en: "The result is a cleaner and more intentional presentation of my work that is easier for recruiters to scan, while also giving me a flexible foundation to keep improving over time.",
-        de: "Das Ergebnis ist eine klarere und bewusstere Präsentation meiner Arbeit, die für Recruiter leichter erfassbar ist und mir zugleich eine flexible Grundlage für spätere Erweiterungen bietet.",
+    },
+  },
+  {
+    id: "ev-charging-simulation",
+    title: {
+      en: "EV Charging Simulation",
+      de: "EV-Ladesimulation",
+    },
+    summary: {
+      en: "A simulation and visualization tool for modeling EV charging demand and exploring power usage over time.",
+      de: "Ein Simulations- und Visualisierungstool zur Modellierung von EV-Ladebedarf und zur Analyse von Lastverläufen über die Zeit.",
+    },
+    tags: ["personal", "simulation", "data-visualization"],
+    stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Recharts"],
+    links: [
+      {
+        href: "https://angelannaroby.github.io/ev-charging-simulation/",
+        label: {
+          en: "Live site",
+          de: "Live-Seite",
+        },
+      },
+      {
+        href: "https://github.com/angelannaroby/ev-charging-simulation",
+        label: {
+          en: "Source code",
+          de: "Quellcode",
+        },
+      },
+    ],
+    category: "personal",
+    image: {
+      src: "/images/ev-charging.jpg",
+      alt: {
+        en: "EV charging simulation dashboard preview",
+        de: "Vorschau des EV-Ladesimulations-Dashboards",
+      },
+    },
+    content: {
+      intro: {
+        en: "A simulation and visualization tool for modeling EV charging demand and exploring power usage over time.",
+        de: "Ein Simulations- und Visualisierungstool zur Modellierung von EV-Ladebedarf und zur Analyse von Lastverläufen über die Zeit.",
+      },
+      story: [
+        {
+          en: "This project looks at how EV charging demand behaves over time by simulating multiple charging stations and their load patterns. Instead of only showing theoretical capacity, it compares expected and actual usage so the results feel closer to a real operating scenario.",
+          de: "Dieses Projekt untersucht, wie sich EV-Ladebedarf über die Zeit verhält, indem mehrere Ladestationen und deren Lastmuster simuliert werden. Anstatt nur theoretische Kapazität zu zeigen, vergleicht es erwartete und tatsächliche Nutzung, sodass die Ergebnisse näher an einem realen Betriebsszenario liegen.",
+        },
+        {
+          en: "The simulation is based on probabilistic arrival and charging-demand patterns and is visualized through a lightweight frontend. I kept the UI intentionally simple, because the goal was not to over-engineer the interface but to make the simulation results easy to understand and interact with.",
+          de: "Die Simulation basiert auf probabilistischen Mustern für Ankunft und Ladebedarf und wird über ein leichtgewichtiges Frontend visualisiert. Ich habe die UI bewusst einfach gehalten, weil das Ziel nicht war, die Oberfläche zu über-engineeren, sondern die Simulationsergebnisse leicht verständlich und gut nutzbar zu machen.",
+        },
+      ],
+      contribution: {
+        en: `I built the project end to end, including the simulation logic, parameter handling, and frontend visualization.
+
+The main focus was translating the domain idea into clear TypeScript logic and then exposing the results through interactive charts and a simple UI. I wanted the code to stay straightforward and readable, without adding unnecessary abstractions.
+
+On the frontend side, I used React with a minimal structure and focused on clarity, fast iteration, and usability. The result is a small but practical project that combines simulation logic with visual exploration.`,
+        de: `Ich habe das Projekt vollständig selbst umgesetzt, einschließlich Simulationslogik, Parametern und Frontend-Visualisierung.
+
+Der Hauptfokus lag darauf, die fachliche Idee in klare TypeScript-Logik zu übersetzen und die Ergebnisse anschließend über interaktive Charts und eine einfache UI sichtbar zu machen. Dabei wollte ich den Code bewusst geradlinig und gut lesbar halten, ohne unnötige Abstraktionen einzubauen.
+
+Im Frontend habe ich React mit einer bewusst schlanken Struktur verwendet und auf Klarheit, schnelle Iteration und gute Nutzbarkeit gesetzt. Das Ergebnis ist ein kleines, aber praktisches Projekt, das Simulationslogik mit visueller Exploration verbindet.`,
       },
     },
   },

@@ -24,24 +24,27 @@ export function Section({
 
   return (
     <section
-      className={cn("py-0", className)}
+      className={cn("py-2 sm:py-4", className)}
       aria-labelledby={title ? titleId : undefined}
       aria-describedby={description ? descriptionId : undefined}
     >
       <Container>
         {title || description ? (
-          <header className="mb-6 space-y-1">
+          <header className="mb-6 space-y-2 sm:mb-8">
             {title ? (
               <h2
                 id={titleId}
-                className="text-xl font-semibold text-foreground"
+                className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
               >
                 {title}
               </h2>
             ) : null}
 
             {description ? (
-              <p id={descriptionId} className="text-sm text-muted-foreground">
+              <p
+                id={descriptionId}
+                className="max-w-2xl text-sm leading-6 text-muted-foreground"
+              >
                 {description}
               </p>
             ) : null}

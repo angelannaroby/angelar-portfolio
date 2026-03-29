@@ -31,8 +31,8 @@ export const skillsContent = {
   recommendations: {
     title: { en: "Recommendations", de: "Empfehlungen" },
     subtitle: {
-      en: "Selected LinkedIn recommendations from managers and colleagues I have worked with.",
-      de: "Ausgewählte LinkedIn-Empfehlungen von Führungskräften und Kolleg:innen, mit denen ich zusammengearbeitet habe.",
+      en: "What my colleagues say",
+      de: "Was Kolleg:innen über mich sagen",
     },
     linkLabel: {
       en: "View on LinkedIn",

@@ -8,14 +8,6 @@ type Props = {
   className?: string
 }
 
-/**
- * Responsive viewport page
- * - Mobile/tablet: natural document flow
- * - Desktop (lg+): strict viewport layout (no page scroll)
- *
- * Measures header/strip/footer heights and exposes remaining space via CSS var:
- *   --vp-content-h (px)
- */
 export function ViewportPage({
   header,
   strip,
@@ -67,7 +59,7 @@ export function ViewportPage({
           {header}
         </div>
 
-        <main className="lg:h-[var(--vp-content-h)] lg:min-h-0 lg:overflow-hidden">
+        <main className="flex-1 lg:h-[var(--vp-content-h)] lg:min-h-0 lg:overflow-hidden">
           {children}
         </main>
 

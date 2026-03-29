@@ -8,19 +8,23 @@ export const projectsContent = {
     },
     subtitle: {
       en: "A collection of projects I’ve built, contributed to, and learned from along the way.",
-      de: "Eine Sammlung von Projekten, die ich entwickelt, zu denen ich beigetragen und aus denen ich dabei gelernt habe.",
+      de: "Eine Sammlung von Projekten, die ich entwickelt habe, zu denen ich beigetragen habe und aus denen ich auf meinem Weg gelernt habe.",
     },
-
     stats: {
       yearsValue: { en: "5+", de: "5+" },
-      yearsLabel: { en: "Years of Experience", de: "Jahre Erfahrung" },
+      yearsLabel: { en: "Years of experience", de: "Jahre Erfahrung" },
       enterpriseValue: { en: "5+", de: "5+" },
-      enterpriseLabel: { en: "Enterprise Projects", de: "Enterprise-Projekte" },
+      enterpriseLabel: { en: "Enterprise projects", de: "Enterprise-Projekte" },
     },
-
     toggle: {
-      professional: { en: "Industry Contributions", de: "Berufliche Beiträge" },
-      personal: { en: "Personal Projects", de: "Persönliche Projekte" },
+      professional: { en: "Enterprise", de: "Enterprise" },
+      personal: { en: "Personal", de: "Persönliche" },
+    },
+    aria: {
+      categoryToggle: {
+        en: "Projects category",
+        de: "Projektkategorie",
+      },
     },
   },
 
@@ -31,19 +35,11 @@ export const projectsContent = {
   detail: {
     title: { en: "Project overview", de: "Projektüberblick" },
     close: { en: "Close", de: "Schließen" },
-    stackTitle: { en: "Stack", de: "Stack" },
+    stackTitle: { en: "Tech stack", de: "Tech-Stack" },
     linksTitle: { en: "Links", de: "Links" },
-
-    professional: {
-      overview: { en: "Overview", de: "Überblick" },
-      capabilities: { en: "Capabilities", de: "Funktionen" },
-      businessValue: { en: "Business value", de: "Geschäftlicher Mehrwert" },
-    },
-
-    personal: {
-      problem: { en: "Problem", de: "Problem" },
-      solution: { en: "Solution", de: "Lösung" },
-      impact: { en: "Impact", de: "Wirkung" },
+    storyContribution: {
+      en: "My contribution",
+      de: "Mein Beitrag",
     },
   },
 } satisfies {
@@ -60,6 +56,9 @@ export const projectsContent = {
       professional: LocalizedText
       personal: LocalizedText
     }
+    aria: {
+      categoryToggle: LocalizedText
+    }
   }
   card: {
     interested: LocalizedText
@@ -69,15 +68,6 @@ export const projectsContent = {
     close: LocalizedText
     stackTitle: LocalizedText
     linksTitle: LocalizedText
-    professional: {
-      overview: LocalizedText
-      capabilities: LocalizedText
-      businessValue: LocalizedText
-    }
-    personal: {
-      problem: LocalizedText
-      solution: LocalizedText
-      impact: LocalizedText
-    }
+    storyContribution: LocalizedText
   }
 }

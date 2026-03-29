@@ -1,13 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router"
 
 import { useLocale } from "@/app/providers"
-import { recommendations, skillItems, skillsContent } from "@/features/skills"
+import { recommendations, skillItems } from "@/features/skills"
 import {
-  RecommendationCard,
-  SkillsHero,
-  SkillsList,
+  RecommendationsSection,
+  SkillsStackSection,
 } from "@/features/skills/components"
-import { pickText } from "@/shared/i18n"
 import { Section } from "@/shared/ui/Section"
 
 export const Route = createFileRoute("/skills/")({
@@ -17,46 +15,14 @@ export const Route = createFileRoute("/skills/")({
 function SkillsPage() {
   const { locale } = useLocale()
 
-  const recommendationsTitle = pickText(
-    skillsContent.recommendations.title,
-    locale,
-  )
-  const recommendationsSubtitle = pickText(
-    skillsContent.recommendations.subtitle,
-    locale,
-  )
-
   return (
     <>
-      <Section>
-        <SkillsHero locale={locale} />
+      <Section className="pt-14 sm:pt-16">
+        <SkillsStackSection items={skillItems} locale={locale} />
       </Section>
 
-      <Section className="pt-0">
-        <SkillsList items={skillItems} locale={locale} />
-      </Section>
-
-      <Section className="pt-10">
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-              {recommendationsTitle}
-            </h2>
-            <p className="max-w-[65ch] text-sm leading-7 text-muted-foreground sm:text-base">
-              {recommendationsSubtitle}
-            </p>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-2">
-            {recommendations.map((recommendation) => (
-              <RecommendationCard
-                key={recommendation.id}
-                recommendation={recommendation}
-                locale={locale}
-              />
-            ))}
-          </div>
-        </div>
+      <Section className="pt-6 sm:pt-8">
+        <RecommendationsSection items={recommendations} locale={locale} />
       </Section>
     </>
   )

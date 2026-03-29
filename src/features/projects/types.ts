@@ -1,27 +1,20 @@
-import type { Locale, LocalizedText } from "@/shared/i18n"
-
-export type ProjectCategory = "professional" | "personal"
+import type { LocalizedText } from "@/shared/i18n"
 
 export type ProjectLink = {
-  label: LocalizedText
   href: string
-}
-
-export type ProjectCaseStudy = {
-  problem: LocalizedText
-  solution: LocalizedText
-  impact: LocalizedText
-}
-
-export type ProjectEnterpriseDetails = {
-  whatItDoes: LocalizedText
-  keyCapabilities: LocalizedText
-  whyItMatters: LocalizedText
+  label: LocalizedText
 }
 
 export type ProjectImage = {
   src: string
   alt: LocalizedText
+}
+
+export type ProjectContent = {
+  intro?: LocalizedText
+  story?: LocalizedText[]
+  contribution?: LocalizedText
+  outcome?: LocalizedText
 }
 
 export type Project = {
@@ -31,15 +24,9 @@ export type Project = {
   tags: string[]
   stack: string[]
   links: ProjectLink[]
-  period?: LocalizedText
-  featured?: boolean
-  category: ProjectCategory
+  category: "professional" | "personal"
   image?: ProjectImage
-  caseStudy?: ProjectCaseStudy
-  details?: ProjectEnterpriseDetails
+  content?: ProjectContent
 }
 
-export type ProjectCardProps = {
-  project: Project
-  locale: Locale
-}
+export type ProjectCategory = "professional" | "personal"

@@ -2,10 +2,11 @@ import { useEffect, useId, useMemo, useState } from "react"
 
 import { Link } from "@tanstack/react-router"
 
-import { useLocale, useTheme } from "@/app/providers"
+import { useLocale } from "@/app/providers"
 import { type Locale, pickText } from "@/shared/i18n"
+import { cn } from "@/shared/lib/cn"
 import { Container } from "@/shared/ui/Container"
-import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from "@/shared/ui/Icons"
+import { CloseIcon, MenuIcon } from "@/shared/ui/Icons"
 
 import { homeContent } from "../content"
 import type { HomeTopLink } from "../types"
@@ -18,8 +19,6 @@ type Props = {
 
 export function HomeHeader({ locale, brand, links }: Props) {
   const { toggleLocale } = useLocale()
-  const { theme, toggleTheme } = useTheme()
-
   const [open, setOpen] = useState(false)
   const titleId = useId()
 
@@ -29,101 +28,90 @@ export function HomeHeader({ locale, brand, links }: Props) {
       navTitle: pickText(h.mobileNavTitle, locale),
       openMenu: pickText(h.openMenu, locale),
       closeMenu: pickText(h.closeMenu, locale),
-      toggleTheme: pickText(h.toggleTheme, locale),
       toggleLanguage: pickText(h.toggleLanguage, locale),
-      themeAndLanguage: pickText(h.themeAndLanguage, locale),
-      light: pickText(h.light, locale),
-      dark: pickText(h.dark, locale),
+      language: pickText(h.language, locale),
     }
   }, [locale])
 
   useEffect(() => {
     if (!open) return
-    const body = document.body
-    const prev = body.style.overflow
-    body.style.overflow = "hidden"
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
     return () => {
-      body.style.overflow = prev
+      document.body.style.overflow = prev
     }
   }, [open])
 
   useEffect(() => {
     if (!open) return
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false)
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false)
     }
     window.addEventListener("keydown", onKeyDown)
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [open])
 
   return (
-    <header className="pt-4 sm:pt-6">
+    <header className="pt-5 sm:pt-6">
       <Container size="wide">
-        <div className="flex items-start justify-between gap-4 sm:gap-10">
+        <div className="flex items-center justify-between gap-4">
           <Link
             to="/"
-            className="shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            aria-label={pickText(brand, locale)}
+            activeOptions={{ exact: true }}
+            className="group shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            aria-label="A²R"
           >
-            <div className="text-2xl font-semibold tracking-tight text-foreground">
-              {pickText(brand, locale)}
-            </div>
-            <div className="mt-2 h-[3px] w-16 bg-foreground" />
+            <img
+              src="images/logo.png"
+              alt="A²R Logo"
+              className="h-10 sm:h-12 lg:h-14 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+            />
           </Link>
 
-          <nav className="hidden flex-1 items-start justify-end gap-14 sm:flex">
+          <nav className="hidden items-center gap-10 md:flex">
             {links.map((item) => (
-              <Link key={item.to} to={item.to} className="group lg:w-[150px]">
-                {/* <div className="h-px w-full bg-border" /> */}
-                <div className="mt-3 flex items-start justify-between gap-3">
-                  <div>
-                    <div className="text-base font-semibold text-foreground">
-                      {pickText(item.title, locale)}
-                    </div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      {pickText(item.hint, locale)}
-                    </div>
-                  </div>
-                  <span className="mt-[2px] text-muted-foreground group-hover:text-foreground">
-                    ↗
+              <Link key={item.to} to={item.to} activeOptions={{ exact: true }}>
+                {({ isActive }) => (
+                  <span
+                    className={cn(
+                      "group relative text-sm font-semibold transition-colors",
+                      isActive
+                        ? "text-foreground"
+                        : "text-foreground/85 hover:text-foreground",
+                    )}
+                  >
+                    {pickText(item.title, locale)}
+                    <span
+                      className={cn(
+                        "absolute -bottom-2 left-0 h-[2px] rounded-full bg-primary transition-all duration-200",
+                        isActive ? "w-full" : "w-0 group-hover:w-full",
+                      )}
+                    />
                   </span>
-                </div>
+                )}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleLocale}
+              className="hidden rounded-full border border-border/70 bg-surface/35 px-3 py-2 text-sm font-semibold text-foreground backdrop-blur-sm hover:bg-surface/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:inline-flex"
+              aria-label={t.toggleLanguage}
+            >
+              {locale === "en" ? "DE" : "EN"}
+            </button>
+
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-background/70 text-foreground ring-1 ring-border hover:bg-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/35 text-foreground backdrop-blur-sm hover:bg-surface/55 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:hidden"
               aria-label={t.openMenu}
               aria-haspopup="dialog"
               aria-expanded={open}
             >
               <MenuIcon className="h-5 w-5" />
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-background/70 text-foreground ring-1 ring-border hover:bg-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-              aria-label={t.toggleTheme}
-            >
-              {theme === "dark" ? (
-                <SunIcon className="h-5 w-5" />
-              ) : (
-                <MoonIcon className="h-5 w-5" />
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleLocale}
-              className="text-sm font-semibold text-foreground hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-              aria-label={t.toggleLanguage}
-            >
-              {locale === "en" ? "DE" : "EN"}
             </button>
           </div>
         </div>
@@ -134,16 +122,16 @@ export function HomeHeader({ locale, brand, links }: Props) {
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
-          className="sm:hidden"
+          className="md:hidden"
         >
           <button
             type="button"
-            className="fixed inset-0 z-40 cursor-default bg-black/30"
+            className="fixed inset-0 z-40 bg-black/50"
             aria-label={t.closeMenu}
             onClick={() => setOpen(false)}
           />
 
-          <div className="fixed inset-x-0 top-0 z-50 rounded-b-3xl bg-background/95 p-4 shadow-xl ring-1 ring-border backdrop-blur">
+          <div className="fixed inset-x-0 top-0 z-50 rounded-b-3xl border-b border-border/70 bg-background/95 p-4 backdrop-blur-xl">
             <div className="flex items-center justify-between">
               <div>
                 <div
@@ -160,53 +148,47 @@ export function HomeHeader({ locale, brand, links }: Props) {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground ring-1 ring-border hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface/50 text-foreground hover:bg-surface/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 aria-label={t.closeMenu}
               >
                 <CloseIcon className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="mt-4 space-y-2">
+            <div className="mt-5 space-y-2">
               {links.map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
+                  activeOptions={{ exact: true }}
                   onClick={() => setOpen(false)}
-                  className="flex items-start justify-between gap-4 rounded-2xl px-3 py-3 ring-1 ring-border hover:bg-surface/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <div>
-                    <div className="text-sm font-semibold text-foreground">
+                  {({ isActive }) => (
+                    <span
+                      className={cn(
+                        "block rounded-2xl border px-4 py-3 text-sm font-medium transition-colors",
+                        isActive
+                          ? "border-primary/30 bg-surface/55 text-foreground"
+                          : "border-border/60 bg-surface/35 text-foreground hover:bg-surface/55",
+                      )}
+                    >
                       {pickText(item.title, locale)}
-                    </div>
-                    <div className="mt-0.5 text-xs text-muted-foreground">
-                      {pickText(item.hint, locale)}
-                    </div>
-                  </div>
+                    </span>
+                  )}
                 </Link>
               ))}
             </div>
 
-            <div className="mt-4 h-px bg-border" />
-
-            <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
-              <span>{t.themeAndLanguage}</span>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="rounded-full px-3 py-1 ring-1 ring-border hover:bg-surface/60"
-                >
-                  {theme === "dark" ? t.light : t.dark}
-                </button>
-                <button
-                  type="button"
-                  onClick={toggleLocale}
-                  className="rounded-full px-3 py-1 ring-1 ring-border hover:bg-surface/60"
-                >
-                  {locale === "en" ? "DE" : "EN"}
-                </button>
-              </div>
+            <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+              <span>{t.language}</span>
+              <button
+                type="button"
+                onClick={toggleLocale}
+                className="rounded-full border border-border/70 bg-surface/45 px-3 py-1.5 text-foreground hover:bg-surface/65"
+                aria-label={t.toggleLanguage}
+              >
+                {locale === "en" ? "DE" : "EN"}
+              </button>
             </div>
           </div>
         </div>

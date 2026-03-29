@@ -4,7 +4,7 @@ import { cn } from "@/shared/lib/cn"
 
 type StatsCardProps = {
   className?: string
-  minWidthClassName?: string // allows Experience's min width behavior
+  minWidthClassName?: string
   children: ReactNode
 }
 
