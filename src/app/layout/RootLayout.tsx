@@ -23,7 +23,7 @@ export function RootLayout() {
         <Outlet />
       </main>
 
-      <HomeFooter locale={locale} content={homeContent} />
+      {!isHome ? <HomeFooter locale={locale} content={homeContent} /> : null}
     </div>
   )
 }

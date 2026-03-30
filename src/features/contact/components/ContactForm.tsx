@@ -153,15 +153,6 @@ export function ContactForm({ locale }: Props) {
                     >
                       {labels.linkedinLabel}
                     </a>
-
-                    <a
-                      href={labels.cvUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition hover:bg-primary/10"
-                    >
-                      {labels.cvLabel}
-                    </a>
                   </div>
                 </dl>
               </div>

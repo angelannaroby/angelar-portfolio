@@ -30,8 +30,8 @@ export function HomeIntroSection({ locale, content }: Props) {
     <section className="py-6 lg:h-full lg:py-0">
       <Container size="wide" className="lg:h-full">
         <div className="grid h-full grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1fr_0.68fr] lg:items-start lg:gap-8 xl:gap-12">
-          <div className="order-2 lg:order-1 lg:pt-28">
-            <div className="max-w-[360px]">
+          <div className="order-2 flex justify-center lg:order-1 lg:block lg:pt-28">
+            <div className="max-w-[360px] text-center lg:text-left">
               <div className="inline-flex h-10 items-center rounded-[2px] bg-[rgb(34_34_36_/_0.9)] px-7 text-sm shadow-[0_4px_12px_rgb(0_0_0_/_0.12)]">
                 <span className="font-semibold text-white">
                   {pickText(content.intro.helloLead, locale)}
@@ -51,7 +51,7 @@ export function HomeIntroSection({ locale, content }: Props) {
                   </span>
                 </h1>
 
-                <div className="mt-5 flex items-center gap-4">
+                <div className="mt-5 flex items-center justify-center gap-4 lg:justify-start">
                   <div className="h-[3px] w-20 shrink-0 rounded-full bg-primary sm:w-24" />
                   <span
                     className="whitespace-nowrap font-medium text-foreground/96"
@@ -62,7 +62,7 @@ export function HomeIntroSection({ locale, content }: Props) {
                 </div>
               </div>
 
-              <div className="mt-14 max-w-[330px]">
+              <div className="mt-14 max-w-[330px] mx-auto lg:mx-0">
                 <Button
                   asChild
                   variant="outline"
@@ -74,7 +74,7 @@ export function HomeIntroSection({ locale, content }: Props) {
                 </Button>
               </div>
 
-              <div className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-foreground/92">
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm text-foreground/92 lg:justify-start">
                 <a
                   href={content.links.linkedin}
                   target="_blank"
@@ -118,8 +118,8 @@ export function HomeIntroSection({ locale, content }: Props) {
             </div>
           </div>
 
-          <div className="order-3 lg:justify-self-end lg:pt-60">
-            <div className="max-w-[255px] lg:ml-auto xl:max-w-[275px]">
+          <div className="order-3 flex justify-center lg:justify-self-end lg:pt-40">
+            <div className="max-w-[255px] text-left lg:ml-auto xl:max-w-[275px]">
               <div className="text-[0.95rem] font-semibold uppercase tracking-[0.18em] text-primary sm:text-base">
                 {sideRoleEyebrow}
               </div>

@@ -13,7 +13,7 @@ function ContactPage() {
 
   return (
     <>
-      <Section className="pt-6">
+      <Section className="pt-8 pb-4 sm:pt-8 sm:pb-0">
         <ContactForm locale={locale} />
       </Section>
     </>

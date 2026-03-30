@@ -38,8 +38,8 @@ export const homeContent = {
       de: "In Deutschland • Offen für Hybrid und Umzug",
     },
     introText: {
-      en: "I build production-grade web applications with React and TypeScript — focusing on clean UI, accessibility, and maintainable architecture.",
-      de: "Ich entwickle produktionsreife Webanwendungen mit React und TypeScript — mit Fokus auf saubere UI, Accessibility und wartbare Architektur.",
+      en: "I build web applications with React and TypeScript. With experience across full-time and working student roles, I’ve contributed to real-world products by building features and improving user interfaces. I focus on keeping things clear, practical, and easy to use.",
+      de: "Ich baue Webanwendungen mit React und TypeScript. Mit Erfahrung aus Vollzeit- und Werkstudentenstellen habe ich zu realen Produkten beigetragen, indem ich Funktionen entwickelt und Benutzeroberflächen verbessert habe. Dabei lege ich Wert darauf, alles klar, praktisch und benutzerfreundlich zu gestalten.",
     },
     ctaPrimary: { en: "Let’s Talk", de: "Kontakt" },
     portraitAlt: {
