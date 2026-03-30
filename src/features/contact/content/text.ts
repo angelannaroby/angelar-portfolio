@@ -20,7 +20,6 @@ export const contactContent = {
     locationLabel: { en: "Location", de: "Standort" },
     availabilityLabel: { en: "Availability", de: "Verfügbarkeit" },
     linkedinLabel: { en: "LinkedIn", de: "LinkedIn" },
-    cvLabel: { en: "Download CV", de: "Lebenslauf" },
   },
 
   form: {
@@ -80,7 +79,6 @@ export const contactContent = {
       de: "Verfügbar ab Mai · Offen für Umzüge innerhalb Deutschlands",
     },
     linkedinUrl: "https://www.linkedin.com/in/angel-anna-roby/",
-    cvUrl: "/AngelAnnaRoby_CV.pdf",
   },
 } satisfies {
   page: {
@@ -95,7 +93,6 @@ export const contactContent = {
     locationLabel: LocalizedText
     availabilityLabel: LocalizedText
     linkedinLabel: LocalizedText
-    cvLabel: LocalizedText
   }
   form: {
     title: LocalizedText
@@ -126,6 +123,5 @@ export const contactContent = {
     location: LocalizedText
     availability: LocalizedText
     linkedinUrl: string
-    cvUrl: string
   }
 }

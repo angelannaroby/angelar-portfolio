@@ -6,6 +6,8 @@ import { appShellContent } from "../content/shell"
 
 export function useAppShellViewModel(locale: Locale) {
   return useMemo(() => {
+    const year = new Date().getFullYear()
+
     return {
       header: {
         brand: pickText(appShellContent.header.brand, locale),
@@ -19,7 +21,10 @@ export function useAppShellViewModel(locale: Locale) {
         })),
       },
       footer: {
-        copyright: pickText(appShellContent.footer.copyright, locale),
+        copyright: pickText(appShellContent.footer.copyright, locale).replace(
+          "{year}",
+          String(year),
+        ),
         builtWith: pickText(appShellContent.footer.builtWith, locale),
       },
     }
