@@ -29,9 +29,7 @@ export function TabbedCollectionSection<T extends string>({
 }: Props<T>) {
   return (
     <section className={cn("space-y-7 sm:space-y-8", className)}>
-      <div
-        className={cn("flex justify-center pt-2 sm:pt-3", controlsClassName)}
-      >
+      <div className={cn("flex justify-center", controlsClassName)}>
         <SegmentedToggle
           value={value}
           options={options}

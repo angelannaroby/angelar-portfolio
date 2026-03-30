@@ -9,7 +9,6 @@ export function useAppShellViewModel(locale: Locale) {
     return {
       header: {
         brand: pickText(appShellContent.header.brand, locale),
-        mobileNavTitle: pickText(appShellContent.header.mobileNavTitle, locale),
         openMenu: pickText(appShellContent.header.openMenu, locale),
         closeMenu: pickText(appShellContent.header.closeMenu, locale),
         toggleLanguage: pickText(appShellContent.header.toggleLanguage, locale),
