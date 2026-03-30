@@ -7,7 +7,6 @@ export type HomeTopLink = {
 
 export type HomeContent = {
   header: {
-    mobileNavTitle: LocalizedText
     openMenu: LocalizedText
     closeMenu: LocalizedText
     toggleLanguage: LocalizedText

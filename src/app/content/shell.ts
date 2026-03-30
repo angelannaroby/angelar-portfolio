@@ -3,7 +3,6 @@ import type { LocalizedText } from "@/shared/i18n"
 export const appShellContent = {
   header: {
     brand: { en: "A²R", de: "A²R" },
-    mobileNavTitle: { en: "Navigation", de: "Navigation" },
     openMenu: { en: "Open menu", de: "Menü öffnen" },
     closeMenu: { en: "Close menu", de: "Menü schließen" },
     toggleLanguage: { en: "Toggle language", de: "Sprache wechseln" },
@@ -27,7 +26,6 @@ export const appShellContent = {
 } satisfies {
   header: {
     brand: LocalizedText
-    mobileNavTitle: LocalizedText
     openMenu: LocalizedText
     closeMenu: LocalizedText
     toggleLanguage: LocalizedText

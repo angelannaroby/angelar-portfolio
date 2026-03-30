@@ -54,7 +54,7 @@ export function AppHeader() {
   return (
     <header className="pt-5 sm:pt-6">
       <Container size="wide">
-        <div className="flex items-center justify-between gap-4">
+        <div className="relative flex items-center justify-between gap-4">
           <Link
             to="/"
             activeOptions={{ exact: true }}
@@ -68,7 +68,7 @@ export function AppHeader() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-10 md:flex">
+          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 md:flex">
             {text.header.links.map((item) => (
               <Link key={item.to} to={item.to} activeOptions={{ exact: true }}>
                 {({ isActive }) => (
@@ -133,16 +133,11 @@ export function AppHeader() {
 
           <div className="fixed inset-x-0 top-0 z-50 rounded-b-3xl border-b border-border/70 bg-background/95 p-4 backdrop-blur-xl">
             <div className="flex items-center justify-between">
-              <div>
-                <div
-                  id={mobileMenuTitleId}
-                  className="text-base font-semibold text-foreground"
-                >
-                  {text.header.brand}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {text.header.mobileNavTitle}
-                </div>
+              <div
+                id={mobileMenuTitleId}
+                className="text-base font-semibold text-foreground"
+              >
+                {text.header.brand}
               </div>
 
               <button
@@ -155,7 +150,7 @@ export function AppHeader() {
               </button>
             </div>
 
-            <div className="mt-5 space-y-2">
+            <div className="mt-6 space-y-3 px-6">
               {text.header.links.map((item) => (
                 <Link
                   key={item.to}
@@ -166,10 +161,11 @@ export function AppHeader() {
                   {({ isActive }) => (
                     <span
                       className={cn(
-                        "block rounded-2xl border px-4 py-3 text-sm font-medium transition-colors",
+                        "block rounded-xl border px-4 py-3 text-center text-sm font-medium transition-all",
+                        "mx-1",
                         isActive
-                          ? "border-primary/30 bg-surface/55 text-foreground"
-                          : "border-border/60 bg-surface/35 text-foreground hover:bg-surface/55",
+                          ? "border-primary/40 bg-surface/60 text-foreground"
+                          : "border-border/50 bg-surface/30 text-foreground/90 hover:bg-surface/50",
                       )}
                     >
                       {item.title}
@@ -179,9 +175,7 @@ export function AppHeader() {
               ))}
             </div>
 
-            <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-              <span>{text.header.language}</span>
-
+            <div className="mt-4 flex justify-end">
               <button
                 type="button"
                 onClick={toggleLocale}
