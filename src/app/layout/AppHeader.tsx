@@ -133,12 +133,19 @@ export function AppHeader() {
 
           <div className="fixed inset-x-0 top-0 z-50 rounded-b-3xl border-b border-border/70 bg-background/95 p-4 backdrop-blur-xl">
             <div className="flex items-center justify-between">
-              <div
-                id={mobileMenuTitleId}
-                className="text-base font-semibold text-foreground"
+              <Link
+                to="/"
+                activeOptions={{ exact: true }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="group shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                aria-label="Go to home"
               >
-                {text.header.brand}
-              </div>
+                <img
+                  src="/images/logo.png"
+                  alt="A²R Logo"
+                  className="h-10 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+                />
+              </Link>
 
               <button
                 type="button"
@@ -161,8 +168,7 @@ export function AppHeader() {
                   {({ isActive }) => (
                     <span
                       className={cn(
-                        "block rounded-xl border px-4 py-3 text-center text-sm font-medium transition-all",
-                        "mx-1",
+                        "mx-1 block rounded-xl border px-4 py-3 text-center text-sm font-medium transition-all",
                         isActive
                           ? "border-primary/40 bg-surface/60 text-foreground"
                           : "border-border/50 bg-surface/30 text-foreground/90 hover:bg-surface/50",

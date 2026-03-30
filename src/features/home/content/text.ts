@@ -34,9 +34,8 @@ export const homeContent = {
   },
 
   links: {
-    linkedin: "https://www.linkedin.com/in/angel-roby/",
-    github: "https://github.com/angelar-portfolio",
-    cvHref: "/cv/AngelAnnaRoby_CV.pdf",
+    linkedin: "https://www.linkedin.com/in/angel-anna-roby/",
+    github: "https://github.com/angelannaroby",
   },
 } satisfies {
   intro: {
@@ -62,7 +61,7 @@ export const homeContent = {
       title: LocalizedText
     }
   }
-  links: { linkedin: string; github: string; cvHref: string }
+  links: { linkedin: string; github: string }
 }
 
 export function formatHomeText(
