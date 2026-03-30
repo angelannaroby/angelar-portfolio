@@ -1,1 +1,2 @@
-export { ContactForm } from "./ContactForm"
+export { ContactPage } from "./ContactPage"
+export { ContactSection } from "./ContactSection"

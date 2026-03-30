@@ -1,29 +1,26 @@
 import { Outlet, useRouterState } from "@tanstack/react-router"
 
-import { useLocale } from "@/app/providers"
-import { homeContent, HomeFooter, HomeHeader } from "@/features/home"
+import { AppFooter } from "./AppFooter"
+import { AppHeader } from "./AppHeader"
 
 export function RootLayout() {
-  const { locale } = useLocale()
   const { location } = useRouterState()
-
-  const isHome = location.pathname === "/"
+  const isHomePage = location.pathname === "/"
 
   return (
-    <div className="min-h-dvh bg-background text-foreground">
-      {!isHome ? (
-        <HomeHeader
-          locale={locale}
-          brand={homeContent.topBrand}
-          links={homeContent.topLinks}
-        />
-      ) : null}
+    <div className="flex min-h-dvh flex-col bg-background text-foreground">
+      <AppHeader />
 
-      <main id="main" className="min-h-[calc(100dvh-1px)]">
+      <main
+        id="main"
+        className={
+          isHomePage ? "flex-1 lg:min-h-0 lg:overflow-hidden" : "flex-1"
+        }
+      >
         <Outlet />
       </main>
 
-      {!isHome ? <HomeFooter locale={locale} content={homeContent} /> : null}
+      <AppFooter />
     </div>
   )
 }

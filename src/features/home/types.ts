@@ -3,7 +3,6 @@ import type { LocalizedText } from "@/shared/i18n"
 export type HomeTopLink = {
   to: string
   title: LocalizedText
-  hint: LocalizedText
 }
 
 export type HomeContent = {
@@ -15,7 +14,6 @@ export type HomeContent = {
     language: LocalizedText
   }
   topBrand: LocalizedText
-  topLinks: HomeTopLink[]
   intro: {
     helloLead: LocalizedText
     helloTrail: LocalizedText
@@ -38,7 +36,6 @@ export type HomeContent = {
       title: LocalizedText
     }
   }
-  capabilityStrip: LocalizedText[]
   links: {
     linkedin: string
     github: string

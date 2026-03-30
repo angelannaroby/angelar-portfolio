@@ -1,21 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { useLocale } from "@/app/providers"
-import { ContactForm } from "@/features/contact/components/ContactForm"
-import { Section } from "@/shared/ui/Section"
+import { ContactPage } from "@/features/contact"
 
 export const Route = createFileRoute("/contact/")({
-  component: ContactPage,
+  component: ContactRoute,
 })
 
-function ContactPage() {
-  const { locale } = useLocale()
-
-  return (
-    <>
-      <Section className="pt-8 pb-4 sm:pt-8 sm:pb-0">
-        <ContactForm locale={locale} />
-      </Section>
-    </>
-  )
+function ContactRoute() {
+  return <ContactPage />
 }

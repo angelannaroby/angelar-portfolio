@@ -1,18 +1,17 @@
-import type { Locale } from "@/shared/i18n"
-import { pickText } from "@/shared/i18n"
+import { useLocale } from "@/app/providers"
 import { cn } from "@/shared/lib/cn"
 
-import { skillsContent } from "../content"
+import { useSkillsViewModel } from "../hooks/useSkillsViewModel"
 import type { SkillItem } from "../types"
 
 type Props = {
   items: SkillItem[]
-  locale: Locale
   className?: string
 }
 
-export function SkillsStackSection({ items, locale, className }: Props) {
-  const title = pickText(skillsContent.skills.title, locale)
+export function SkillsStackSection({ items, className }: Props) {
+  const { locale } = useLocale()
+  const text = useSkillsViewModel(locale)
 
   return (
     <section className={cn("relative", className)}>
@@ -21,27 +20,25 @@ export function SkillsStackSection({ items, locale, className }: Props) {
       <div className="mx-auto max-w-4xl px-4 pb-6 text-center sm:px-6 sm:pb-10">
         <div className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[rgb(var(--color-primary)/0.88)]">
-            {title}
+            {text.skills.title}
           </p>
         </div>
 
         <div className="mt-12 flex flex-wrap justify-center gap-3.5 sm:mt-14">
-          {items.map((item) => {
-            return (
-              <span
-                key={item.id}
-                className={cn(
-                  "rounded-full px-4 py-2 text-sm font-medium text-foreground",
-                  "border transition-none",
-                  "border-[rgb(var(--color-primary)/0.32)]",
-                  "bg-[linear-gradient(180deg,rgba(var(--color-primary),0.06)_0%,rgba(var(--color-bg-elevated),0.98)_100%)]",
-                  "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
-                )}
-              >
-                {item.label}
-              </span>
-            )
-          })}
+          {items.map((item) => (
+            <span
+              key={item.id}
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-medium text-foreground",
+                "border transition-none",
+                "border-[rgb(var(--color-primary)/0.32)]",
+                "bg-[linear-gradient(180deg,rgba(var(--color-primary),0.06)_0%,rgba(var(--color-bg-elevated),0.98)_100%)]",
+                "shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
+              )}
+            >
+              {item.label}
+            </span>
+          ))}
         </div>
       </div>
     </section>

@@ -1,12 +1,14 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 
-import type { UseFormReset, UseFormSetError } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
 
-import type { ContactFormValues } from "../lib/contactSchema"
+import type { Locale } from "@/shared/i18n"
+
+import { type ContactFormValues, makeContactSchema } from "../lib/contactSchema"
 
 type Params = {
-  reset: UseFormReset<ContactFormValues>
-  setError: UseFormSetError<ContactFormValues>
+  locale: Locale
   fallbackErrorMessage: string
 }
 
@@ -17,12 +19,22 @@ type FormspreeResponse = {
   errors?: Array<{ message?: string }>
 }
 
-export function useContactForm({
-  reset,
-  setError,
-  fallbackErrorMessage,
-}: Params) {
+export function useContactForm({ locale, fallbackErrorMessage }: Params) {
   const [submitState, setSubmitState] = useState<SubmitState>("idle")
+  const schema = useMemo(() => makeContactSchema(locale), [locale])
+
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(schema),
+    mode: "onBlur",
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+  })
+
+  const { reset, setError } = form
 
   const onSubmit = async (values: ContactFormValues) => {
     setSubmitState("idle")
@@ -62,6 +74,7 @@ export function useContactForm({
   }
 
   return {
+    ...form,
     onSubmit,
     submitState,
   }

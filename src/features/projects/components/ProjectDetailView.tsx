@@ -1,16 +1,15 @@
 import { type MouseEvent, useEffect } from "react"
 
-import { type Locale, pickText } from "@/shared/i18n"
+import { useLocale } from "@/app/providers"
 import { cn } from "@/shared/lib/cn"
 import { Button } from "@/shared/ui/Button"
 import { Card } from "@/shared/ui/Card"
 
-import { projectsContent } from "../content"
+import { useProjectsViewModel } from "../hooks/useProjectsViewModel"
 import type { Project } from "../types"
 
 type Props = {
   project: Project
-  locale: Locale
   open: boolean
   onClose: () => void
 }
@@ -32,7 +31,11 @@ function CloseIcon(props: { className?: string }) {
   )
 }
 
-export function ProjectDetailView({ project, locale, open, onClose }: Props) {
+export function ProjectDetailView({ project, open, onClose }: Props) {
+  const { locale } = useLocale()
+  const text = useProjectsViewModel(locale)
+  const detailText = text.resolveProjectDetail(project)
+
   useEffect(() => {
     if (!open) return
 
@@ -55,21 +58,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
 
   if (!open) return null
 
-  const title = pickText(project.title, locale)
-  const imgAlt = project.image ? pickText(project.image.alt, locale) : ""
-
-  const intro = project.content?.intro
-    ? pickText(project.content.intro, locale)
-    : ""
-
-  const story =
-    project.content?.story?.map((entry) => pickText(entry, locale)) ?? []
-
-  const contribution = project.content?.contribution
-    ? pickText(project.content.contribution, locale)
-    : ""
-
-  const hasLinks = project.links.length > 0
+  const hasLinks = detailText.links.length > 0
 
   return (
     <div
@@ -103,7 +92,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
               {project.image?.src ? (
                 <img
                   src={project.image.src}
-                  alt={imgAlt}
+                  alt={detailText.imageAlt}
                   className="absolute inset-0 h-full w-full object-cover object-top"
                 />
               ) : (
@@ -135,19 +124,19 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
                   id="project-detail-title"
                   className="text-[1.9rem] font-semibold tracking-tight text-foreground sm:text-[2.2rem] lg:text-[2.25rem]"
                 >
-                  {title}
+                  {detailText.title}
                 </h2>
 
-                {intro ? (
+                {detailText.intro ? (
                   <p className="max-w-lg text-sm leading-6 text-muted-foreground sm:text-[15px]">
-                    {intro}
+                    {detailText.intro}
                   </p>
                 ) : null}
               </div>
 
               <div className="mt-3">
                 <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground/80">
-                  {pickText(projectsContent.detail.stackTitle, locale)}
+                  {text.detail.stackTitle}
                 </h3>
 
                 <div className="flex flex-wrap gap-1.5">
@@ -172,7 +161,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
             variant="ghost"
             size="sm"
             onClick={onClose}
-            aria-label={pickText(projectsContent.detail.close, locale)}
+            aria-label={text.detail.close}
             className="absolute right-3 top-3 rounded-full border border-white/10 bg-black/20 text-white backdrop-blur-sm hover:bg-black/35 sm:right-4 sm:top-4"
           >
             <CloseIcon className="h-5 w-5" />
@@ -195,7 +184,7 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
               )}
             >
               <div className="space-y-5">
-                {story.map((paragraph, index) => (
+                {detailText.story.map((paragraph, index) => (
                   <p
                     key={`${project.id}-story-${index}`}
                     className="text-sm leading-8 text-muted-foreground sm:text-[15px]"
@@ -204,16 +193,13 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
                   </p>
                 ))}
 
-                {contribution ? (
+                {detailText.contribution ? (
                   <section className="mt-6 rounded-2xl border border-border bg-muted/35 p-4 sm:p-5">
                     <h3 className="mb-2 text-sm font-semibold tracking-wide text-foreground">
-                      {pickText(
-                        projectsContent.detail.storyContribution,
-                        locale,
-                      )}
+                      {text.detail.storyContribution}
                     </h3>
                     <p className="whitespace-pre-line text-sm leading-7 text-muted-foreground">
-                      {contribution}
+                      {detailText.contribution}
                     </p>
                   </section>
                 ) : null}
@@ -224,30 +210,26 @@ export function ProjectDetailView({ project, locale, open, onClose }: Props) {
               <aside className="border-t border-border/70 p-5 sm:p-6 lg:border-l lg:border-t-0">
                 <div className="space-y-3">
                   <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/80">
-                    {pickText(projectsContent.detail.linksTitle, locale)}
+                    {text.detail.linksTitle}
                   </h3>
 
                   <div className="flex flex-col gap-3">
-                    {project.links.map((link) => {
-                      const label = pickText(link.label, locale)
-
-                      return (
-                        <a
-                          key={`${label}-${link.href}`}
-                          href={link.href}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className={cn(
-                            "inline-flex items-center justify-between rounded-2xl border border-border",
-                            "bg-muted/40 px-4 py-3 text-sm font-medium text-foreground transition",
-                            "hover:border-primary/30 hover:bg-primary/10",
-                          )}
-                        >
-                          <span>{label}</span>
-                          <span aria-hidden>↗</span>
-                        </a>
-                      )
-                    })}
+                    {detailText.links.map((link) => (
+                      <a
+                        key={`${link.label}-${link.href}`}
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className={cn(
+                          "inline-flex items-center justify-between rounded-2xl border border-border",
+                          "bg-muted/40 px-4 py-3 text-sm font-medium text-foreground transition",
+                          "hover:border-primary/30 hover:bg-primary/10",
+                        )}
+                      >
+                        <span>{link.label}</span>
+                        <span aria-hidden>↗</span>
+                      </a>
+                    ))}
                   </div>
                 </div>
               </aside>

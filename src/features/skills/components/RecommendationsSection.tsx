@@ -1,23 +1,21 @@
 import { useMemo, useState } from "react"
 
-import type { Locale } from "@/shared/i18n"
-import { pickText } from "@/shared/i18n"
+import { useLocale } from "@/app/providers"
 import { cn } from "@/shared/lib/cn"
 
-import { skillsContent } from "../content"
+import { useSkillsViewModel } from "../hooks/useSkillsViewModel"
 import type { Recommendation } from "../types"
 
 type Props = {
   items: Recommendation[]
-  locale: Locale
   className?: string
 }
 
-export function RecommendationsSection({ items, locale, className }: Props) {
-  const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "")
+export function RecommendationsSection({ items, className }: Props) {
+  const { locale } = useLocale()
+  const text = useSkillsViewModel(locale)
 
-  const title = pickText(skillsContent.recommendations.title, locale)
-  const subtitle = pickText(skillsContent.recommendations.subtitle, locale)
+  const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "")
 
   const activeRecommendation = useMemo(() => {
     return items.find((item) => item.id === activeId) ?? items[0] ?? null
@@ -27,11 +25,7 @@ export function RecommendationsSection({ items, locale, className }: Props) {
     return null
   }
 
-  const quote = pickText(activeRecommendation.quote, locale)
-  const role = pickText(activeRecommendation.role, locale)
-  const roleLine = activeRecommendation.company
-    ? `${role} · ${activeRecommendation.company}`
-    : role
+  const activeText = text.resolveRecommendation(activeRecommendation)
 
   return (
     <section className={cn("relative", className)}>
@@ -43,17 +37,17 @@ export function RecommendationsSection({ items, locale, className }: Props) {
       >
         <div className="space-y-3">
           <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            {title}
+            {text.recommendations.title}
           </h2>
 
           <p className="text-sm italic leading-7 text-muted-foreground/85 sm:text-base">
-            {subtitle}
+            {text.recommendations.subtitle}
           </p>
         </div>
 
         <div className="mt-14 max-w-3xl sm:mt-16">
           <p className="text-sm leading-8 text-muted-foreground sm:text-[15px] sm:leading-9">
-            “{quote}”
+            “{activeText.quote}”
           </p>
         </div>
 
@@ -62,20 +56,20 @@ export function RecommendationsSection({ items, locale, className }: Props) {
             {activeRecommendation.name}
           </p>
 
-          <p className="text-sm text-muted-foreground">{roleLine}</p>
+          <p className="text-sm text-muted-foreground">{activeText.roleLine}</p>
         </div>
 
         <div className="mt-10 flex items-center justify-center gap-4">
           {items.map((item) => {
             const isActive = item.id === activeRecommendation.id
-            const itemRole = pickText(item.role, locale)
+            const itemText = text.resolveRecommendation(item)
 
             return (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setActiveId(item.id)}
-                aria-label={`${item.name} — ${itemRole}`}
+                aria-label={`${item.name} — ${itemText.role}`}
                 aria-pressed={isActive}
                 className={cn(
                   "group relative h-14 w-14 overflow-hidden rounded-full transition duration-300",
@@ -99,11 +93,7 @@ export function RecommendationsSection({ items, locale, className }: Props) {
                       "text-sm font-semibold text-foreground",
                     )}
                   >
-                    {item.name
-                      .split(" ")
-                      .map((part) => part[0])
-                      .join("")
-                      .slice(0, 2)}
+                    {itemText.initials}
                   </div>
                 )}
 
