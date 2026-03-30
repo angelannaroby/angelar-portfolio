@@ -1,22 +1,21 @@
 import type { KeyboardEvent } from "react"
 
-import type { Locale } from "@/shared/i18n"
-import { pickText } from "@/shared/i18n"
+import { useLocale } from "@/app/providers"
 import { cn } from "@/shared/lib/cn"
 import { Card, CardContent } from "@/shared/ui/Card"
 
+import { useProjectsViewModel } from "../hooks/useProjectsViewModel"
 import type { Project } from "../types"
 
 type Props = {
   project: Project
-  locale: Locale
   onOpen: () => void
 }
 
-export function ProjectCard({ project, locale, onOpen }: Props) {
-  const title = pickText(project.title, locale)
-  const summary = pickText(project.summary, locale)
-  const imgAlt = project.image ? pickText(project.image.alt, locale) : ""
+export function ProjectCard({ project, onOpen }: Props) {
+  const { locale } = useLocale()
+  const text = useProjectsViewModel(locale)
+  const cardText = text.resolveProjectCard(project)
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Enter" || event.key === " ") {
@@ -29,7 +28,7 @@ export function ProjectCard({ project, locale, onOpen }: Props) {
     <Card
       role="button"
       tabIndex={0}
-      aria-label={title}
+      aria-label={cardText.title}
       onClick={onOpen}
       onKeyDown={handleKeyDown}
       className={cn(
@@ -49,7 +48,7 @@ export function ProjectCard({ project, locale, onOpen }: Props) {
         {project.image?.src ? (
           <img
             src={project.image.src}
-            alt={imgAlt}
+            alt={cardText.imageAlt}
             loading="lazy"
             className="h-full w-full scale-[1.02] object-cover object-top transition duration-300 group-hover:scale-[1.05]"
           />
@@ -67,7 +66,7 @@ export function ProjectCard({ project, locale, onOpen }: Props) {
         <div className="flex flex-1 flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
             <h3 className="text-lg font-bold tracking-tight text-foreground">
-              {title}
+              {cardText.title}
             </h3>
 
             <span
@@ -78,7 +77,9 @@ export function ProjectCard({ project, locale, onOpen }: Props) {
             </span>
           </div>
 
-          <p className="text-base leading-9 text-muted-foreground">{summary}</p>
+          <p className="text-base leading-9 text-muted-foreground">
+            {cardText.summary}
+          </p>
         </div>
       </CardContent>
     </Card>

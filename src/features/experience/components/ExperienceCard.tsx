@@ -1,15 +1,14 @@
 import { useMemo } from "react"
 
-import type { Locale } from "@/shared/i18n"
-import { pickText } from "@/shared/i18n"
+import { useLocale } from "@/app/providers"
 import { cn } from "@/shared/lib/cn"
 
+import { useExperienceViewModel } from "../hooks/useExperienceViewModel"
 import type { ExperienceEntry } from "../types"
-import { formatPeriod, getCollapsedStack, getInitials } from "../utils"
+import { getInitials } from "../utils"
 
 type Props = {
   entry: ExperienceEntry
-  locale: Locale
   className?: string
 }
 
@@ -28,17 +27,13 @@ function StackChip({ children }: { children: string }) {
   )
 }
 
-export function ExperienceCard({ entry, locale, className }: Props) {
-  const role = pickText(entry.role, locale)
-  const period = formatPeriod(entry.start, entry.end, locale)
+export function ExperienceCard({ entry, className }: Props) {
+  const { locale } = useLocale()
+  const text = useExperienceViewModel(locale)
 
   const initials = useMemo(() => getInitials(entry.org), [entry.org])
-  const { items: collapsedStack, remaining } = useMemo(
-    () => getCollapsedStack(entry.stack, 4),
-    [entry.stack],
-  )
-
-  const previewHighlights = entry.highlights?.slice(0, 2) ?? []
+  const entryText = text.resolveEntry(entry)
+  const stackItems = entry.stack ?? []
 
   return (
     <article
@@ -114,21 +109,16 @@ export function ExperienceCard({ entry, locale, className }: Props) {
                   "ring-1 ring-inset ring-[rgb(var(--color-primary)/0.22)]",
                 )}
               >
-                <span className="truncate">{role}</span>
+                <span className="truncate">{entryText.role}</span>
               </p>
 
-              {collapsedStack.length ? (
+              {stackItems.length > 0 ? (
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  {collapsedStack.map((stackItem) => (
-                    <StackChip key={`${entry.id}-collapsed-${stackItem}`}>
+                  {stackItems.map((stackItem) => (
+                    <StackChip key={`${entry.id}-stack-${stackItem}`}>
                       {stackItem}
                     </StackChip>
                   ))}
-                  {remaining > 0 ? (
-                    <span className="text-xs text-[rgb(var(--color-muted-fg))]">
-                      +{remaining}
-                    </span>
-                  ) : null}
                 </div>
               ) : null}
             </div>
@@ -141,9 +131,9 @@ export function ExperienceCard({ entry, locale, className }: Props) {
                 "bg-[rgb(var(--color-bg-elevated)/0.86)] text-[rgb(var(--color-fg-soft))]",
                 "ring-1 ring-inset ring-[rgb(var(--color-border)/0.68)]",
               )}
-              title={period}
+              title={entryText.period}
             >
-              <span className="truncate">{period}</span>
+              <span className="truncate">{entryText.period}</span>
             </div>
           </div>
         </div>
@@ -157,9 +147,9 @@ export function ExperienceCard({ entry, locale, className }: Props) {
           )}
         >
           <div className="overflow-hidden">
-            {previewHighlights.length ? (
+            {entryText.previewHighlights.length ? (
               <ul className="mt-4 grid gap-2.5">
-                {previewHighlights.map((highlight, index) => (
+                {entryText.previewHighlights.map((highlight, index) => (
                   <li
                     key={`${entry.id}-preview-${index}`}
                     className="flex gap-2.5"
@@ -169,7 +159,7 @@ export function ExperienceCard({ entry, locale, className }: Props) {
                       className="mt-[8px] h-1.5 w-1.5 shrink-0 rounded-full bg-[rgb(var(--color-primary))]"
                     />
                     <p className="text-sm leading-relaxed text-[rgb(var(--color-fg-soft))]">
-                      {pickText(highlight, locale)}
+                      {highlight}
                     </p>
                   </li>
                 ))}

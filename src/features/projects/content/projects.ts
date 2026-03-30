@@ -192,7 +192,7 @@ Außerdem habe ich zu wiederverwendbaren Komponentenmustern beigetragen, datenin
     tags: ["manufacturing", "monitoring", "real-time-data"],
     stack: [
       "React",
-      "TypeScript",
+      "JavaScript",
       "Material UI",
       "Charts",
       "REST APIs",

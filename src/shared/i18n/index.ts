@@ -1,2 +1,2 @@
 export type { Locale, LocalizedText } from "./types"
-export { pickText } from "./utils"
+export { pickText, pickTextList, pickTexts } from "./utils"

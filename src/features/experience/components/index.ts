@@ -1,2 +1,3 @@
 export { ExperienceCard } from "./ExperienceCard"
-export { ExperienceTabsSection } from "./ExperienceTabsSection"
+export { ExperienceCollectionSection } from "./ExperienceCollectionSection"
+export { ExperiencePage } from "./ExperiencePage"

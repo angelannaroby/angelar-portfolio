@@ -1,34 +1,29 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
-import type { Locale } from "@/shared/i18n"
-import { pickText } from "@/shared/i18n"
+import { useLocale } from "@/app/providers"
 import { cn } from "@/shared/lib/cn"
 import { TabbedCollectionSection } from "@/shared/ui/TabbedCollectionSection"
 
-import { projectsContent } from "../content"
+import { useProjectsViewModel } from "../hooks/useProjectsViewModel"
 import type { Project, ProjectCategory } from "../types"
 
 import { ProjectCard } from "./ProjectCard"
 import { ProjectDetailView } from "./ProjectDetailView"
 
 type Props = {
-  locale: Locale
   projects: Project[]
   className?: string
 }
 
-export function ProjectsTabsSection({ locale, projects, className }: Props) {
-  const [tab, setTab] = useState<ProjectCategory>("professional")
+export function ProjectsCollectionSection({ projects, className }: Props) {
+  const { locale } = useLocale()
+  const text = useProjectsViewModel(locale)
+
+  const [activeCategory, setActiveCategory] =
+    useState<ProjectCategory>("professional")
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
     null,
   )
-
-  const professionalLabel = pickText(
-    projectsContent.page.toggle.professional,
-    locale,
-  )
-  const personalLabel = pickText(projectsContent.page.toggle.personal, locale)
-  const ariaLabel = pickText(projectsContent.page.aria.categoryToggle, locale)
 
   const hasPersonalProjects = useMemo(
     () =>
@@ -38,16 +33,24 @@ export function ProjectsTabsSection({ locale, projects, className }: Props) {
     [projects],
   )
 
-  const options = [
-    { value: "professional", label: professionalLabel },
-    { value: "personal", label: personalLabel, disabled: !hasPersonalProjects },
+  const categoryOptions = [
+    { value: "professional", label: text.toggle.professional },
+    {
+      value: "personal",
+      label: text.toggle.personal,
+      disabled: !hasPersonalProjects,
+    },
   ] as const
 
-  const filteredProjects = useMemo(() => {
+  const visibleProjects = useMemo(() => {
     return projects.filter(
-      (project) => (project.category ?? "professional") === tab,
+      (project) => (project.category ?? "professional") === activeCategory,
     )
-  }, [projects, tab])
+  }, [projects, activeCategory])
+
+  useEffect(() => {
+    setSelectedProjectId(null)
+  }, [activeCategory])
 
   const selectedProject = useMemo(
     () => projects.find((project) => project.id === selectedProjectId) ?? null,
@@ -57,21 +60,20 @@ export function ProjectsTabsSection({ locale, projects, className }: Props) {
   return (
     <>
       <TabbedCollectionSection
-        value={tab}
-        options={options}
-        onChange={setTab}
-        ariaLabel={ariaLabel}
+        value={activeCategory}
+        options={categoryOptions}
+        onChange={setActiveCategory}
+        ariaLabel={text.aria.categoryToggle}
         className={cn(className)}
         contentClassName="flex flex-wrap justify-center gap-5"
       >
-        {filteredProjects.map((project) => (
+        {visibleProjects.map((project) => (
           <div
             key={project.id}
             className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-13.5px)]"
           >
             <ProjectCard
               project={project}
-              locale={locale}
               onOpen={() => setSelectedProjectId(project.id)}
             />
           </div>
@@ -81,7 +83,6 @@ export function ProjectsTabsSection({ locale, projects, className }: Props) {
       {selectedProject ? (
         <ProjectDetailView
           project={selectedProject}
-          locale={locale}
           open
           onClose={() => setSelectedProjectId(null)}
         />

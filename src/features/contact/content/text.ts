@@ -13,8 +13,8 @@ export const contactContent = {
   panel: {
     title: { en: "Contact details", de: "Kontaktinformationen" },
     text: {
-      en: "I’m currently open to internships and working student roles in frontend development.",
-      de: "Ich bin aktuell offen für Praktika und Werkstudentenstellen im Frontend-Bereich.",
+      en: "Open to full-time frontend roles, with an interest in gradually growing into fullstack development.",
+      de: "Offen für Vollzeit-Frontend-Rollen, mit Interesse daran, mich schrittweise in Richtung Fullstack-Entwicklung weiterzuentwickeln.",
     },
     emailLabel: { en: "Email", de: "E-Mail" },
     locationLabel: { en: "Location", de: "Standort" },
@@ -69,7 +69,6 @@ export const contactContent = {
     },
   },
 
-  // ✅ NEW (required by your component)
   meta: {
     email: "robyangelanna@gmail.com",
     location: {
@@ -77,8 +76,8 @@ export const contactContent = {
       de: "Kaiserslautern, Deutschland",
     },
     availability: {
-      en: "Open to internships and working student roles",
-      de: "Offen für Praktika und Werkstudentenstellen",
+      en: "Available from May · Open to relocation across Germany",
+      de: "Verfügbar ab Mai · Offen für Umzüge innerhalb Deutschlands",
     },
     linkedinUrl: "https://www.linkedin.com/in/angel-anna-roby/",
     cvUrl: "/AngelAnnaRoby_CV.pdf",
