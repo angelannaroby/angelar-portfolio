@@ -427,4 +427,55 @@ Im Frontend habe ich React mit einer bewusst schlanken Struktur verwendet und au
       },
     },
   },
+  {
+    id: "job-application-tracker",
+    title: {
+      en: "Job Application Tracker (Upcoming)",
+      de: "Job-Application-Tracker (In Planung)",
+    },
+    summary: {
+      en: "A full-stack application to track job applications, interview stages, follow-ups, and progress insights in one structured workspace.",
+      de: "Eine Full-Stack-Anwendung zur Nachverfolgung von Bewerbungen, Interviewphasen, Follow-ups und Fortschrittsanalysen in einer strukturierten Oberfläche.",
+    },
+    tags: ["personal", "fullstack", "productivity"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Prisma",
+      "React Hook Form",
+      "Zod",
+    ],
+    links: [],
+    category: "personal",
+    image: {
+      src: "/images/jobApp.png", // you can replace later
+      alt: {
+        en: "Upcoming project placeholder",
+        de: "Platzhalter für kommendes Projekt",
+      },
+    },
+    content: {
+      intro: {
+        en: "A full-stack project designed to help users manage their job search journey from application tracking to interview progress and follow-ups.",
+        de: "Ein Full-Stack-Projekt, das Nutzern hilft, ihren Bewerbungsprozess von der Bewerbung bis zu Interviews und Follow-ups strukturiert zu verwalten.",
+      },
+      story: [
+        {
+          en: "This project is inspired by the need to organize and track multiple job applications in a structured and meaningful way. Instead of managing scattered notes and spreadsheets, the goal is to provide a single system where users can track applications, statuses, interview rounds, and responses.",
+          de: "Dieses Projekt basiert auf der Idee, Bewerbungen strukturiert und sinnvoll zu organisieren. Anstatt verstreuter Notizen oder Tabellen soll eine zentrale Anwendung entstehen, in der Nutzer Bewerbungen, Status, Interviewphasen und Rückmeldungen verwalten können.",
+        },
+        {
+          en: "It will also provide insights into the job search journey, such as application trends, response rates, and progress over time. The focus is not just on data storage, but on creating a product that helps users reflect on and improve their job search strategy.",
+          de: "Zusätzlich sollen Einblicke in den Bewerbungsprozess ermöglicht werden, wie Trends, Rücklaufquoten und Fortschritt über die Zeit. Der Fokus liegt nicht nur auf Datenspeicherung, sondern auf einem Produkt, das Nutzern hilft, ihre Bewerbungsstrategie besser zu verstehen und zu optimieren.",
+        },
+      ],
+      contribution: {
+        en: `This project is currently in progress and is being built as a learning-driven full-stack application.`,
+        de: `Dieses Projekt befindet sich aktuell in Entwicklung und wird als lerngetriebenes Full-Stack-Projekt umgesetzt.`,
+      },
+    },
+  },
 ]
