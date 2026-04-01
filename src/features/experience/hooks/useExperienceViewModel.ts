@@ -19,12 +19,10 @@ export function useExperienceViewModel(locale: Locale) {
       },
 
       resolveEntry(entry: ExperienceEntry) {
-        const previewHighlights = entry.highlights?.slice(0, 2) ?? []
-
         return {
           role: pickText(entry.role, locale),
           period: formatPeriod(entry.start, entry.end, locale),
-          previewHighlights: pickTextList(previewHighlights, locale),
+          previewHighlights: pickTextList(entry.highlights ?? [], locale),
         }
       },
     }
