@@ -97,7 +97,7 @@ export function HomeIntroSection({ locale }: Props) {
               <div className="pointer-events-none absolute left-1/2 top-[52%] h-[310px] w-[310px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl sm:h-[380px] sm:w-[380px] lg:h-[480px] lg:w-[480px]" />
 
               <img
-                src="/images/angel.png"
+                src="/images/angel4.PNG"
                 alt={text.intro.portraitAlt}
                 className="relative z-10 translate-y-4 max-h-[114%] w-auto object-contain object-bottom sm:translate-y-6 sm:max-h-[116%] lg:translate-y-8 lg:max-h-[121%]"
                 draggable={false}
