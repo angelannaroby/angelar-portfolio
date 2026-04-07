@@ -1,5 +1,7 @@
 import { Outlet, useRouterState } from "@tanstack/react-router"
 
+import { AnalyticsProvider } from "@/app/providers/AnalyticsProvider"
+
 import { AppFooter } from "./AppFooter"
 import { AppHeader } from "./AppHeader"
 
@@ -9,6 +11,7 @@ export function RootLayout() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-background text-foreground">
+      <AnalyticsProvider />
       <AppHeader />
 
       <main
