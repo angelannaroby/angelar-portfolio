@@ -13,7 +13,8 @@
     "test:run": "vitest run",
     "format": "prettier . --write",
     "prepare": "husky",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "check": "pnpm run lint && pnpm run test:run && pnpm run build"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
