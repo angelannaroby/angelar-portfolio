@@ -428,6 +428,83 @@ Im Frontend habe ich React mit einer bewusst schlanken Struktur verwendet und au
     },
   },
   {
+    id: "flames-game",
+    title: {
+      en: "FLAMES",
+      de: "FLAMES",
+    },
+    summary: {
+      en: "A nostalgic little web app that brings the classic pen-and-paper FLAMES game into a polished, modern frontend experience.",
+      de: "Eine nostalgische kleine Web-App, die das klassische FLAMES-Spiel aus der Schulzeit in ein modernes und liebevoll gestaltetes Frontend bringt.",
+    },
+    tags: ["personal", "nostalgia", "frontend"],
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Vitest",
+      "Playwright",
+      "Motion",
+    ],
+    links: [
+      {
+        href: "https://play-flames.vercel.app/",
+        label: {
+          en: "Live site",
+          de: "Live-Seite",
+        },
+      },
+      {
+        href: "https://github.com/angelannaroby/flames-match-game",
+        label: {
+          en: "Source code",
+          de: "Quellcode",
+        },
+      },
+    ],
+    category: "personal",
+    image: {
+      src: "/images/flames.jpg",
+      alt: {
+        en: "FLAMES game preview",
+        de: "Vorschau der FLAMES-App",
+      },
+    },
+    content: {
+      intro: {
+        en: "A nostalgic little web app that brings the classic pen-and-paper FLAMES game into a polished, modern frontend experience.",
+        de: "Eine nostalgische kleine Web-App, die das klassische FLAMES-Spiel aus der Schulzeit in ein modernes und liebevoll gestaltetes Frontend bringt.",
+      },
+      story: [
+        {
+          en: "This started as a simple Easter weekend project — I wanted to try out animations more deeply and experiment with motion-driven UI. Instead of building something purely technical, I chose an idea that felt familiar and a bit nostalgic: the FLAMES game we used to play with pen and paper.",
+          de: "Dieses Projekt entstand an einem Osterwochenende — ich wollte gezielt Animationen ausprobieren und mit motion-basierter UI experimentieren. Statt etwas rein Technisches zu bauen, habe ich mich für eine Idee entschieden, die sich vertraut und ein bisschen nostalgisch anfühlt: das FLAMES-Spiel aus der Schulzeit.",
+        },
+        {
+          en: "Even though the idea is small and playful, I approached it like a real product. I focused on smooth interactions, clean UI structure, and making the experience feel consistent and complete. It became less about the game itself and more about how small details — transitions, feedback, and layout — shape the overall experience.",
+          de: "Auch wenn die Idee klein und verspielt ist, habe ich sie wie ein echtes Produkt umgesetzt. Der Fokus lag auf flüssigen Interaktionen, klarer UI-Struktur und einem insgesamt stimmigen Erlebnis. Am Ende ging es weniger um das Spiel selbst, sondern darum, wie kleine Details — Animationen, Feedback und Layout — die gesamte User Experience beeinflussen.",
+        },
+      ],
+      contribution: {
+        en: `I designed and developed the project end to end, including UI design, component structure, and frontend implementation using React and TypeScript.
+
+A key focus was exploring animation using Motion — building transitions, micro-interactions, and visual feedback to make the experience feel dynamic and engaging.
+
+I also implemented testing using Vitest and Playwright to ensure core flows work reliably, and treated the project with production-level practices despite its small scope.
+
+In addition, I worked on basic SEO improvements, including integrating Google Search Console, to make the application discoverable and closer to a real-world deployment standard.`,
+        de: `Ich habe das Projekt vollständig selbst umgesetzt — von UI-Design und Komponentenstruktur bis hin zur Frontend-Implementierung mit React und TypeScript.
+
+Ein besonderer Fokus lag auf Animationen mit Motion — ich habe Transitions, Micro-Interactions und visuelles Feedback umgesetzt, um die Anwendung lebendig und interaktiv wirken zu lassen.
+
+Zusätzlich habe ich Tests mit Vitest und Playwright implementiert, um wichtige User Flows abzusichern, und das Projekt trotz seines kleinen Umfangs mit produktionsnahen Standards behandelt.
+
+Außerdem habe ich grundlegende SEO-Maßnahmen umgesetzt, einschließlich der Integration der Google Search Console, um die Anwendung auffindbar zu machen und näher an reale Deployment-Standards heranzuführen.`,
+      },
+    },
+  },
+  {
     id: "job-application-tracker",
     title: {
       en: "Job Application Tracker (Upcoming)",
