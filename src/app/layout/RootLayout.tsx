@@ -1,4 +1,5 @@
 import { Outlet, useRouterState } from "@tanstack/react-router"
+import { Analytics } from "@vercel/analytics/react"
 
 import { AnalyticsProvider } from "@/app/providers/AnalyticsProvider"
 
@@ -12,6 +13,7 @@ export function RootLayout() {
   return (
     <div className="flex min-h-dvh flex-col bg-background text-foreground">
       <AnalyticsProvider />
+      <Analytics />
       <AppHeader />
 
       <main
