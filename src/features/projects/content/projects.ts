@@ -449,7 +449,7 @@ Im Frontend habe ich React mit einer bewusst schlanken Struktur verwendet und au
     ],
     links: [
       {
-        href: "https://play-flames.vercel.app/",
+        href: "https://flamesplay.vercel.app/",
         label: {
           en: "Live site",
           de: "Live-Seite",
